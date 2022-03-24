@@ -1,2 +1,3 @@
 pacakges:
   - 'packages/**'
+  - 'apps/**'

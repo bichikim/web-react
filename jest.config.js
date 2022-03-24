@@ -5,6 +5,7 @@ module.exports = {
   cacheDirectory: './.jest/cache',
   collectCoverageFrom: [
     '<rootDir>/packages/*/src/**/*.{ts,tsx}',
+    '<rootDir>/apps/*/src/**/*.{ts,tsx}',
     '!<rootDir>/**/*.d.ts',
     '!<rootDir>/**/*.stories.{ts,tsx}',
     '!<rootDir>/**/__tests__/*.{ts,tsx}',
@@ -38,7 +39,7 @@ module.exports = {
       testMatch: [
         '!<rootDir>/**/*.e2e.ts',
         '<rootDir>/packages/*/src/**/__tests__/*.spec.{ts,tsx}',
-        '<rootDir>/scripts/__tests__/*.spec.ts',
+        '<rootDir>/apps/*/src/**/__tests__/*.spec.{ts,tsx}',
       ],
       transformIgnorePatterns: ['/node_modules/'],
       watchPlugins: [
