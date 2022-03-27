@@ -1,5 +1,5 @@
-import {isPassiveEventSupported, isSSR} from 'src/utils'
-import {useRef} from 'react'
+import {isPassiveEventSupported} from 'src/utils'
+import {MutableRefObject, useRef} from 'react'
 
 export interface UseEventOptions {
   immediateStop?: boolean
@@ -24,8 +24,7 @@ export const withImmediateStop = (handle: EventHandle) => (event: Event) => {
   return handle(event)
 }
 
-export const withOnes = (handle: EventHandle) => {
-  const active = useRef(false)
+export const withOnes = (handle: EventHandle, active: MutableRefObject<boolean>) => {
   return (event: Event) => {
     if (!active.current) {
       active.current = true
@@ -34,12 +33,12 @@ export const withOnes = (handle: EventHandle) => {
   }
 }
 
-const createHandle = (handle: EventHandle, options: UseEventOptions = {}) => {
+const createHandle = (handle: EventHandle, active: MutableRefObject<boolean>, options: UseEventOptions = {}) => {
   const {
-    passive = false,
+    ones = false,
     prevent = false,
     stop = false,
-    ones = false,
+    immediateStop = false,
   } = options
   let _handle = handle
 
@@ -47,12 +46,16 @@ const createHandle = (handle: EventHandle, options: UseEventOptions = {}) => {
     _handle = withPrevent(_handle)
   }
 
+  if (ones) {
+    _handle = withOnes(_handle, active)
+  }
+
   if (stop) {
     _handle = withStop(_handle)
   }
 
-  if (ones) {
-    _handle = withOnes(_handle)
+  if (immediateStop) {
+    _handle = withImmediateStop(_handle)
   }
 
   return _handle
@@ -60,17 +63,21 @@ const createHandle = (handle: EventHandle, options: UseEventOptions = {}) => {
 
 export type EventHandle<Event = any> = (event: Event) => unknown
 export const useEvent = (
-  target: any,
   event: string,
   handle: EventHandle,
   options: UseEventOptions = {},
 ) => {
 
-  const handleRef = useRef()
+  const target = useRef<undefined | any>()
+  const onesRef = useRef(false)
 
   useEffect(() => {
+    const _handle = createHandle(handle, onesRef, options)
+    target.current?.addEventListener?.(event, _handle, options.passive ? isPassiveEventSupported() : undefined)
     return () => {
-      //
+      target.current?.removeEventListener?.(event, _handle)
     }
   })
+
+  return target
 }
