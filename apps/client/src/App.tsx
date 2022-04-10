@@ -3,6 +3,8 @@ import {Original} from './componets/Original'
 import {PropsSyncText} from './componets/PropsSyncText'
 import {Events} from './componets/Events'
 import {DeepMemo} from './componets/DeepMemo'
+import {Zustand} from './componets/Zustand'
+import {HookState} from './componets/HookState'
 
 export const App: FC = withSolid(() => {
 
@@ -26,6 +28,12 @@ export const App: FC = withSolid(() => {
       </section>
       <section>
         <DeepMemo />
+      </section>
+      <section>
+        <Zustand />
+      </section>
+      <section>
+        <HookState />
       </section>
     </div>
   )
