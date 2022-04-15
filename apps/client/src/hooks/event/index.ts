@@ -1,5 +1,6 @@
 import {isPassiveEventSupported} from 'src/utils'
-import {MutableRefObject, useRef} from 'react'
+import {MutableRefObject, useEffect, useRef} from 'react'
+import {useDeepMemo} from '../use-deep-memo'
 
 export interface UseEventOptions {
   immediateStop?: boolean
@@ -62,22 +63,24 @@ const createHandle = (handle: EventHandle, active: MutableRefObject<boolean>, op
 }
 
 export type EventHandle<Event = any> = (event: Event) => unknown
+
 export const useEvent = (
   event: string,
   handle: EventHandle,
   options: UseEventOptions = {},
 ) => {
-
-  const target = useRef<undefined | any>()
+  const _options = useDeepMemo(() => options, options)
+  const target = useRef<null | any>()
   const onesRef = useRef(false)
 
   useEffect(() => {
-    const _handle = createHandle(handle, onesRef, options)
-    target.current?.addEventListener?.(event, _handle, options.passive ? isPassiveEventSupported() : undefined)
+    const prevTarget = target.current
+    const _handle = createHandle(handle, onesRef, _options)
+    target.current?.addEventListener?.(event, _handle, _options.passive ? isPassiveEventSupported() : undefined)
     return () => {
-      target.current?.removeEventListener?.(event, _handle)
+      prevTarget?.removeEventListener?.(event, _handle)
     }
-  })
+  }, [handle, event, _options, target.current])
 
   return target
 }
