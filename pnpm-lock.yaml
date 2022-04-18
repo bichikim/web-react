@@ -171,6 +171,8 @@ importers:
       '@types/node': 17.0.21
       '@types/validator': 13.7.1
       '@vitejs/plugin-react': 1.2.0
+      '@vue/reactivity': 3.2.33
+      '@vue/runtime-core': 3.2.33
       '@zerollup/ts-transform-paths': 1.7.18
       compression: 1.7.4
       cross-env: 7.0.3
@@ -208,6 +210,8 @@ importers:
       zustand: 3.7.2
     dependencies:
       '@hookstate/core': 3.0.13_react@18.0.0
+      '@vue/reactivity': 3.2.33
+      '@vue/runtime-core': 3.2.33
       compression: 1.7.4
       cross-env: 7.0.3
       express: 4.17.3
@@ -6142,22 +6146,19 @@ packages:
       - typescript
     dev: true
 
-  /@vue/reactivity/3.2.31:
-    resolution: {integrity: sha512-HVr0l211gbhpEKYr2hYe7hRsV91uIVGFYNHj73njbARVGHQvIojkImKMaZNDdoDZOIkMsBc9a1sMqR+WZwfSCw==}
+  /@vue/reactivity/3.2.33:
+    resolution: {integrity: sha512-62Sq0mp9/0bLmDuxuLD5CIaMG2susFAGARLuZ/5jkU1FCf9EDbwUuF+BO8Ub3Rbodx0ziIecM/NsmyjardBxfQ==}
     dependencies:
-      '@vue/shared': 3.2.31
-    dev: true
+      '@vue/shared': 3.2.33
 
-  /@vue/runtime-core/3.2.31:
-    resolution: {integrity: sha512-Kcog5XmSY7VHFEMuk4+Gap8gUssYMZ2+w+cmGI6OpZWYOEIcbE0TPzzPHi+8XTzAgx1w/ZxDFcXhZeXN5eKWsA==}
+  /@vue/runtime-core/3.2.33:
+    resolution: {integrity: sha512-N2D2vfaXsBPhzCV3JsXQa2NECjxP3eXgZlFqKh4tgakp3iX6LCGv76DLlc+IfFZq+TW10Y8QUfeihXOupJ1dGw==}
     dependencies:
-      '@vue/reactivity': 3.2.31
-      '@vue/shared': 3.2.31
-    dev: true
+      '@vue/reactivity': 3.2.33
+      '@vue/shared': 3.2.33
 
-  /@vue/shared/3.2.31:
-    resolution: {integrity: sha512-ymN2pj6zEjiKJZbrf98UM2pfDd6F2H7ksKw7NDt/ZZ1fh5Ei39X5tABugtT03ZRlWd9imccoK0hE8hpjpU7irQ==}
-    dev: true
+  /@vue/shared/3.2.33:
+    resolution: {integrity: sha512-UBc1Pg1T3yZ97vsA2ueER0F6GbJebLHYlEi4ou1H5YL4KWvMOOWwpYo9/QpWq93wxKG6Wo13IY74Hcn/f7c7Bg==}
 
   /@webassemblyjs/ast/1.11.1:
     resolution: {integrity: sha512-ukBh14qFLjxTQNTXocdyksN5QdM28S1CxHt2rdskFyL+xFV7VremuBLVbmCePj+URalXBENx/9Lm7lnhihtCSw==}
@@ -18941,7 +18942,7 @@ packages:
       '@antfu/utils': 0.5.0
       '@rollup/pluginutils': 4.2.0
       '@types/markdown-it': 12.2.3
-      '@vue/runtime-core': 3.2.31
+      '@vue/runtime-core': 3.2.33
       gray-matter: 4.0.3
       markdown-it: 12.3.2
       vite: 2.8.6

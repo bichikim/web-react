@@ -5,6 +5,7 @@ import {Events} from './componets/Events'
 import {DeepMemo} from './componets/DeepMemo'
 import {Zustand} from './componets/Zustand'
 import {HookState} from './componets/HookState'
+import {Reactivity} from './componets/Reactivity'
 
 export const App: FC = withSolid(() => {
 
@@ -34,6 +35,9 @@ export const App: FC = withSolid(() => {
       </section>
       <section>
         <HookState />
+      </section>
+      <section>
+        <Reactivity />
       </section>
     </div>
   )
