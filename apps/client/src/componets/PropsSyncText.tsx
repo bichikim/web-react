@@ -11,12 +11,10 @@ export const SyncMe: FC<SyncMeProps> = (props) => {
     setValue(`${value}o`)
   }
 
-  console.log('signal', value)
-
   return (
     <div>
       <button onClick={onChange}>change</button>
-      {value}
+      {value()}
     </div>
   )
 }

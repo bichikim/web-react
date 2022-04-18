@@ -44,7 +44,7 @@ export const HookState: FC = () => {
     <div>
       {
         state.map((item) => (
-          <Nest state={item} />
+          <Nest state={item} key={item.title.get()} />
         ))
       }
       <Nest state={{title: 'example'}} />
