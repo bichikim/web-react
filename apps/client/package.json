@@ -49,6 +49,7 @@
     "validator": "13.7.0"
   },
   "devDependencies": {
+    "flush-promises": "1.0.2",
     "@types/uuid": "8.3.4",
     "@testing-library/react-hooks": "7.0.2",
     "@testing-library/react": "12.1.4",

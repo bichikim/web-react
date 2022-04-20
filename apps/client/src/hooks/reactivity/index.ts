@@ -1,10 +1,17 @@
 import {effectScope, reactive, readonly, UnwrapNestedRefs} from '@vue/reactivity'
-import {watch, WatchOptions} from '@vue/runtime-core'
-import {memo, PropsWithChildren, ReactNode, useEffect, useRef} from 'react'
+import {watch, watchEffect, WatchOptions} from '@vue/runtime-core'
+import {memo, PropsWithChildren, useEffect, useRef} from 'react'
 import {useSignal} from 'src/hooks/signal'
 
 const {isArray} = Array
 export const isObject = (value) => !isArray(value) && value !== null && typeof value === 'object'
+
+export {
+  watch,
+  watchEffect,
+}
+
+export * from '@vue/reactivity'
 
 export function traverse(value: any, seen: Set<unknown> = new Set()) {
   if (!isObject(value) || seen.has(value)) {
@@ -54,7 +61,6 @@ export function useObserver<P extends Record<string, any>>(
     propsRef.current = scope.run(() => {
       const reactiveProps = reactive(__props)
       watch(reactiveProps, () => {
-        console.log(reactiveProps)
         signal()
         shouldRender.current = true
       }, {
@@ -80,11 +86,6 @@ export function useObserver<P extends Record<string, any>>(
   })
 
   return renderedNode.current
-}
-
-export interface PropsAsState<P> {
-  children?: ReactNode | undefined
-  state: P
 }
 
 export const withReactivity = <P extends Record<string, any>>(

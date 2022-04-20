@@ -180,6 +180,7 @@ importers:
       csstype: 3.0.11
       dotenv: 16.0.0
       express: 4.17.3
+      flush-promises: 1.0.2
       graphql: 16.3.0
       graphql-tag: 2.12.6
       helmet: 5.0.2
@@ -253,6 +254,7 @@ importers:
       '@zerollup/ts-transform-paths': 1.7.18_typescript@4.6.2
       csstype: 3.0.11
       dotenv: 16.0.0
+      flush-promises: 1.0.2
       markdown-it-link-attributes: 4.0.0
       markdown-it-prism: 2.2.3
       ts-node: 10.7.0_e79e62fe450383fd2d418267dc75e645
@@ -10401,6 +10403,10 @@ packages:
 
   /flatted/3.2.5:
     resolution: {integrity: sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==}
+    dev: true
+
+  /flush-promises/1.0.2:
+    resolution: {integrity: sha512-G0sYfLQERwKz4+4iOZYQEZVpOt9zQrlItIxQAAYAWpfby3gbHrx0osCHz5RLl/XoXevXk0xoN4hDFky/VV9TrA==}
     dev: true
 
   /flush-write-stream/1.1.1:
