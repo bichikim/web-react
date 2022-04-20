@@ -1,32 +1,6 @@
-import {computed, ref, toRefs} from '@vue/reactivity'
+import {ref} from '@vue/reactivity'
 import {useSetup, withReactivity} from 'src/hooks/reactivity'
 import {v4 as uuid} from 'uuid'
-
-export const ReactivityItem: FC<{value: any}> = (props) => {
-  const state = useSetup((props) => {
-    const {value} = toRefs(props)
-    const age = ref(0)
-    const ageX = computed(() => {
-      return age.value + (value?.value ?? 0)
-    })
-    const increase = () => {
-      age.value += 1
-    }
-    return {
-      age,
-      ageX,
-      increase,
-    }
-  }, props)
-
-  return (
-    <div>
-      <div>{state.age}</div>
-      <div>{state.ageX}</div>
-      <button onClick={() => state.increase()}>increase</button>
-    </div>
-  )
-}
 
 export interface TodoItem {
   done?: boolean
