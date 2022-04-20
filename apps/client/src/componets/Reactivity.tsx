@@ -1,5 +1,6 @@
 import {computed, ref, toRefs} from '@vue/reactivity'
 import {useSetup, withReactivity} from 'src/hooks/reactivity'
+import {v4 as uuid} from 'uuid'
 
 export const ReactivityItem: FC<{value: any}> = (props) => {
   const state = useSetup((props) => {
@@ -27,32 +28,163 @@ export const ReactivityItem: FC<{value: any}> = (props) => {
   )
 }
 
-export const ReactivityItem2 = withReactivity<{value: any}>((props) => {
-  return () => (
+export interface TodoItem {
+  done?: boolean
+  id: string
+  message?: string
+  title?: string
+}
+
+export interface TodoItemProps extends TodoItem {
+  name?: string
+  onToggleDone?: (id: string, value?: boolean) => any
+}
+
+export const TodoItem = withReactivity<TodoItemProps>((props) => {
+  console.log('rendered', props.id)
+  return (
     <div>
-      <div>{props.value}</div>
+      <div>
+        <span>
+          author {props.name}
+        </span>
+      </div>
+      <div>
+        <span>{props.title}</span>
+        <span>{props.message}</span>
+      </div>
+      <button onClick={() => props.onToggleDone?.(props.id)}>{props.done ? 'done' : 'not yet'}</button>
     </div>
   )
 })
 
-export const Reactivity: FC = () => {
-  const [value, setValue] = useState(0)
-  const [value2, setValue2] = useState(0)
-  const increase = () => {
-    setValue((value) => value + 1)
-  }
-  const increase2 = () => {
-    setValue2((value) => value + 1)
-  }
+export interface AddTodoItemProps {
+  onAddItem?: (payload: Omit<TodoItem, 'id'>) => any
+}
+
+export const AddTodoItem: FC<AddTodoItemProps> = (props) => {
+  const state = useSetup((props) => {
+    const title = ref('')
+    const message = ref('')
+
+    const createOnInput = (target: string) => (event: any) => {
+      const {value} = event.target ?? {}
+      if (typeof value === 'undefined') {
+        return
+      }
+      switch (target) {
+        case 'title':
+          title.value = value
+          return
+        case 'message':
+          message.value = value
+      }
+    }
+
+    const onAddItem = () => {
+      props.onAddItem?.({
+        done: false,
+        message: message.value,
+        title: title.value,
+      })
+    }
+
+    return {
+      createOnInput,
+      message,
+      onAddItem,
+      title,
+    }
+  }, props)
+
   return (
-    <div>
-      <button onClick={increase}>increase</button>
-      <button onClick={increase2}>increase2</button>
-      <div>{value2}</div>
-      <ReactivityItem2 value={value} />
-      <ReactivityItem value={value}>
-      </ReactivityItem>
-    </div>
+    <>
+      <input onChange={state.createOnInput('title')}></input>
+      <input onChange={state.createOnInput('message')}></input>
+      <button onClick={state.onAddItem}>add</button>
+    </>
+  )
+}
+
+export interface TodoListProps {
+  name?: string
+}
+
+export const TodoList: FC<TodoListProps> = (props) => {
+  const state = useSetup(() => {
+    const list = ref<TodoItem[]>([])
+
+    const addItem = (payload: Omit<TodoItem, 'id'>) => {
+      list.value.push({...payload, id: uuid()})
+    }
+
+    const fineIndexItem = (id: string) => {
+      return list.value.findIndex((item) => item.id === id)
+    }
+
+    const modifyIndexItem = (index: number, payload?: Partial<Omit<TodoItem, 'id'>>) => {
+      if (index >= 0) {
+        if (payload) {
+          list.value.splice(index, 1, {...list.value[index], ...payload})
+        } else {
+          list.value.splice(index, 1)
+        }
+      }
+    }
+
+    const modifyItem = (id: string, payload?: Partial<Omit<TodoItem, 'id'>>) => {
+      const index = fineIndexItem(id)
+      modifyIndexItem(index, payload)
+    }
+
+    const toggleDone = (id: string, value?: boolean) => {
+      if (typeof value === 'undefined') {
+        const index = fineIndexItem(id)
+        const item = list.value[index]
+        if (item) {
+          modifyIndexItem(index, {done: !item.done})
+        }
+        return
+      }
+      modifyItem(id, {done: value})
+    }
+
+    return {
+      addItem,
+      list,
+      modifyItem,
+      toggleDone,
+    }
+  })
+  return (
+    <>
+      {state.list.map((item) => {
+        return (
+          <TodoItem
+            onToggleDone={state.toggleDone}
+            name={props.name}
+            {...item}
+            key={item.id}
+          ></TodoItem>
+        )
+      })}
+      <div>
+        <AddTodoItem onAddItem={state.addItem} />
+      </div>
+    </>
+  )
+}
+
+export interface ReactivityProps {
+  name?: string
+}
+
+export const Reactivity: FC<ReactivityProps> = () => {
+  return (
+    <>
+      <div>to do example</div>
+      <TodoList name="foo" />
+    </>
   )
 }
 

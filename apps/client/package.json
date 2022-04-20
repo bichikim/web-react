@@ -43,11 +43,13 @@
     "react-router-dom": "6.3.0",
     "react-solid-state": "0.27.3",
     "serve-static": "1.14.2",
+    "uuid": "8.3.2",
     "tslib": "2.3.1",
     "urql": "2.2.0",
     "validator": "13.7.0"
   },
   "devDependencies": {
+    "@types/uuid": "8.3.4",
     "@testing-library/react-hooks": "7.0.2",
     "@testing-library/react": "12.1.4",
     "@capacitor/cli": "3.4.3",

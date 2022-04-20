@@ -1,17 +1,18 @@
-import {effectScope, reactive} from '@vue/reactivity'
-import {memo, PropsWithChildren, useEffect, useRef} from 'react'
-import {watchEffect} from '@vue/runtime-core'
+import {effectScope, reactive, readonly, UnwrapNestedRefs} from '@vue/reactivity'
+import {watch, WatchOptions} from '@vue/runtime-core'
+import {memo, PropsWithChildren, ReactNode, useEffect, useRef} from 'react'
 import {useSignal} from 'src/hooks/signal'
 
 const {isArray} = Array
 export const isObject = (value) => !isArray(value) && value !== null && typeof value === 'object'
 
-function traverse(value: any, seen: Set<unknown> = new Set()) {
+export function traverse(value: any, seen: Set<unknown> = new Set()) {
   if (!isObject(value) || seen.has(value)) {
     return value
   }
 
   seen.add(value)
+
   if (isArray(value)) {
     for (const element of value) {
       traverse(element, seen)
@@ -33,19 +34,32 @@ function traverse(value: any, seen: Set<unknown> = new Set()) {
   return value
 }
 
-export function useObserver<T>(props, fn: () => T) {
+export function useObserver<P extends Record<string, any>>(
+  props: P,
+  maybeRef: any,
+  component: (props: PropsWithChildren<P>, r: any) => JSX.Element,
+  watchOptions?: WatchOptions,
+) {
   const __props = {...props}
+  const signal = useSignal()
   const reaction = useRef<any>()
   const renderedNode = useRef<any>()
   const propsRef = useRef<any>()
-  const shouldRender = useRef(false)
+  const shouldRender = useRef(true)
+  if (shouldRender.current) {
+    renderedNode.current = component(props, maybeRef)
+  }
   if (!reaction.current) {
     const scope = effectScope()
     propsRef.current = scope.run(() => {
       const reactiveProps = reactive(__props)
-      watchEffect(() => {
-        traverse(reactiveProps)
+      watch(reactiveProps, () => {
+        console.log(reactiveProps)
+        signal()
         shouldRender.current = true
+      }, {
+        deep: true,
+        ...watchOptions,
       })
       return reactiveProps
     })
@@ -65,23 +79,26 @@ export function useObserver<T>(props, fn: () => T) {
     shouldRender.current = false
   })
 
-  if (shouldRender.current) {
-    renderedNode.current = fn()
-  }
-
   return renderedNode.current
 }
 
+export interface PropsAsState<P> {
+  children?: ReactNode | undefined
+  state: P
+}
+
 export const withReactivity = <P extends Record<string, any>>(
-  ComponentType: (props: PropsWithChildren<P>, r: any) => () => JSX.Element,
+  component: (props: PropsWithChildren<P>, maybeRef: any) => JSX.Element,
+  watchOptions?: WatchOptions,
 ) => {
-  return memo<P>((p, r) => {
-    const component = ComponentType(p, r)
-    return component ? useObserver(p, component) : null
+  return memo<P>((props, maybeRef) => {
+    return component ? useObserver(props, maybeRef, component, watchOptions) : null
   })
 }
 
-export const useSetup = (setup: (props?: any) => Record<string, any>, props?: Record<string, any>) => {
+export const useSetup = <T extends Record<string, any>>(
+  setup: (props?: any) => T, props?: Record<string, any>, watchOptions?: WatchOptions,
+): UnwrapNestedRefs<T> => {
   const stateRef = useRef<any>()
   const isStateUpdated = useRef<boolean>(false)
   const __props = props ? {...props} : {}
@@ -90,13 +107,15 @@ export const useSetup = (setup: (props?: any) => Record<string, any>, props?: Re
   const signal = useSignal()
   if (!stateRef.current) {
     scope.current.run(() => {
-      propsRef.current = reactive(__props)
+      propsRef.current = readonly(reactive(__props))
       const state = reactive(setup(propsRef.current))
       stateRef.current = state
-      watchEffect(() => {
+      watch(() => Object.values(state), () => {
         isStateUpdated.current = true
-        traverse(state)
         signal()
+      }, {
+        deep: true,
+        ...watchOptions,
       })
     })
   }
