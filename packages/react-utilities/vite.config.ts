@@ -1,32 +1,39 @@
-import solid from 'vite-plugin-solid'
-import * as path from 'path'
+import {kebabCase} from 'lodash'
+import path from 'path'
+import {externals} from 'rollup-plugin-node-externals'
 import {defineConfig} from 'vite'
+import dts from 'vite-plugin-dts'
+import packageJson from './package.json'
+import {sharedConfig} from './vite.shared'
 
-export default defineConfig(() => {
+const libraryName = kebabCase(packageJson.name)
+
+export default defineConfig((configEnv) => {
+  const config = sharedConfig(configEnv)
+  config.plugins?.push(
+    dts({
+      insertTypesEntry: true,
+    }),
+  )
   return {
-    define: {
-      __DEV__: JSON.stringify('import.meta.env.DEV'),
-      'process.env.NODE_ENV': JSON.stringify('import.meta.env.MODE'),
-    },
-    optimizeDeps: {
-      exclude: [
-      ],
-      include: [
-      ],
-    },
-
-    plugins: [
-      solid(),
-    ],
-
-    resolve: {
-      alias: {
-        '~/': `${path.resolve(__dirname, '')}/`,
-        'components/': `${path.resolve(__dirname, 'src/components')}/`,
-        'layouts/': `${path.resolve(__dirname, 'src/layouts')}/`,
-        'pages/': `${path.resolve(__dirname, 'src/pages')}/`,
-        'src/': `${path.resolve(__dirname, 'src')}/`,
-        'store/': `${path.resolve(__dirname, 'src/store')}/`,
+    ...config,
+    build: {
+      lib: {
+        entry: path.resolve(__dirname, 'src/index.ts'),
+        fileName: 'index',
+        formats: ['es', 'umd'],
+        name: libraryName,
+      },
+      rollupOptions: {
+        output: {
+          globals: {
+            react: 'React',
+            'react-dom': 'ReactDOM',
+          },
+        },
+        plugins: [
+          externals(),
+        ],
       },
     },
   }

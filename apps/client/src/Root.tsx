@@ -7,9 +7,8 @@ import {Zustand} from './componets/Zustand'
 import {HookState} from './componets/HookState'
 import {Reactivity} from './componets/Reactivity'
 
-export const App: FC = withSolid(() => {
-
-  return () => (
+export const Root: FPC = () => {
+  return (
     <div>
       <section>
         solid
@@ -41,4 +40,6 @@ export const App: FC = withSolid(() => {
       </section>
     </div>
   )
-})
+}
+
+export default Root

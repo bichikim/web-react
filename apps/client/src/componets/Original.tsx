@@ -1,10 +1,8 @@
 const Counter: FC = ({children}) => {
-  console.log('Counter')
   return <div>{children}</div>
 }
 
-export const Original: FC = () => {
-  console.log('Original')
+export const Original: FPC = () => {
   const [count, setCount] = useState(1)
   const [count2, setCount2] = useState(1)
 

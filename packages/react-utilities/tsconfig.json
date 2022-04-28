@@ -1,18 +1,13 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "outDir": "lib",
+    "outDir": "dist",
     "baseUrl": ".",
     "paths": {
       "src/*": [
         "src/*"
       ]
-    },
-    "plugins": [
-      { "transform": "@zerollup/ts-transform-paths" }
-    ]
+    }
   },
   "ts-node": {
     "compilerOptions": {
@@ -27,7 +22,6 @@
     "src/**/*.tsx",
     "tests/**/*.ts",
     "tests/**/*.tsx",
-    "../../coong/client-react-18/auto-imports.d.ts"
   ],
   "exclude": [
     "node_modules"
