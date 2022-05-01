@@ -9,7 +9,6 @@ import vitePluginImp from 'vite-plugin-imp'
 import * as dotenv from 'dotenv'
 import react from '@vitejs/plugin-react'
 import autoImport from 'unplugin-auto-import/vite'
-// import {quasar} from '@quasar/vite-plugin'
 
 // eslint-disable-next-line import/no-named-as-default-member
 dotenv.config()
@@ -45,6 +44,11 @@ export default defineConfig(() => {
               'createEffect',
               'onCleanup',
               'withSolid',
+            ],
+          },
+          {
+            'htm/react': [
+              'html',
             ],
           },
         ],

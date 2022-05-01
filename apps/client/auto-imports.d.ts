@@ -3,6 +3,7 @@
 declare global {
   const createEffect: typeof import('react-solid-state')['createEffect']
   const createSignal: typeof import('react-solid-state')['createSignal']
+  const html: typeof import('htm/react')['html']
   const onCleanup: typeof import('react-solid-state')['onCleanup']
   const useCallback: typeof import('react')['useCallback']
   const useContext: typeof import('react')['useContext']

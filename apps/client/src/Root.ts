@@ -8,38 +8,38 @@ import {HookState} from './componets/HookState'
 import {Reactivity} from './componets/Reactivity'
 
 export const Root: FPC = () => {
-  return (
+  return html`
     <div>
       <section>
         solid
-        <Solid />
+        <${Solid} />
       </section>
       <br />
       <section>
         original
-        <Original />
+        <${Original} />
       </section>
       <br />
       <section>
-        <PropsSyncText />
+        <${PropsSyncText} />
       </section>
       <section>
-        <Events />
+        <${Events} />
       </section>
       <section>
-        <DeepMemo />
+        <${DeepMemo} />
       </section>
       <section>
-        <Zustand />
+        <${Zustand} />
       </section>
       <section>
-        <HookState />
+        <${HookState} />
       </section>
       <section>
-        <Reactivity />
+        <${Reactivity} />
       </section>
     </div>
-  )
+  `
 }
 
 export default Root
