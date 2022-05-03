@@ -1,5 +1,4 @@
-import {RefObject} from 'react'
-
+import {useSignal} from 'src/hooks/signal'
 const {is} = Object
 
 export interface UseWaitProps<D> {
@@ -8,9 +7,14 @@ export interface UseWaitProps<D> {
 }
 
 export interface UseWaitReturn<T, D> {
-  promise: RefObject<null | Promise<T>>
+  promise: Promise<T>
   reload: () => any
   run: (data: D) => any
+}
+
+export interface ReuseAblePromise<T> {
+  reject: (error: T) => any
+  resolve: (value: T) => any
 }
 
 export const useWait = <T, D>(
@@ -18,28 +22,46 @@ export const useWait = <T, D>(
   options: UseWaitProps<D> = {},
 ): UseWaitReturn<T, D> => {
   const {autoStart = false, data} = options
+  const signal_ = useSignal()
   const dataRef = useRef(data)
   const fetchRef = useRef<(data?: any) => Promise<T>>()
-  const promiseRef = useRef<null | Promise<any>>(null)
+  const promiseRef = useRef<Promise<any>>(new Promise<any>(() => {
+    // empty
+  }))
+
+  const run = useCallback((data?: D, signal: boolean = true) => {
+    promiseRef.current = new Promise((resolve, reject) => {
+      if (!fetchRef.current) {
+        return
+      }
+      if (data) {
+        dataRef.current = data
+      }
+      fetchRef.current(dataRef.current).then((value) => {
+        resolve(value)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+
+    if (signal) {
+      signal_()
+    }
+  }, [])
+
   if (!is(fetchRef.current, fetch)) {
     fetchRef.current = fetch
     if (autoStart) {
-      promiseRef.current = fetchRef.current(dataRef.current)
+      run(undefined, false)
     }
   }
-
-  const run = useCallback((data?: D) => {
-    if (fetchRef.current) {
-      promiseRef.current = fetchRef.current(data ?? dataRef.current)
-    }
-  }, [])
 
   const reload = useCallback(() => {
     run()
   }, [])
 
   return {
-    promise: promiseRef,
+    promise: promiseRef.current,
     reload,
     run,
   }

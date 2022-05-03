@@ -1,13 +1,16 @@
 import {useSignal} from 'src/hooks/signal'
-const {is} = Object
-export interface WaitChildren {
+import {usePromiseAll} from './use-promise-all'
+
+export interface WaitNode {
   done?: ((value: any) => ReactNode) | ReactNode
   error?: ((error: any) => ReactNode) | ReactNode
   waiting?: ReactNode
 }
 
+export type WaitChildren = ((waiting: boolean, value: any, error: any) => ReactNode) | WaitNode | ReactNode
+
 export interface WaitProps {
-  children?: ((waiting: boolean, value: any, error: any) => ReactNode) | WaitChildren | ReactNode
+  children?: WaitChildren
   for: Promise<any> | any
   onDone?: (value?: any) => any
   onError?: (error: any) => any
@@ -20,32 +23,31 @@ export const Wait: FPC<WaitProps> = (props) => {
   const valueRef = useRef<any>(null)
   const errorRef = useRef<any>(null)
   const waitRef = useRef(false)
-  const waitForRef = useRef<any>()
-  if (!is(waitForRef.current, waitFor)) {
-    valueRef.current = null
-    errorRef.current = null
-    waitRef.current = false
-    waitForRef.current = waitFor
-    if (waitForRef.current instanceof Promise) {
-      waitRef.current = true
-      waitForRef.current.then((value) => {
+  usePromiseAll(
+    waitFor,
+    {
+      onDone: (value) => {
         valueRef.current = value
         waitRef.current = false
         errorRef.current = null
         signal()
         onDone?.(value)
-      }).catch((error) => {
+      },
+      onError: (error) => {
         const _error = error ?? new Error('unknown error')
         valueRef.current = null
         waitRef.current = false
         errorRef.current = _error
         signal()
         onError?.(_error)
-      })
-    } else {
-      valueRef.current = waitForRef.current
-    }
-  }
+      },
+      onUpdated: () => {
+        valueRef.current = null
+        errorRef.current = null
+        waitRef.current = true
+      },
+    },
+  )
 
   if (typeof children === 'function') {
     return <>{

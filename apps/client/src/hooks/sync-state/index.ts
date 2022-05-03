@@ -14,6 +14,8 @@ const deepCompare = (value1: any, value2: any): boolean => {
 export type UseSyncStateReturn<T extends NotFunction> = [() => T, Dispatch<SetStateAction<T>>]
 export interface UseSyncStateOptions<T> {
   /**
+   * compare deep
+   * @see react-fast-compare
    * @default false
    */
   deep?: boolean

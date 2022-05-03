@@ -30,6 +30,40 @@ describe('Wait', () => {
     await flushPromises()
     expect(screen.getByTestId('result').textContent).toBe('done')
   })
+  it('should render waiting elements and done elements with multiple promises', async () => {
+    let _resolve
+    let _resolve2
+    const promise = new Promise((resolve) => {
+      _resolve = resolve
+    })
+    const promise2 = new Promise((resolve) => {
+      _resolve2 = resolve
+    })
+    await render(
+      <Wait for={[promise, promise2]} >
+        {(waiting, value, error) => {
+          if (waiting) {
+            return (
+              <div data-testid="result">waiting</div>
+            )
+          }
+          if (error) {
+            return (
+              <div data-testid="result">error</div>
+            )
+          }
+          return <div data-testid="result">done {value}</div>
+        }}
+      </Wait>,
+    )
+    expect(screen.getByTestId('result').textContent).toBe('waiting')
+    _resolve('foo')
+    await flushPromises()
+    expect(screen.getByTestId('result').textContent).toBe('waiting')
+    _resolve2('bar')
+    await flushPromises()
+    expect(screen.getByTestId('result').textContent).toBe('done foobar')
+  })
   it('should render error elements', async () => {
     let _resolve
     let _reject
