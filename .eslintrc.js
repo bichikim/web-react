@@ -85,6 +85,7 @@ module.exports = {
     'import',
     'sort-keys-fix',
     'typescript-sort-keys',
+    'eslint-plugin-htm',
   ],
   root: true,
   rules: {
@@ -179,7 +180,9 @@ module.exports = {
     'import/no-unresolved': 'off',
     indent: [
       'error', 2, {
+        ObjectExpression: 'first',
         SwitchCase: 1,
+        ignoredNodes: ['TemplateLiteral *'],
       },
     ],
     'jsx-quotes': ['error', 'prefer-double'],

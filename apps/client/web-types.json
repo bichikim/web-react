@@ -5,17 +5,12 @@
   "version": "1.0.0",
   "contributions": {
     "html": {
-      "vue-directives": [
+      "attributes": [
         {
-          "name": "css",
-          "argument": {
-            "name": "breakpoint",
-            "pattern": ".*"
+          "name": "key",
+          "value": {
+            "required": false
           }
-        },
-        {
-          "name": "Unknown directive",
-          "pattern": ".*"
         }
       ]
     }

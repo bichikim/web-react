@@ -13,8 +13,12 @@ module.exports = {
             loglevel: 'info',
           },
         ],
+        ['htm', {
+          pragma: 'React.createElement',
+        }],
       ],
       presets: [
+
         ['@babel/preset-react', {
           isTSX: true,
         }],
