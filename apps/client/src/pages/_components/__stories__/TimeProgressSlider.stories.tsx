@@ -30,7 +30,7 @@ export const Default = () => {
   }, [])
 
   return (
-    <div style={{backgroundColor: 'white', height: '500px', width: '1000px'}}>
+    <div style={{backgroundColor: 'white', height: '500px', maxWidth: '1500px'}}>
       <button onClick={next}>next</button>
       <TimeProgressSlider stepNow={now} stepBgImages={images} onChangeNow={onChangeNow} />
     </div>
