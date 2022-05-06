@@ -70,7 +70,7 @@ const useStepTimer = (props: UseStepTimerProps) => {
       }
       return now + 1
     })
-  }, [])
+  }, [total])
 
   const prevStep = useCallback(() => {
     setNow((now) => {
@@ -80,12 +80,12 @@ const useStepTimer = (props: UseStepTimerProps) => {
       return now - 1
     })
     setClearSignal((value) => !value)
-  }, [])
+  }, [total])
 
   const nextStep = useCallback(() => {
     _nextStep()
     setClearSignal((value) => !value)
-  }, [])
+  }, [_nextStep])
 
   useEffect(() => {
     onChangeNow?.(now)
@@ -96,7 +96,7 @@ const useStepTimer = (props: UseStepTimerProps) => {
     return () => {
       clearInterval(cancelFlag)
     }
-  }, [total, props.now, clearSignal])
+  }, [props.now, clearSignal])
 
   return {
     nextStep,
