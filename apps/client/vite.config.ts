@@ -27,6 +27,7 @@ export default defineConfig(() => {
     optimizeDeps: {
       exclude: [
         'vite',
+        'react-router-dom',
       ],
       include: [
       ],

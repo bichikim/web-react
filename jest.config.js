@@ -33,7 +33,6 @@ module.exports = {
 
       snapshotSerializers: [
         'jest-stitches',
-        '@emotion/jest/serializer',
       ],
       testEnvironment: '@happy-dom/jest-environment',
       testMatch: [
@@ -55,7 +54,6 @@ module.exports = {
 
   snapshotSerializers: [
     'jest-stitches',
-    '@emotion/jest/serializer',
   ],
 
   testEnvironment: '@happy-dom/jest-environment',

@@ -6,8 +6,10 @@ import {DeepMemo} from './componets/DeepMemo'
 import {Zustand} from './componets/Zustand'
 import {HookState} from './componets/HookState'
 import {Reactivity} from './componets/Reactivity'
+import {SideSlide} from 'pages/side-slide'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
-export const Root: FPC = () => {
+const Testing: FC = () => {
   return html`
     <div>
       <section>
@@ -40,6 +42,17 @@ export const Root: FPC = () => {
       </section>
     </div>
   `
+}
+
+export const Root: FPC = () => {
+  return (
+    <BrowserRouter >
+      <Routes>
+        <Route element={<Testing />} path="/" />
+        <Route element={<SideSlide />} path="/side-slide" />
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default Root

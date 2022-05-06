@@ -1,5 +1,5 @@
 import {fireEvent, render, screen} from '@testing-library/react'
-import React, {FC, useState, useCallback} from 'react'
+import React, {FC, useCallback, useState} from 'react'
 import {useSyncState} from '../'
 import {useHandle} from '../../use-handle'
 
@@ -9,13 +9,13 @@ describe('signal', () => {
     const Component = (props) => {
       const [value, setValue] = useSyncState(props.value)
       const onChange = () => {
-        setValue(`${value()}o`)
+        setValue((value) => `${value}o`)
       }
       rendered()
       return (
         <div>
           <button onClick={onChange}>change</button>
-          <div data-testid="value">{value()}</div>
+          <div data-testid="value">{value}</div>
         </div>
       )
     }
@@ -51,13 +51,13 @@ describe('signal', () => {
     const Component = (props) => {
       const [value, setValue] = useSyncState(props.value)
       const onChange = () => {
-        setValue(`${value()}o`)
+        setValue((value) => `${value}o`)
       }
       rendered()
       return (
         <div>
           <button onClick={onChange}>change</button>
-          <div data-testid="value">{value()}</div>
+          <div data-testid="value">{value}</div>
         </div>
       )
     }
@@ -90,16 +90,16 @@ describe('signal', () => {
   })
   it('should be safe in callback that will not change itself', async () => {
     const rendered = jest.fn()
-    const Component = (props) => {
+    const Component = () => {
       const [value, setValue] = useSyncState<string>('foo')
       const onChange = useCallback(() => {
-        setValue(`${value()}o`)
+        setValue((value) => `${value}o`)
       }, [])
       rendered()
       return (
         <div>
           <button onClick={onChange}>change</button>
-          <div data-testid="value">{value()}</div>
+          <div data-testid="value">{value}</div>
         </div>
       )
     }
@@ -139,8 +139,8 @@ describe('signal', () => {
       return (
         <div>
           <button onClick={onChange}>change</button>
-          <div data-testid="foo">{state().foo}</div>
-          <div data-testid="bar">{state().bar}</div>
+          <div data-testid="foo">{state.foo}</div>
+          <div data-testid="bar">{state.bar}</div>
         </div>
       )
     }
@@ -183,7 +183,11 @@ describe('signal', () => {
           <button onClick={onChangeJohn}>rootChangeJohn</button>
           <button onClick={onChangeFoo}>rootChangeFoo</button>
           <div>{state.john}</div>
-          <Component foo={state.foo} bar={state.bar} onChangeBar={onChangeBar} />
+          <Component
+            foo={state.foo}
+            bar={state.bar}
+            onChangeBar={onChangeBar}
+          />
         </div>
       )
     }

@@ -14,7 +14,7 @@ describe('toggle', () => {
       return (
         <div>
           <button onClick={onChange}>change</button>
-          <div data-testid="value">{String(value())}</div>
+          <div data-testid="value">{String(value)}</div>
         </div>
       )
     }
