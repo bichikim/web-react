@@ -14,7 +14,7 @@ export const SyncMe: FC<SyncMeProps> = (props) => {
   return (
     <div>
       <button onClick={onChange}>change</button>
-      {value()}
+      {value}
     </div>
   )
 }

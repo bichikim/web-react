@@ -43,8 +43,8 @@ export function traverse(value: any, seen: Set<unknown> = new Set()) {
 
 export function useObserver<P extends Record<string, any>>(
   props: P,
-  maybeRef: any,
-  component: (props: PropsWithChildren<P>, r: any) => JSX.Element,
+  secondArg: any,
+  component: (props: PropsWithChildren<P>, r?: any) => JSX.Element,
   watchOptions?: WatchOptions,
 ) {
   const __props = {...props}
@@ -53,13 +53,22 @@ export function useObserver<P extends Record<string, any>>(
   const renderedNode = useRef<any>()
   const propsRef = useRef<any>()
   const shouldRender = useRef(true)
+
   if (shouldRender.current) {
-    renderedNode.current = component(props, maybeRef)
+    // renderedNode.current = component(props, maybeRef)
+    renderedNode.current = component(props)
+    shouldRender.current = false
+    // support vite hot reloading
+  } else if (import.meta.hot) {
+    renderedNode.current = component(props)
   }
-  if (!reaction.current) {
+
+  if (!reaction.current || import.meta.hot) {
     const scope = effectScope()
+
     propsRef.current = scope.run(() => {
       const reactiveProps = reactive(__props)
+
       watch(reactiveProps, () => {
         signal()
         shouldRender.current = true
@@ -69,31 +78,32 @@ export function useObserver<P extends Record<string, any>>(
       })
       return reactiveProps
     })
+
     reaction.current = scope
   }
+
   const _props = propsRef.current
+
   Object.keys(__props).forEach((key) => {
     _props[key] = __props[key]
   })
+
   useEffect(() => {
     return () => {
       reaction.current.stop()
     }
   }, [])
-
-  useEffect(() => {
-    shouldRender.current = false
-  })
+  //
 
   return renderedNode.current
 }
 
 export const withReactivity = <P extends Record<string, any>>(
-  component: (props: PropsWithChildren<P>, maybeRef: any) => JSX.Element,
+  component: (props: PropsWithChildren<P>, secondArg: any) => JSX.Element,
   watchOptions?: WatchOptions,
 ) => {
-  return memo<P>((props, maybeRef) => {
-    return component ? useObserver(props, maybeRef, component, watchOptions) : null
+  return memo<P>((props, secondArg) => {
+    return useObserver(props, secondArg, component, watchOptions)
   })
 }
 
@@ -104,13 +114,14 @@ export const useSetup = <T extends Record<string, any>>(
   const isStateUpdated = useRef<boolean>(false)
   const __props = props ? {...props} : {}
   const propsRef = useRef<any>()
-  const scope = useRef(effectScope())
+  const scope = useRef<any>()
   const signal = useSignal()
-  if (!stateRef.current) {
-    scope.current.run(() => {
+
+  if (!scope.current) {
+    scope.current = effectScope()
+    stateRef.current = scope.current.run(() => {
       propsRef.current = readonly(reactive(__props))
       const state = reactive(setup(propsRef.current))
-      stateRef.current = state
       watch(() => Object.values(state), () => {
         isStateUpdated.current = true
         signal()
@@ -118,22 +129,24 @@ export const useSetup = <T extends Record<string, any>>(
         deep: true,
         ...watchOptions,
       })
+      return state
     })
   }
+
   if (!isStateUpdated.current && props) {
     const _props = propsRef.current
     Object.keys(__props).forEach((key) => {
       _props[key] = __props[key]
     })
   }
-
-  useEffect(() => {
-    isStateUpdated.current = false
-  })
+  isStateUpdated.current = false
 
   useEffect(() => {
     return () => {
-      scope.current.stop()
+      // support vite hot reload
+      if (!import.meta.hot) {
+        scope.current.stop()
+      }
     }
   }, [])
 

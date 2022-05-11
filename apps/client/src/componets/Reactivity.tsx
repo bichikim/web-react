@@ -1,6 +1,7 @@
 import {ref} from '@vue/reactivity'
 import {useSetup, withReactivity} from 'src/hooks/reactivity'
 import {v4 as uuid} from 'uuid'
+import {styled} from '@stitches/react'
 
 export interface TodoItem {
   done?: boolean
@@ -11,13 +12,42 @@ export interface TodoItem {
 
 export interface TodoItemProps extends TodoItem {
   name?: string
+  onRemoveItem?: (id: string) => any
   onToggleDone?: (id: string, value?: boolean) => any
 }
 
+export const TodoItemContainer =
+  styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+  })
+
+export const TodoItemActionContainer =
+  styled('div', {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '10px',
+  })
+
 export const TodoItem = withReactivity<TodoItemProps>((props) => {
+
+  const state = useSetup((props) => {
+
+    const onRemoveItem = () => {
+      props.onRemoveItem?.(props.id)
+    }
+
+    return {
+      onRemoveItem,
+    }
+  }, props)
+
+  // check how many times rendered
   console.log('rendered', props.id)
+
   return (
-    <div>
+    <TodoItemContainer>
       <div>
         <span>
           author {props.name}
@@ -27,8 +57,11 @@ export const TodoItem = withReactivity<TodoItemProps>((props) => {
         <span>{props.title}</span>
         <span>{props.message}</span>
       </div>
-      <button onClick={() => props.onToggleDone?.(props.id)}>{props.done ? 'done' : 'not yet'}</button>
-    </div>
+      <TodoItemActionContainer>
+        <button onClick={() => props.onToggleDone?.(props.id)}>{props.done ? 'done' : 'not yet'}</button>
+        <button onClick={state.onRemoveItem}>remove</button>
+      </TodoItemActionContainer>
+    </TodoItemContainer>
   )
 })
 
@@ -36,12 +69,19 @@ export interface AddTodoItemProps {
   onAddItem?: (payload: Omit<TodoItem, 'id'>) => any
 }
 
+export const AddTodoItemContainer =
+  styled('div', {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+  })
+
 export const AddTodoItem: FC<AddTodoItemProps> = (props) => {
   const state = useSetup((props) => {
     const title = ref('')
     const message = ref('')
 
-    const createOnInput = (target: string) => (event: any) => {
+    const onInputFactory = (target: string) => (event: any) => {
       const {value} = event.target ?? {}
       if (typeof value === 'undefined') {
         return
@@ -64,19 +104,25 @@ export const AddTodoItem: FC<AddTodoItemProps> = (props) => {
     }
 
     return {
-      createOnInput,
       message,
       onAddItem,
+      onInputFactory,
       title,
     }
   }, props)
 
   return (
-    <>
-      <input onChange={state.createOnInput('title')}></input>
-      <input onChange={state.createOnInput('message')}></input>
+    <AddTodoItemContainer>
+      <label htmlFor="title">
+        <span>Title</span>
+        <input id="title" onChange={state.onInputFactory('title')}></input>
+      </label>
+      <label htmlFor="message">
+        <span>Message</span>
+        <input id="message" onChange={state.onInputFactory('message')}></input>
+      </label>
       <button onClick={state.onAddItem}>add</button>
-    </>
+    </AddTodoItemContainer>
   )
 }
 
@@ -111,6 +157,13 @@ export const TodoList: FC<TodoListProps> = (props) => {
       modifyIndexItem(index, payload)
     }
 
+    const removeItem = (id: string) => {
+      const index = fineIndexItem(id)
+      if (index !== -1) {
+        list.value.splice(index, 1)
+      }
+    }
+
     const toggleDone = (id: string, value?: boolean) => {
       if (typeof value === 'undefined') {
         const index = fineIndexItem(id)
@@ -127,19 +180,22 @@ export const TodoList: FC<TodoListProps> = (props) => {
       addItem,
       list,
       modifyItem,
+      removeItem,
       toggleDone,
     }
   })
+
   return (
     <>
       {state.list.map((item) => {
         return (
           <TodoItem
             onToggleDone={state.toggleDone}
+            onRemoveItem={state.removeItem}
             name={props.name}
             {...item}
             key={item.id}
-          ></TodoItem>
+          />
         )
       })}
       <div>
@@ -156,7 +212,6 @@ export interface ReactivityProps {
 export const Reactivity: FC<ReactivityProps> = () => {
   return (
     <>
-      <div>to do example</div>
       <TodoList name="foo" />
     </>
   )
