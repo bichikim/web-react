@@ -1,15 +1,16 @@
 import {fireEvent, render, screen} from '@testing-library/react'
+import {renderHook} from '@testing-library/react-hooks'
 import React, {FC, useCallback, useState} from 'react'
 import {useSyncState} from '../'
 import {useHandle} from '../../use-handle'
 
-describe('signal', () => {
+describe('useSyncState', () => {
   it('should rerender ones', async () => {
     const rendered = jest.fn()
     const Component = (props) => {
       const [value, setValue] = useSyncState(props.value)
       const onChange = () => {
-        setValue((value) => `${value}o`)
+        setValue(`${value}o`)
       }
       rendered()
       return (
@@ -45,6 +46,9 @@ describe('signal', () => {
     fireEvent.click(screen.getByText('rootChange'))
     expect(rendered).toBeCalledTimes(4)
     expect(screen.getByTestId('value').textContent).toBe('fooo')
+    fireEvent.click(screen.getByText('rootChange'))
+    expect(rendered).toBeCalledTimes(5)
+    expect(screen.getByTestId('value').textContent).toBe('foooo')
   })
   it('should rerender ones with an inner setFunction', async () => {
     const rendered = jest.fn()
@@ -87,6 +91,9 @@ describe('signal', () => {
     fireEvent.click(screen.getByText('rootChange'))
     expect(rendered).toBeCalledTimes(4)
     expect(screen.getByTestId('value').textContent).toBe('fooo')
+    fireEvent.click(screen.getByText('rootChange'))
+    expect(rendered).toBeCalledTimes(5)
+    expect(screen.getByTestId('value').textContent).toBe('foooo')
   })
   it('should be safe in callback that will not change itself', async () => {
     const rendered = jest.fn()
@@ -212,5 +219,59 @@ describe('signal', () => {
     expect(rendered).toBeCalledTimes(5)
     expect(screen.getByTestId('foo').textContent).toBe('fooo')
     expect(screen.getByTestId('bar').textContent).toBe('baroo')
+  })
+  it('should update state with an assign updating Strategy', () => {
+    interface Props {
+      bar: string
+      foo: string
+      john?: string
+    }
+    const {result, rerender} = renderHook((props: Props) => useSyncState(props, {deep: true, updateStrategy: 'assign'}), {
+      initialProps: {bar: 'bar', foo: 'foo'},
+    })
+    {
+      const [state, setState] = result.current
+      expect(state).toEqual({bar: 'bar', foo: 'foo'})
+      setState((value) => ({...value, john: 'john'}))
+    }
+    {
+      const [state, setState] = result.current
+      expect(state).toEqual({bar: 'bar', foo: 'foo', john: 'john'})
+    }
+    rerender({
+      bar: 'bar1',
+      foo: 'foo',
+    })
+    {
+      const [state, setState] = result.current
+      expect(state).toEqual({bar: 'bar1', foo: 'foo', john: 'john'})
+    }
+  })
+  it('should update state without an assign updating Strategy', () => {
+    interface Props {
+      bar: string
+      foo: string
+      john?: string
+    }
+    const {result, rerender} = renderHook((props: Props) => useSyncState(props, {deep: true, updateStrategy: 'replace'}), {
+      initialProps: {bar: 'bar', foo: 'foo'},
+    })
+    {
+      const [state, setState] = result.current
+      expect(state).toEqual({bar: 'bar', foo: 'foo'})
+      setState((value) => ({...value, john: 'john'}))
+    }
+    {
+      const [state, setState] = result.current
+      expect(state).toEqual({bar: 'bar', foo: 'foo', john: 'john'})
+    }
+    rerender({
+      bar: 'bar1',
+      foo: 'foo',
+    })
+    {
+      const [state, setState] = result.current
+      expect(state).toEqual({bar: 'bar1', foo: 'foo'})
+    }
   })
 })

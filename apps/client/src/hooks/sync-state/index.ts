@@ -12,6 +12,9 @@ const deepCompare = (value1: any, value2: any): boolean => {
 }
 
 export type UseSyncStateReturn<T extends NotFunction> = [T, Dispatch<SetStateAction<T>>]
+
+export type UpdateStrategy = 'replace' | 'assign'
+
 export interface UseSyncStateOptions<T> {
   /**
    * compare deep
@@ -20,21 +23,34 @@ export interface UseSyncStateOptions<T> {
    */
   deep?: boolean
   defaultValue?: T
+  /**
+   * how to update props changing
+   * @default replace
+   */
+  updateStrategy?: UpdateStrategy
 }
 export const useSyncState = <T extends NotFunction>(
-  value: FunctionValue<T>,
+  props: FunctionValue<T>,
   options: UseSyncStateOptions<T> = {},
 ): UseSyncStateReturn<T> => {
-  const {deep, defaultValue} = options
-  const _value = functionValue(value, defaultValue)
+  const {deep, defaultValue, updateStrategy} = options
+  const _props = functionValue(props, defaultValue)
   const onSignal = useSignal()
-  const prevPropValue = useRef<T>(_value)
-  const valueRef = useRef<T>(_value)
+  const prevPropValue = useRef<any>()
+  const valueRef = useRef<any>(_props)
   const _compare = deep ? deepCompare : compare
 
-  if (!_compare(_value, prevPropValue.current)) {
-    valueRef.current = _value
-    prevPropValue.current = _value
+  if (!_compare(_props, prevPropValue.current)) {
+    if (typeof _props === 'object' && updateStrategy === 'assign') {
+      valueRef.current = {
+        ...valueRef.current,
+        ..._props,
+      }
+    } else {
+      valueRef.current = _props
+    }
+
+    prevPropValue.current = valueRef.current
   }
 
   const setValue = useCallback((value: T | ((value: T) => T)) => {

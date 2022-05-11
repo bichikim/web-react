@@ -2,9 +2,10 @@ import {styled} from '@stitches/react'
 import {useSyncState} from 'src/hooks/sync-state'
 
 export const ProgressBarStyled = styled('div', {
+  $$color: 'white',
   $$transform: 'scaleX(0)',
   $$transition: 'scaleX 2s',
-  backgroundColor: 'white',
+  backgroundColor: '$$color',
   height: '100%',
   transform: '$$transform',
   transformOrigin: 'left',
