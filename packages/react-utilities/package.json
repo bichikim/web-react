@@ -41,7 +41,6 @@
     "react-dom": "^18",
     "vite-plugin-dts": "1.1.1",
     "lodash": "4.17.21",
-    "ttypescript": "1.5.13",
     "typescript": "4.6.2",
     "vite": "2.8.6",
     "@testing-library/react": "^12.1.4",

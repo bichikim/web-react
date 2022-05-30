@@ -9,6 +9,7 @@ import vitePluginImp from 'vite-plugin-imp'
 import * as dotenv from 'dotenv'
 import react from '@vitejs/plugin-react'
 import autoImport from 'unplugin-auto-import/vite'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 // eslint-disable-next-line import/no-named-as-default-member
 dotenv.config()
@@ -35,6 +36,7 @@ export default defineConfig(() => {
 
     plugins: [
       react(),
+      tsconfigPaths(),
       autoImport({
         imports: [
           'react',

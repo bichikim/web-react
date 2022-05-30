@@ -1,3 +1,2 @@
-# Vare
+# React Utilities
 
-Vue Share State Library
