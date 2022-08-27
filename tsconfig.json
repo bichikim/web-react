@@ -23,7 +23,7 @@
   },
   "include": [
     "**/*.ts",
-    "jest.setup.unit.ts"
+    "jest.setup.ts"
   ],
   "exclude": ["node_modules"]
 }

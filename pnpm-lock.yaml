@@ -52,6 +52,7 @@ importers:
       '@types/react': 18.0.8
       '@types/react-dom': 18.0.0
       '@types/sinon': 10.0.11
+      '@types/testing-library__jest-dom': ^5.14.5
       '@typescript-eslint/eslint-plugin': 5.16.0
       '@typescript-eslint/parser': 5.16.0
       babel-jest: 27.5.1
@@ -118,6 +119,7 @@ importers:
       '@types/react': 18.0.8
       '@types/react-dom': 18.0.0
       '@types/sinon': 10.0.11
+      '@types/testing-library__jest-dom': 5.14.5
       '@typescript-eslint/eslint-plugin': 5.16.0_h7wskcyrkgkbjjgh2usgrxll6u
       '@typescript-eslint/parser': 5.16.0_ynv3edxl3ah44xwgrna2g2yine
       babel-jest: 27.5.1_@babel+core@7.17.8

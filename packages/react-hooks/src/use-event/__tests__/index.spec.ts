@@ -157,7 +157,7 @@ describe('useEvent', () => {
     act(() => {
       fakeElement.triggerHandler()
     })
-    const [_, __, options] = fakeElement.addEventListener.mock.calls[1]
+    const [, __, options] = fakeElement.addEventListener.mock.calls[1] as any
     expect(options).toEqual({
       passive: true,
     })

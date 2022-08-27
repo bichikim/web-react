@@ -10,7 +10,7 @@ export const Default = () => {
     name: 'foo',
   })
 
-  const prevState = useRef(state())
+  const prevState = useRef(state)
 
   const updateName = () => {
     updateState((draft) => {
@@ -25,7 +25,7 @@ export const Default = () => {
   }
 
   useEffect(() => {
-    prevState.current = state()
+    prevState.current = state
   })
 
   // 같을 경우 업데이트를 안한다 (그런데 바뀌고 같아도 한번은 업데이트 하는 문제가 있다)
@@ -33,8 +33,8 @@ export const Default = () => {
 
   return (
     <div>
-      <span>{state().name}</span>
-      <span>{String(Object.is(state(), prevState.current))}</span>
+      <span>{state.name}</span>
+      <span>{String(Object.is(state, prevState.current))}</span>
       <button onClick={updateName}>updateName</button>
       <button onClick={updateNothing}>updateNothing</button>
     </div>
