@@ -1,12 +1,10 @@
 module.exports = {
   env: {node: true},
   extends: [
-    'plugin:vue/vue3-recommended',
     'plugin:unicorn/recommended',
     'plugin:import/recommended',
     'plugin:@typescript-eslint/recommended',
     'eslint:recommended',
-    '@vue/typescript/recommended',
   ],
   globals: {
     __QUASAR_SSR__: true,
@@ -32,6 +30,7 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-var-requires': 'off',
+        'id-length': 'off',
         'max-len': 'off',
         'max-lines-per-function': 'off',
         'max-nested-callbacks': 'off',
@@ -40,8 +39,6 @@ module.exports = {
         'prefer-destructuring': 'off',
         'unicorn/consistent-function-scoping': 'off',
         'unicorn/no-useless-undefined': 'off',
-        'vue/one-component-per-file': 'off',
-        'vue/require-prop-types': 'off',
       },
     },
     {
@@ -68,10 +65,6 @@ module.exports = {
         '.eslintrc.js',
       ],
       rules: {'no-magic-numbers': 'off'},
-    },
-    {
-      files: ['**/*.vue'],
-      rules: {'@typescript-eslint/no-unused-vars': 'off'},
     },
   ],
   parserOptions: {
@@ -211,6 +204,7 @@ module.exports = {
     'max-classes-per-file': 'error',
 
     'max-depth': ['error', {max: 4}],
+
     'max-len': [
       'error', {
         code: 120,
@@ -243,6 +237,7 @@ module.exports = {
     'no-confusing-arrow': 'warn',
 
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+
     'no-constructor-return': 'error',
     'no-continue': 'error',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -292,6 +287,7 @@ module.exports = {
     'no-new': 'error',
 
     'no-new-func': 'error',
+
     'no-new-object': 'error',
     'no-new-require': 'error',
     'no-new-wrappers': 'error',
@@ -301,6 +297,7 @@ module.exports = {
     'no-plusplus': 'error',
     'no-promise-executor-return': 'error',
     'no-proto': 'error',
+    'no-redeclare': 'off',
     'no-restricted-globals': 'error',
     'no-restricted-properties': 'error',
     'no-return-assign': 'error',
@@ -420,17 +417,12 @@ module.exports = {
     'unicorn/prefer-node-protocol': 'off',
     'unicorn/prefer-ternary': 'off',
     'unicorn/prevent-abbreviations': 'off',
-    'vue/component-name-in-template-casing': ['warn', 'kebab-case'],
-    'vue/multi-word-component-names': 'off',
-    'vue/order-in-components': 'off',
-    'vue/require-default-prop': 'off',
-    'vue/return-in-computed-property': 'off',
     'wrap-iife': 'error',
     'yield-star-spacing': ['error', 'before'],
     yoda: 'error',
   },
   settings: {
-    'import/parsers': {'@typescript-eslint/parser': ['.ts', '.tsx', 'vue']},
+    'import/parsers': {'@typescript-eslint/parser': ['.ts', '.tsx']},
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,

@@ -41,10 +41,6 @@ module.exports = {
         '<rootDir>/apps/*/src/**/__tests__/*.spec.{ts,tsx}',
       ],
       transformIgnorePatterns: ['/node_modules/'],
-      watchPlugins: [
-        require.resolve('jest-watch-typeahead/filename'),
-        require.resolve('jest-watch-typeahead/testname'),
-      ],
     },
   ],
 
@@ -75,9 +71,4 @@ module.exports = {
   },
 
   transformIgnorePatterns: ['/node_modules/'],
-
-  watchPlugins: [
-    require.resolve('jest-watch-typeahead/filename'),
-    require.resolve('jest-watch-typeahead/testname'),
-  ],
 }
