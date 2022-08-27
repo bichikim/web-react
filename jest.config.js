@@ -1,16 +1,15 @@
 const path = require('path')
-
+process.env.TZ = 'Europe/London'
 // for wallaby runtime
 module.exports = {
-  cacheDirectory: './.jest/cache',
   collectCoverageFrom: [
     '<rootDir>/packages/*/src/**/*.{ts,tsx}',
     '<rootDir>/apps/*/src/**/*.{ts,tsx}',
     '!<rootDir>/**/*.d.ts',
     '!<rootDir>/**/*.stories.{ts,tsx}',
-    '!<rootDir>/**/__tests__/*.{ts,tsx}',
-    '!<rootDir>/**/__stories__/*.{ts,tsx}',
-    '!<rootDir>/**/__mocks__/*.{ts,tsx}',
+    '!<rootDir>/**/__tests__/*',
+    '!<rootDir>/**/__stories__/*',
+    '!<rootDir>/**/__mocks__/*',
     '!<rootDir>/**/types/**/*.{ts,tsx}',
   ],
 
@@ -31,10 +30,13 @@ module.exports = {
       },
       setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 
-      snapshotSerializers: [
-        'jest-stitches',
-      ],
-      testEnvironment: '@happy-dom/jest-environment',
+      // not working
+      // snapshotSerializers: ['jest-stitches'],
+      testEnvironment: 'jest-environment-jsdom',
+
+      testEnvironmentOptions: {
+        url: 'http://localhost/',
+      },
       testMatch: [
         '!<rootDir>/**/*.e2e.ts',
         '<rootDir>/packages/*/src/**/__tests__/*.spec.{ts,tsx}',
@@ -42,18 +44,35 @@ module.exports = {
       ],
       transformIgnorePatterns: ['/node_modules/'],
     },
+    {
+      displayName: 'storybook-test',
+      globals: {
+        __DEV__: true,
+      },
+
+      // not working
+      // snapshotSerializers: ['jest-stitches'],
+      testEnvironment: '@happy-dom/jest-environment',
+
+      testEnvironmentOptions: {
+        url: 'http://localhost/',
+      },
+      testMatch: ['<rootDir>/storybook.spec.ts'],
+      transformIgnorePatterns: ['/node_modules/'],
+    },
   ],
 
-  setupFilesAfterEnv: [
-    path.resolve(__dirname, 'jest.setup.ts'),
-  ],
+  setupFilesAfterEnv: [path.resolve(__dirname, 'jest.setup.ts')],
 
-  snapshotSerializers: [
-    'jest-stitches',
-  ],
+  // not working
+  // snapshotSerializers: ['jest-stitches'],
 
-  testEnvironment: '@happy-dom/jest-environment',
+  // testEnvironment: '@happy-dom/jest-environment',
+  testEnvironment: 'jest-environment-node',
 
+  testEnvironmentOptions: {
+    url: 'http://localhost/',
+  },
   testPathIgnorePatterns: [
     '\\.snap$',
     '/node_modules/',
@@ -61,11 +80,10 @@ module.exports = {
   ],
 
   // https://github.com/facebook/jest/issues/6766
-  testURL: 'http://localhost/',
 
   transform: {
-    '.+\\.(css|styl|less|sass|scss|jpg|jpeg|png|svg|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      require.resolve('jest-transform-stub'),
+    // '.+\\.(css|styl|less|sass|scss|jpg|jpeg|png|svg|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+    //   require.resolve('jest-transform-stub'),
     '^.+\\.jsx?$': require.resolve('babel-jest'),
     '^.+\\.tsx?$': require.resolve('babel-jest'),
   },

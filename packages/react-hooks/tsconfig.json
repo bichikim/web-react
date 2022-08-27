@@ -1,6 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "jsx": "react-jsx",
+    "target": "ESNext",
+    "module": "ESNext",
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
@@ -17,13 +20,10 @@
   },
   "include": [
     "src/**/*.ts",
-    "dev/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "tests/**/*.ts",
-    "tests/**/*.tsx",
+    "src/**/*.tsx"
   ],
   "exclude": [
     "node_modules"
   ]
+
 }

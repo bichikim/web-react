@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import {isSSR} from '../'
 
 describe('isSSR in SSR', () => {

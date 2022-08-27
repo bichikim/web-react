@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import {isPassiveEventSupported} from '../'
 
 describe('isPassiveEventSupported', () => {

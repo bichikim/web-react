@@ -3,6 +3,14 @@ module.exports = {
   env: {
     test: {
       plugins: [
+        'babel-plugin-transform-typescript-metadata',
+        [
+          '@babel/plugin-proposal-decorators',
+          {
+            legacy: true,
+          },
+        ],
+        ['@babel/plugin-proposal-class-properties', {loose: true}],
         [
           'module-resolver',
           {
@@ -13,15 +21,15 @@ module.exports = {
             loglevel: 'info',
           },
         ],
-        ['htm', {
-          pragma: 'React.createElement',
-        }],
       ],
       presets: [
-
-        ['@babel/preset-react', {
-          isTSX: true,
-        }],
+        [
+          '@babel/preset-react',
+          {
+            allExtensions: true,
+            isTSX: true,
+          },
+        ],
         [
           '@babel/preset-env',
           {
@@ -32,7 +40,8 @@ module.exports = {
           },
         ],
         [
-          '@babel/preset-typescript', {
+          '@babel/preset-typescript',
+          {
             allExtensions: true,
             isTSX: true,
           },

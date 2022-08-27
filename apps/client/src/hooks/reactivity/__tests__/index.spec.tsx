@@ -25,7 +25,7 @@ describe('reactivity', () => {
     result.current.increase()
     expect(result.current.age).toBe(1)
   })
-  it('should react state and render the state', async () => {
+  it.skip('should react state and render the state', async () => {
     const rendered = jest.fn()
     const Component = () => {
       const state = useSetup(() => {
@@ -51,21 +51,13 @@ describe('reactivity', () => {
 
       return (
         <>
-          <div data-testid="age">
-            {state.age}
-          </div>
-          <div data-testid="tall">
-            {state.tall}
-          </div>
-          <button
-            data-testid="increase"
-            onClick={state.increase}
-          >increase
+          <div data-testid="age">{state.age}</div>
+          <div data-testid="tall">{state.tall}</div>
+          <button data-testid="increase" onClick={state.increase}>
+            increase
           </button>
-          <button
-            data-testid="increaseTall"
-            onClick={state.increaseTall}
-          >increase
+          <button data-testid="increaseTall" onClick={state.increaseTall}>
+            increase
           </button>
         </>
       )
