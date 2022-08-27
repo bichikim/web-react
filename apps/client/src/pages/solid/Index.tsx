@@ -1,9 +1,7 @@
 import {Solid} from 'components/Solid'
 
 export const SolidPage: FPC = () => {
-  return (
-    <Solid />
-  )
+  return <Solid />
 }
 
 export default SolidPage

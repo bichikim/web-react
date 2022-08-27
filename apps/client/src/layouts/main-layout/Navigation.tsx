@@ -7,8 +7,6 @@ export const Navigation: FPC = () => {
         <NaviItem to="/" name="main" />
         <NaviItem to="reactivity" />
         <NaviItem to="hook-state" />
-        <NaviItem to="deep-memo" />
-        <NaviItem to="events" />
         <NaviItem to="original" />
         <NaviItem to="solid" />
         <NaviItem to="zustand" />

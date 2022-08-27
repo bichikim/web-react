@@ -1,9 +1,7 @@
 import {HookState} from 'components/HookState'
 
 export const HookStatePage: FPC = () => {
-  return (
-    <HookState />
-  )
+  return <HookState />
 }
 
 export default HookStatePage

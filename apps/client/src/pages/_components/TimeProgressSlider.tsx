@@ -2,7 +2,7 @@ import {styled} from '@stitches/react'
 import {StepCounter} from './StepCounter'
 import {ProgressBar} from './ProgressBar'
 import {BgImage} from './BgImage'
-import {useSyncState} from 'src/hooks/sync-state'
+import {useSyncState} from 'src/_hooks'
 
 export const ProgressBarContainer = styled('div', {
   backgroundColor: 'rgba(255, 255, 255, 0.4)',
@@ -123,7 +123,7 @@ export const TimeProgressSlider: FC<TimeProgressSliderProps> = (props) => {
         <NavButton onClick={nextStep}>{'>'}</NavButton>
       </NavContainer>
       <ProgressContainer>
-        <StepCounter now={now} total={stepTotal}/>
+        <StepCounter now={now} total={stepTotal} />
         <ProgressBarContainer>
           <ProgressBar now={now} total={stepTotal} wait={wait} />
         </ProgressBarContainer>

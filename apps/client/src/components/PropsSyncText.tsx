@@ -1,4 +1,4 @@
-import {useSyncState} from '../hooks/sync-state'
+import {useSyncState} from 'src/_hooks'
 
 export interface SyncMeProps {
   value?: string
@@ -14,7 +14,7 @@ export const SyncMe: FC<SyncMeProps> = (props) => {
   return (
     <div>
       <button onClick={onChange}>change</button>
-      {value()}
+      {value}
     </div>
   )
 }

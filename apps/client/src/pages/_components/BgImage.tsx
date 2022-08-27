@@ -56,7 +56,8 @@ export const BgImage: FPC<BgImageProps> = (props) => {
             enterActive: `${fade} enter-active`,
             exit: `${fade} exit`,
             exitActive: `${fade} exit-active`,
-          }}>
+          }}
+        >
           <BgImageItem className={fade} src={imgSrc} alt={`background-image-${showIndex}`} />
         </CSSTransition>
       </SwitchTransition>

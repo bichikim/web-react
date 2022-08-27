@@ -1,5 +1,5 @@
 import {styled} from '@stitches/react'
-import {useSyncState} from 'src/hooks/sync-state'
+import {useSyncState} from 'src/_hooks'
 
 export const ProgressBarStyled = styled('div', {
   $$transform: 'scaleX(0)',
@@ -49,9 +49,5 @@ export const ProgressBar: FPC<ProgressBarProps> = (props) => {
     '---transition': transition,
   }
 
-  return (
-    <ProgressBarStyled key={props.now} style={style}>
-    </ProgressBarStyled>
-  )
+  return <ProgressBarStyled key={props.now} style={style}></ProgressBarStyled>
 }
-

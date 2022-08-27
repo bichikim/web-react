@@ -1,9 +1,7 @@
 import {Reactivity} from 'components/Reactivity'
 
 export const ReactivityPage: FPC = () => {
-  return (
-    <Reactivity />
-  )
+  return <Reactivity />
 }
 
 export default ReactivityPage

@@ -1,9 +1,7 @@
 import {Original} from 'components/Original'
 
 export const OriginalPage: FPC = () => {
-  return (
-    <Original />
-  )
+  return <Original />
 }
 
 export default OriginalPage

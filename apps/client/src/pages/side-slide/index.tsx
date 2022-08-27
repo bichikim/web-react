@@ -1,8 +1,3 @@
-
 export const SideSlide: FC = () => {
-  return (
-    <div>
-      hello
-    </div>
-  )
+  return <div>hello</div>
 }

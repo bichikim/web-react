@@ -1,9 +1,7 @@
 import {PropsSyncText} from 'components/PropsSyncText'
 
 export const PropsSyncTextPage: FPC = () => {
-  return (
-    <PropsSyncText />
-  )
+  return <PropsSyncText />
 }
 
 export default PropsSyncTextPage
