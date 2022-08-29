@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`For should render fallback 1`] = `
+Array [
+  <div
+    data-testid="loading"
+  >
+    Loading...
+  </div>,
+]
+`;
+
+exports[`For should render list all 1`] = `
+Array [
+  <div
+    data-testid="item"
+  >
+    1
+  </div>,
+  <div
+    data-testid="item"
+  >
+    2
+  </div>,
+  <div
+    data-testid="item"
+  >
+    3
+  </div>,
+  <div
+    data-testid="item"
+  >
+    4
+  </div>,
+  <div
+    data-testid="item"
+  >
+    5
+  </div>,
+]
+`;
