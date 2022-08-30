@@ -14,11 +14,9 @@ describe('For', () => {
       },
     ]
     await render(
-      <For list={list} >
+      <For list={list}>
         {(item) => (
-          <div key={item.id}
-            data-testid={`root-${item.id}`}
-          >
+          <div key={item.id} data-testid={`root-${item.id}`}>
             <span>{item.id}</span>
             <span>{item.title}</span>
           </div>

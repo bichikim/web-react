@@ -12,8 +12,11 @@ export const Switch: FPC<SwitchProps> = (props) => {
   const {when, children} = props
 
   if (typeof children !== 'function') {
-
-    if (typeof children === 'object' && children !== null && ('yes' in children || 'no' in children)) {
+    if (
+      typeof children === 'object' &&
+      children !== null &&
+      ('yes' in children || 'no' in children)
+    ) {
       if (when) {
         return <>{children.yes ?? null}</>
       }

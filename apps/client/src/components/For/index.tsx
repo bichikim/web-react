@@ -9,11 +9,9 @@ export const For: FPC<ForProps> = (props) => {
   if (typeof children === 'function') {
     return (
       <>
-        {
-          list.map((item, index) => {
-            return children(item, index)
-          })
-        }
+        {list.map((item, index) => {
+          return children(item, index)
+        })}
       </>
     )
   }

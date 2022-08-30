@@ -11,11 +11,7 @@ describe('once', () => {
         age.current += 1
       })
 
-      return (
-        <div data-testid="age">
-          {age.current}
-        </div>
-      )
+      return <div data-testid="age">{age.current}</div>
     }
     const {rerender} = await render(<Component age={0} />)
 

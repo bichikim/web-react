@@ -7,9 +7,13 @@ describe('use-wait', () => {
     const callback = jest.fn()
     let _resolve
     const {result} = renderHook(() => {
-      return useWait(() => new Promise((resolve) => {
-        _resolve = resolve
-      }), {autoStart: true})
+      return useWait(
+        () =>
+          new Promise((resolve) => {
+            _resolve = resolve
+          }),
+        {autoStart: true},
+      )
     })
     expect(typeof result.current.promise).not.toBeNull()
     result.current.promise?.then(callback)
@@ -22,9 +26,12 @@ describe('use-wait', () => {
     const callback = jest.fn()
     let _resolve
     const {result} = renderHook(() => {
-      return useWait(() => new Promise((resolve) => {
-        _resolve = resolve
-      }))
+      return useWait(
+        () =>
+          new Promise((resolve) => {
+            _resolve = resolve
+          }),
+      )
     })
     result.current.reload()
     expect(result.current.promise).not.toBeNull()
@@ -38,9 +45,12 @@ describe('use-wait', () => {
     const callback = jest.fn()
     let _resolve
     const {result} = renderHook(() => {
-      return useWait(() => new Promise((resolve) => {
-        _resolve = resolve
-      }))
+      return useWait(
+        () =>
+          new Promise((resolve) => {
+            _resolve = resolve
+          }),
+      )
     })
     expect(result.current.promise).not.toBeNull()
     result.current.reload()

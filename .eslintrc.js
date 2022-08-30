@@ -289,7 +289,6 @@ module.exports = {
     'max-classes-per-file': 'error',
 
     'max-depth': ['error', {max: 4}],
-
     'max-len': [
       'error',
       {
@@ -299,8 +298,8 @@ module.exports = {
         ignoreUrls: true,
       },
     ],
-
     'max-lines': ['error', 600],
+
     'max-lines-per-function': [
       'error',
       {
@@ -329,7 +328,9 @@ module.exports = {
     'no-constructor-return': 'error',
 
     'no-continue': 'error',
+
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-redeclare': 'off',
     'no-div-regex': 'error',
     'no-duplicate-imports': 'warn',
     'no-else-return': 'error',

@@ -26,12 +26,8 @@ export default defineConfig(() => {
       'process.env.NODE_ENV': JSON.stringify('import.meta.env.MODE'),
     },
     optimizeDeps: {
-      exclude: [
-        'vite',
-        'react-router-dom',
-      ],
-      include: [
-      ],
+      exclude: ['vite', 'react-router-dom'],
+      include: [],
     },
 
     plugins: [
@@ -50,9 +46,7 @@ export default defineConfig(() => {
             ],
           },
           {
-            'htm/react': [
-              'html',
-            ],
+            'htm/react': ['html'],
           },
         ],
       }),
