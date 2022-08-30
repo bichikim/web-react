@@ -10,6 +10,7 @@ export const Navigation: FPC = () => {
         <NaviItem to="original" />
         <NaviItem to="solid" />
         <NaviItem to="zustand" />
+        <NaviItem to="valitio" />
       </ul>
     </nav>
   )

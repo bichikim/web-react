@@ -242,7 +242,7 @@ module.exports = {
     'func-names': ['error', 'as-needed'],
     'func-style': ['error', 'declaration', {allowArrowFunctions: true}],
     'function-call-argument-newline': ['error', 'consistent'],
-    'function-paren-newline': ['error', 'consistent'],
+    'function-paren-newline': 'off',
     'generator-star-spacing': [
       'error',
       {

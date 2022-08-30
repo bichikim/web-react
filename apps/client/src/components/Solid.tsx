@@ -16,8 +16,8 @@ export const Solid: FC = withSolid(() => {
       <div>hello</div>
       <Counter>{count()}</Counter>
       <Counter>{count2()}</Counter>
-      <button onClick={onIncrease} >increase</button>
-      <button onClick={onIncrease2} >increase2</button>
+      <button onClick={onIncrease}>increase</button>
+      <button onClick={onIncrease2}>increase2</button>
     </div>
   )
 })

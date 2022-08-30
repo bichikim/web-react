@@ -2,14 +2,14 @@ import {ref} from '@vue/reactivity'
 import {useSetup, withReactivity} from 'src/hooks/reactivity'
 import {v4 as uuid} from 'uuid'
 
-export interface TodoItem {
+export interface TodoItemType {
   done?: boolean
   id: string
   message?: string
   title?: string
 }
 
-export interface TodoItemProps extends TodoItem {
+export interface TodoItemProps extends TodoItemType {
   name?: string
   onToggleDone?: (id: string, value?: boolean) => any
 }
@@ -19,21 +19,21 @@ export const TodoItem = withReactivity<TodoItemProps>((props) => {
   return (
     <div>
       <div>
-        <span>
-          author {props.name}
-        </span>
+        <span>author {props.name}</span>
       </div>
       <div>
         <span>{props.title}</span>
         <span>{props.message}</span>
       </div>
-      <button onClick={() => props.onToggleDone?.(props.id)}>{props.done ? 'done' : 'not yet'}</button>
+      <button onClick={() => props.onToggleDone?.(props.id)}>
+        {props.done ? 'done' : 'not yet'}
+      </button>
     </div>
   )
 })
 
 export interface AddTodoItemProps {
-  onAddItem?: (payload: Omit<TodoItem, 'id'>) => any
+  onAddItem?: (payload: Omit<TodoItemType, 'id'>) => any
 }
 
 export const AddTodoItem: FC<AddTodoItemProps> = (props) => {
@@ -86,9 +86,9 @@ export interface TodoListProps {
 
 export const TodoList: FC<TodoListProps> = (props) => {
   const state = useSetup(() => {
-    const list = ref<TodoItem[]>([])
+    const list = ref<TodoItemType[]>([])
 
-    const addItem = (payload: Omit<TodoItem, 'id'>) => {
+    const addItem = (payload: Omit<TodoItemType, 'id'>) => {
       list.value.push({...payload, id: uuid()})
     }
 
@@ -96,7 +96,7 @@ export const TodoList: FC<TodoListProps> = (props) => {
       return list.value.findIndex((item) => item.id === id)
     }
 
-    const modifyIndexItem = (index: number, payload?: Partial<Omit<TodoItem, 'id'>>) => {
+    const modifyIndexItem = (index: number, payload?: Partial<Omit<TodoItemType, 'id'>>) => {
       if (index >= 0) {
         if (payload) {
           list.value.splice(index, 1, {...list.value[index], ...payload})
@@ -106,7 +106,7 @@ export const TodoList: FC<TodoListProps> = (props) => {
       }
     }
 
-    const modifyItem = (id: string, payload?: Partial<Omit<TodoItem, 'id'>>) => {
+    const modifyItem = (id: string, payload?: Partial<Omit<TodoItemType, 'id'>>) => {
       const index = fineIndexItem(id)
       modifyIndexItem(index, payload)
     }
@@ -161,4 +161,3 @@ export const Reactivity: FC<ReactivityProps> = () => {
     </>
   )
 }
-

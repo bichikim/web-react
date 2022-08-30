@@ -51,6 +51,7 @@
     "uuid": "8.3.2",
     "tslib": "2.3.1",
     "urql": "2.2.0",
+    "valtio": "^1.6.4",
     "validator": "13.7.0",
     "@winter-love/lodash": "^1.0.25-alpha.14",
     "@winter-love/react-hooks": "^0.0.1"

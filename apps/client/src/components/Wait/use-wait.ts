@@ -1,4 +1,4 @@
-import {useSignal} from 'src/hooks/signal'
+import {useUpdate} from 'react-use'
 const {is} = Object
 
 export interface UseWaitProps<D> {
@@ -22,12 +22,14 @@ export const useWait = <T, D>(
   options: UseWaitProps<D> = {},
 ): UseWaitReturn<T, D> => {
   const {autoStart = false, data} = options
-  const signal_ = useSignal()
+  const update = useUpdate()
   const dataRef = useRef(data)
   const fetchRef = useRef<(data?: any) => Promise<T>>()
-  const promiseRef = useRef<Promise<any>>(new Promise<any>(() => {
-    // empty
-  }))
+  const promiseRef = useRef<Promise<any>>(
+    new Promise<any>(() => {
+      // empty
+    }),
+  )
 
   const run = useCallback((data?: D, signal: boolean = true) => {
     promiseRef.current = new Promise((resolve, reject) => {
@@ -37,15 +39,18 @@ export const useWait = <T, D>(
       if (data) {
         dataRef.current = data
       }
-      fetchRef.current(dataRef.current).then((value) => {
-        resolve(value)
-      }).catch((error) => {
-        reject(error)
-      })
+      fetchRef
+        .current(dataRef.current)
+        .then((value) => {
+          resolve(value)
+        })
+        .catch((error) => {
+          reject(error)
+        })
     })
 
     if (signal) {
-      signal_()
+      update()
     }
   }, [])
 

@@ -1,4 +1,5 @@
-import {State, useState} from '@hookstate/core'
+import {State, useHookstate} from '@hookstate/core'
+import {useCallback} from 'react'
 
 interface Take {
   memo?: string
@@ -8,23 +9,25 @@ interface Take {
 interface NestProps {
   state: State<Take> | Take
 }
+
 export const Nest: FC<NestProps> = (props) => {
-  const state: State<Take> = useState(props.state as Take)
+  const state: State<Take> = useHookstate(props.state as Take)
+
+  const handleChange = useCallback((event) => {
+    // 몬가 웃김...
+    state.title.set(event.target.value)
+  }, [])
   return (
     <div>
-      <div>
-        {state.memo.get()}
-      </div>
-      <div>
-        {state.title.get()}
-      </div>
-      <input value={state.title.get()} onChange={(event) => state.title.set(event.target.value)} />
+      <div>{state.memo.get()}</div>
+      <div>{state.title.get()}</div>
+      <input onChange={handleChange} />
     </div>
   )
 }
 
 export const HookState: FC = () => {
-  const state: State<Take[]> = useState([
+  const state: State<Take[]> = useHookstate([
     {
       memo: 'yeah',
       title: 'foo',
@@ -42,11 +45,9 @@ export const HookState: FC = () => {
   }
   return (
     <div>
-      {
-        state.map((item) => (
-          <Nest state={item} key={item.title.get()} />
-        ))
-      }
+      {state.map((item, index) => (
+        <Nest state={item} key={index} />
+      ))}
       <Nest state={{title: 'example'}} />
       <div>{state.get().length}</div>
       <button onClick={onAdd}>add</button>

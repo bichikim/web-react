@@ -4,16 +4,19 @@ interface ReducerState {
   age: number
 }
 
-type ReducerAction = {
-  payload?: never
-  type: 'increase'
-} | {
-  payload?: never
-  type: 'decrease'
-} | {
-  payload: number
-  type: 'set'
-}
+type ReducerAction =
+  | {
+      payload?: never
+      type: 'increase'
+    }
+  | {
+      payload?: never
+      type: 'decrease'
+    }
+  | {
+      payload: number
+      type: 'set'
+    }
 
 const reducerState: Reducer<ReducerState, ReducerAction> = (state, action) => {
   switch (action.type) {

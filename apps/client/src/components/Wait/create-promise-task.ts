@@ -20,5 +20,4 @@ export const createPromiseTask = (
       promise.catch(reject)
     })
   })
-
 }

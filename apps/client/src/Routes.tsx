@@ -8,6 +8,7 @@ import {ReactivityPage} from 'pages/reactivity'
 import {HookStatePage} from 'pages/hook-state'
 import {ZustandPage} from 'pages/zustand'
 import {MainLayout} from 'layouts/main-layout/Index'
+import ValtioPage from 'pages/valtio/Index'
 
 export const Routes: FC = () => {
   return (
@@ -22,6 +23,7 @@ export const Routes: FC = () => {
             <Route path="props-sync-text" element={<PropsSyncTextPage />} />
             <Route path="original" element={<OriginalPage />} />
             <Route path="solid" element={<SolidPage />} />
+            <Route path="valitio" element={<ValtioPage />} />
           </Route>
         </Route>
       </BrowserRoutes>

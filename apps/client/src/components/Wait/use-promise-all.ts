@@ -33,12 +33,7 @@ export const usePromiseAll = (
   promises: Promise<any>[] | Promise<any>,
   options: UsePromiseAllOptions = {},
 ) => {
-  const {
-    onDone,
-    onError,
-    onNotUpdated,
-    onUpdated,
-  } = options
+  const {onDone, onError, onNotUpdated, onUpdated} = options
   const promisesRef = useRef<any>()
   if (isArrayCompare(promisesRef.current, promises)) {
     onNotUpdated?.()
@@ -46,7 +41,9 @@ export const usePromiseAll = (
     promisesRef.current = promises
     onUpdated?.()
     if (isArrayPromise(promisesRef.current)) {
-      Promise.all(promisesRef.current).then((value) => onDone?.(value)).catch((error) => onError?.(error))
+      Promise.all(promisesRef.current)
+        .then((value) => onDone?.(value))
+        .catch((error) => onError?.(error))
     } else if (promisesRef.current instanceof Promise) {
       promisesRef.current.then((value) => onDone?.(value)).catch((error) => onError?.(error))
     }
