@@ -1,2 +1,2 @@
-# React Utilities
+# React Components
 

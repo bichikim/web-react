@@ -1,3 +1,3 @@
-# React Hooks
+# Utils
 
-React Utils
+JS Utils
