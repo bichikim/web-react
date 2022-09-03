@@ -104,7 +104,7 @@ module.exports = {
         },
       },
     ],
-    // Owing to using prettier, It does not need to config
+    // Owing to using prettier, It does not need to this config anymore
     // '@typescript-eslint/indent': [
     //   'error',
     //   2,
@@ -322,15 +322,10 @@ module.exports = {
     // typescript decoration error
     // 'new-cap': 'error',
     'no-confusing-arrow': 'warn',
-
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-
     'no-constructor-return': 'error',
-
     'no-continue': 'error',
-
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-redeclare': 'off',
     'no-div-regex': 'error',
     'no-duplicate-imports': 'warn',
     'no-else-return': 'error',
@@ -375,6 +370,7 @@ module.exports = {
     'no-negated-condition': 'error',
     // 'no-nested-ternary': 'error',
     'no-new': 'error',
+
     'no-new-func': 'error',
     'no-new-object': 'error',
     'no-new-require': 'error',
@@ -385,6 +381,7 @@ module.exports = {
     'no-plusplus': 'error',
     'no-promise-executor-return': 'error',
     'no-proto': 'error',
+    'no-redeclare': 'off',
     'no-restricted-globals': 'error',
     'no-restricted-properties': 'error',
     'no-return-assign': 'error',
