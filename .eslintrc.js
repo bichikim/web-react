@@ -9,16 +9,15 @@ module.exports = {
     'prettier',
   ],
   globals: {
-    __QUASAR_SSR__: true,
-    __QUASAR_SSR_CLIENT__: true,
-    __QUASAR_SSR_PWA__: true,
-    __QUASAR_SSR_SERVER__: true,
     __statics: true,
+    // capacitor hybrid app
     Capacitor: true,
     chrome: true,
     // Google Analytics
     cordova: true,
+    // ga Analytics
     ga: true,
+    // node process
     process: true,
   },
   overrides: [
@@ -33,6 +32,7 @@ module.exports = {
       },
     },
     {
+      // storybook files
       files: ['**/*.story.{t,t}s?(x)'],
       rules: {
         'unicorn/consistent-function-scoping': 'off',
@@ -58,13 +58,6 @@ module.exports = {
       },
     },
     {
-      // configs
-      files: ['**/quasar.conf.js'],
-      rules: {
-        'max-lines-per-function': 'off',
-      },
-    },
-    {
       // js
       files: ['**/*.js'],
       rules: {
@@ -73,6 +66,7 @@ module.exports = {
       },
     },
     {
+      // eslint config
       files: ['.eslintrc.js'],
       rules: {'no-magic-numbers': 'off'},
     },
