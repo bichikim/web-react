@@ -313,8 +313,6 @@ module.exports = {
     'no-buffer-constructor': 'error',
     'no-caller': 'error',
     'no-catch-shadow': 'error',
-    // typescript decoration error
-    // 'new-cap': 'error',
     'no-confusing-arrow': 'warn',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-constructor-return': 'error',
@@ -362,9 +360,7 @@ module.exports = {
       },
     ],
     'no-negated-condition': 'error',
-    // 'no-nested-ternary': 'error',
     'no-new': 'error',
-
     'no-new-func': 'error',
     'no-new-object': 'error',
     'no-new-require': 'error',
@@ -509,9 +505,9 @@ module.exports = {
     'unicorn/no-null': 'off',
     'unicorn/no-unsafe-regex': 'error',
     'unicorn/prefer-export-from': 'off',
-    // 적용 할 수 있도록 해야한다
+    // todo 적용 할 수 있도록 해야한다
     'unicorn/prefer-module': 'off',
-    // 적용 할 수 있도록 해야한다
+    // todo 적용 할 수 있도록 해야한다
     'unicorn/prefer-node-protocol': 'off',
     'unicorn/prefer-ternary': 'off',
     'unicorn/prevent-abbreviations': 'off',
