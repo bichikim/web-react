@@ -1,15 +1,12 @@
 import {effectScope, reactive, readonly, UnwrapNestedRefs} from '@vue/reactivity'
 import {watch, watchEffect, WatchOptions} from '@vue/runtime-core'
 import {memo, PropsWithChildren, useEffect, useRef} from 'react'
-import {useSignal} from 'src/hooks/signal'
+import {useUpdate} from 'react-use'
 
 const {isArray} = Array
 export const isObject = (value) => !isArray(value) && value !== null && typeof value === 'object'
 
-export {
-  watch,
-  watchEffect,
-}
+export {watch, watchEffect}
 
 export * from '@vue/reactivity'
 
@@ -43,110 +40,107 @@ export function traverse(value: any, seen: Set<unknown> = new Set()) {
 
 export function useObserver<P extends Record<string, any>>(
   props: P,
-  secondArg: any,
-  component: (props: PropsWithChildren<P>, r?: any) => JSX.Element,
+  maybeRef: any,
+  component: (props: PropsWithChildren<P>, r: any) => JSX.Element,
   watchOptions?: WatchOptions,
 ) {
   const __props = {...props}
-  const signal = useSignal()
+  const signal = useUpdate()
   const reaction = useRef<any>()
   const renderedNode = useRef<any>()
   const propsRef = useRef<any>()
   const shouldRender = useRef(true)
-
   if (shouldRender.current) {
-    // renderedNode.current = component(props, maybeRef)
-    renderedNode.current = component(props)
-    shouldRender.current = false
-    // support vite hot reloading
-  } else if (import.meta.hot) {
-    renderedNode.current = component(props)
+    renderedNode.current = component(props, maybeRef)
   }
-
-  if (!reaction.current || import.meta.hot) {
+  if (!reaction.current) {
     const scope = effectScope()
-
     propsRef.current = scope.run(() => {
       const reactiveProps = reactive(__props)
-
-      watch(reactiveProps, () => {
-        signal()
-        shouldRender.current = true
-      }, {
-        deep: true,
-        ...watchOptions,
-      })
+      watch(
+        reactiveProps,
+        () => {
+          signal()
+          shouldRender.current = true
+        },
+        {
+          deep: true,
+          ...watchOptions,
+        },
+      )
       return reactiveProps
     })
-
     reaction.current = scope
   }
-
   const _props = propsRef.current
-
   Object.keys(__props).forEach((key) => {
     _props[key] = __props[key]
   })
-
   useEffect(() => {
     return () => {
       reaction.current.stop()
     }
   }, [])
-  //
+
+  useEffect(() => {
+    shouldRender.current = false
+  })
 
   return renderedNode.current
 }
 
 export const withReactivity = <P extends Record<string, any>>(
-  component: (props: PropsWithChildren<P>, secondArg: any) => JSX.Element,
+  component: (props: PropsWithChildren<P>, maybeRef: any) => JSX.Element,
   watchOptions?: WatchOptions,
 ) => {
-  return memo<P>((props, secondArg) => {
-    return useObserver(props, secondArg, component, watchOptions)
+  return memo<P>((props, maybeRef) => {
+    return component ? useObserver(props, maybeRef, component, watchOptions) : null
   })
 }
 
 export const useSetup = <T extends Record<string, any>>(
-  setup: (props?: any) => T, props?: Record<string, any>, watchOptions?: WatchOptions,
+  setup: (props?: any) => T,
+  props?: Record<string, any>,
+  watchOptions?: WatchOptions,
 ): UnwrapNestedRefs<T> => {
   const stateRef = useRef<any>()
   const isStateUpdated = useRef<boolean>(false)
   const __props = props ? {...props} : {}
   const propsRef = useRef<any>()
-  const scope = useRef<any>()
-  const signal = useSignal()
-
-  if (!scope.current) {
-    scope.current = effectScope()
-    stateRef.current = scope.current.run(() => {
+  const scope = useRef(effectScope())
+  const signal = useUpdate()
+  if (!stateRef.current) {
+    scope.current.run(() => {
       propsRef.current = readonly(reactive(__props))
       const state = reactive(setup(propsRef.current))
-      watch(() => Object.values(state), () => {
-        isStateUpdated.current = true
-        signal()
-      }, {
-        deep: true,
-        ...watchOptions,
-      })
-      return state
+      stateRef.current = state
+      watch(
+        () => Object.values(state),
+        () => {
+          isStateUpdated.current = true
+          signal()
+        },
+        {
+          deep: true,
+          ...watchOptions,
+        },
+      )
     })
   }
-
   if (!isStateUpdated.current && props) {
     const _props = propsRef.current
     Object.keys(__props).forEach((key) => {
       _props[key] = __props[key]
     })
   }
-  isStateUpdated.current = false
+
+  useEffect(() => {
+    isStateUpdated.current = false
+  })
 
   useEffect(() => {
     return () => {
-      // support vite hot reload
-      if (!import.meta.hot) {
-        scope.current.stop()
-      }
+      scope.current.stop()
     }
   }, [])
 

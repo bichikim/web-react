@@ -2,7 +2,7 @@ import {styled} from '@stitches/react'
 import {StepCounter} from './StepCounter'
 import {ProgressBar} from './ProgressBar'
 import {BgImage} from './BgImage'
-import {useSyncState} from 'src/hooks/sync-state'
+import {useSyncState} from 'src/_hooks'
 
 export const ProgressBarContainer = styled('div', {
   backgroundColor: 'rgba(255, 255, 255, 0.4)',
@@ -10,25 +10,9 @@ export const ProgressBarContainer = styled('div', {
   width: '300px',
 })
 
-export const Container = styled('div', {
-  boxSizing: 'border-box',
+export const TimeProgressContainer = styled('div', {
   height: '100%',
   overflow: 'hidden',
-  padding: '20px',
-  position: 'relative',
-  width: '100%',
-})
-
-export const ImageContainer = styled('div', {
-  height: '100%',
-  left: 0,
-  position: 'absolute',
-  top: 0,
-  width: '100%',
-})
-
-export const ContainerInner = styled('div', {
-  height: '100%',
   position: 'relative',
   width: '100%',
 })
@@ -44,8 +28,6 @@ export const ProgressContainer = styled('div', {
 
 export const NavContainer = styled('div', {
   bottom: 0,
-  display: 'flex',
-  gap: '10px',
   position: 'absolute',
   right: 0,
 })
@@ -134,22 +116,18 @@ export const TimeProgressSlider: FC<TimeProgressSliderProps> = (props) => {
   })
 
   return (
-    <Container>
-      <ImageContainer>
-        <BgImage list={stepBgImages} showIndex={now} />
-      </ImageContainer>
-      <ContainerInner>
-        <NavContainer>
-          <NavButton onClick={prevStep}>{'<'}</NavButton>
-          <NavButton onClick={nextStep}>{'>'}</NavButton>
-        </NavContainer>
-        <ProgressContainer>
-          <StepCounter now={now} total={stepTotal}/>
-          <ProgressBarContainer>
-            <ProgressBar now={now} total={stepTotal} wait={wait} />
-          </ProgressBarContainer>
-        </ProgressContainer>
-      </ContainerInner>
-    </Container>
+    <TimeProgressContainer>
+      <BgImage list={stepBgImages} showIndex={now} />
+      <NavContainer>
+        <NavButton onClick={prevStep}>{'<'}</NavButton>
+        <NavButton onClick={nextStep}>{'>'}</NavButton>
+      </NavContainer>
+      <ProgressContainer>
+        <StepCounter now={now} total={stepTotal} />
+        <ProgressBarContainer>
+          <ProgressBar now={now} total={stepTotal} wait={wait} />
+        </ProgressBarContainer>
+      </ProgressContainer>
+    </TimeProgressContainer>
   )
 }
