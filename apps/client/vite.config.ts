@@ -35,19 +35,8 @@ export default defineConfig(() => {
       tsconfigPaths(),
       autoImport({
         imports: [
+          //
           'react',
-          {
-            'react-solid-state': [
-              'useObserver',
-              'createSignal',
-              'createEffect',
-              'onCleanup',
-              'withSolid',
-            ],
-          },
-          {
-            'htm/react': ['html'],
-          },
         ],
       }),
       vitePluginImp(),

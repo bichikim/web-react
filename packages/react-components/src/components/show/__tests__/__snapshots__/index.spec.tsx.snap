@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Show should be visible with the when is true 1`] = `
+<div>
+  hello
+  <div
+    data-testid="element1"
+  >
+    hello2
+  </div>
+  <div
+    data-testid="element2"
+  >
+    hello2
+  </div>
+</div>
+`;
+
+exports[`Show should not be visible with the when is false 1`] = `
+<div>
+  hello
+  <div
+    data-testid="element1"
+    style="display: none;"
+  >
+    hello2
+  </div>
+  <div
+    data-testid="element2"
+    style="display: none;"
+  >
+    hello2
+  </div>
+</div>
+`;

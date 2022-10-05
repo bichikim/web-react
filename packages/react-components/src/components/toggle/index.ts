@@ -1,12 +1,12 @@
 import {ReactElement} from 'react'
 
-export interface ShowProps {
+export interface ToggleProps {
   children?: ReactElement
   fallback?: ReactElement
   when?: boolean | undefined | null
 }
 
-export const Show = (props: ShowProps): ReactElement => {
+export const Toggle = (props: ToggleProps): ReactElement => {
   if (props.when) {
     return props.children
   }
