@@ -1,5 +1,5 @@
 {
-  "name": "@winter-love/react-hooks",
+  "name": "@winter-love/signals-rebuild",
   "version": "0.0.1",
   "repository": "https://github.com/bluchip-nft/bluchip",
   "author": "bihci@live.co.kr",
@@ -26,16 +26,11 @@
     "publish": "npm publish"
   },
   "dependencies": {
-    "@winter-love/js-utils": "^0.0.1",
-    "immer": "^9.0.15",
-    "react": "^18.2",
-    "react-fast-compare": "^3.2.0",
-    "@preact/signals-react": "^1.1.1",
-    "@preact/signals-core": "^1.2.1",
-    "react-use": "^17.4.0"
+    "react": "^18.2.0"
   },
   "devDependencies": {
-    "@winter-love/signals-rebuild": "workspace:*",
+    "@preact/signals-react": "^1.1.1",
+    "@preact/signals-core": "^1.2.1",
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.14",
     "flush-promises": "^1.0.2",

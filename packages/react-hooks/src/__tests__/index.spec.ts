@@ -21,7 +21,6 @@ describe('react-hooks', () => {
         "useOnce": [Function],
         "useRefImmer": [Function],
         "useShow": [Function],
-        "useSignal": [Function],
         "useSyncState": [Function],
         "useTimeout": [Function],
         "wrapImmediateStop": [Function],
