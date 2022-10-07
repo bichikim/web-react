@@ -7,6 +7,6 @@ export const useToggle = (value: FunctionValue<boolean>): UseToggleReturn => {
   const [toggle, setToggle] = useSyncState(value)
   const onToggle = useCallback(() => {
     setToggle((toggle) => !toggle)
-  }, [])
+  }, [setToggle])
   return [toggle, onToggle]
 }

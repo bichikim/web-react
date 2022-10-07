@@ -6,7 +6,7 @@ describe('toggle', () => {
   it('should toggle value', async () => {
     const rendered = jest.fn()
     const Component = (props) => {
-      const [value, setToggle] = useToggle(props.value)
+      const [value, setToggle] = useToggle(props.value ?? false)
       const onChange = () => {
         setToggle()
       }

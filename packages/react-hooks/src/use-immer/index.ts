@@ -16,9 +16,12 @@ export const useImmer = <S extends NotFunction>(
 ): [S, UpdateState<S>] => {
   const [state, setState] = useCustomState(() => freeze(functionValue(initialState)))
 
-  const updateState = useCallback((recipe: Recipe<S>) => {
-    setState(produce(recipe))
-  }, [])
+  const updateState = useCallback(
+    (recipe: Recipe<S>) => {
+      setState(produce(recipe))
+    },
+    [setState],
+  )
 
   return [state, updateState]
 }

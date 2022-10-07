@@ -18,6 +18,7 @@ describe('react-hooks', () => {
         "useImmer": [Function],
         "useIntervalWheel": [Function],
         "useMutationObserver": [Function],
+        "useOnce": [Function],
         "useRefImmer": [Function],
         "useShow": [Function],
         "useSignal": [Function],
