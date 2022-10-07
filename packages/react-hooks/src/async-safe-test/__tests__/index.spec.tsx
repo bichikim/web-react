@@ -5,6 +5,8 @@ import flushPromises from 'flush-promises'
 describe('async safe test', () => {
   it('should work', async () => {
     let _resolve: any
+
+    const rendered = jest.fn()
     const fetch = () => {
       return new Promise<string>((resolve) => {
         _resolve = resolve
@@ -18,7 +20,7 @@ describe('async safe test', () => {
         })
       }, [])
 
-      console.log(result)
+      rendered()
       return <div data-testid="test">{result}</div>
     }
 
@@ -39,5 +41,7 @@ describe('async safe test', () => {
     _resolve('foo')
 
     await flushPromises()
+
+    expect(rendered).toBeCalledTimes(1)
   })
 })
