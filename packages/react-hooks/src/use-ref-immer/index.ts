@@ -12,9 +12,12 @@ export const useRefImmer = <S extends NotFunction>(
     stateRef.current = state(stateRef.current)
   }, [])
 
-  const updateState = useCallback((recipe: Recipe<S>) => {
-    setState(produce(recipe))
-  }, [])
+  const updateState = useCallback(
+    (recipe: Recipe<S>) => {
+      setState(produce(recipe))
+    },
+    [setState],
+  )
 
   return [stateRef, updateState]
 }

@@ -1,3 +1,4 @@
+// noinspection NodeCoreCodingAssistance
 const path = require('path')
 process.env.TZ = 'Europe/London'
 // for wallaby runtime
@@ -20,6 +21,7 @@ module.exports = {
     '\\.(css|scss)$': 'identity-obj-proxy',
     '\\.(jpg|jpeg|png|svg)$': '<rootDir>/__mocks__/file.mock.ts',
     '\\.svg$': '<rootDir>/__mocks__/svg.mock.ts',
+    '^@winter-love/(.*)$': '<rootDir>/packages/$1',
   },
   projects: [
     {

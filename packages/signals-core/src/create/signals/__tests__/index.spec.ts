@@ -1,23 +1,32 @@
-import {computed, useSignal} from '@preact/signals-react'
+import {computed} from '@winter-love/signals-rebuild'
 import {act, renderHook} from '@testing-library/react-hooks'
-import {useSignals} from '../'
-import {useRef} from 'react'
-
-const useUpdate = (value) => {
-  const old = useRef()
-  if (!Object.is(value, old)) {
-    old.current = value
-  }
-  return old.current
-}
+import {useMemo, useRef} from 'react'
+import {createDeps} from 'src/create/deps'
+import {createSignals} from '../'
 
 describe('useSignal', () => {
+  const isInComponent = jest.fn(() => true)
+  const deps = createDeps({
+    isInComponent,
+    useMemo,
+    useRef,
+  })
+  const signals = createSignals({
+    isInComponent,
+    useMemo,
+    useRef,
+  })
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('should return signal (no repeat)', () => {
+    isInComponent.mockReturnValue(true)
     const wrapper = renderHook(
       (props: {count: number}) => {
-        const count = useSignal(0)
-        count.value = props.count
-        return useSignals(() => {
+        const {count} = deps(props)
+        return signals(() => {
           const increase = () => {
             count.value += 1
           }

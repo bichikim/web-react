@@ -28,6 +28,7 @@ module.exports = {
           {
             allExtensions: true,
             isTSX: true,
+            runtime: 'automatic',
           },
         ],
         [

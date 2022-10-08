@@ -1,4 +1,5 @@
 import {useUpdate} from 'react-use'
+import {useCallback, useRef} from 'react'
 const {is} = Object
 
 export interface UseWaitProps<D> {
@@ -12,11 +13,11 @@ export interface UseWaitReturn<T, D> {
   run: (data: D) => any
 }
 
-export interface ReuseAblePromise<T> {
-  reject: (error: T) => any
-  resolve: (value: T) => any
-}
-
+/**
+ * todo 로직 이상
+ * @param fetch
+ * @param options
+ */
 export const useWait = <T, D>(
   fetch: (data: D) => Promise<T>,
   options: UseWaitProps<D> = {},
@@ -31,28 +32,31 @@ export const useWait = <T, D>(
     }),
   )
 
-  const run = useCallback((data?: D, signal: boolean = true) => {
-    promiseRef.current = new Promise((resolve, reject) => {
-      if (!fetchRef.current) {
-        return
-      }
-      if (data) {
-        dataRef.current = data
-      }
-      fetchRef
-        .current(dataRef.current)
-        .then((value) => {
-          resolve(value)
-        })
-        .catch((error) => {
-          reject(error)
-        })
-    })
+  const run = useCallback(
+    (data?: D, signal: boolean = true) => {
+      promiseRef.current = new Promise((resolve, reject) => {
+        if (!fetchRef.current) {
+          return
+        }
+        if (data) {
+          dataRef.current = data
+        }
+        fetchRef
+          .current(dataRef.current)
+          .then((value) => {
+            resolve(value)
+          })
+          .catch((error) => {
+            reject(error)
+          })
+      })
 
-    if (signal) {
-      update()
-    }
-  }, [])
+      if (signal) {
+        update()
+      }
+    },
+    [update],
+  )
 
   if (!is(fetchRef.current, fetch)) {
     fetchRef.current = fetch
@@ -63,7 +67,7 @@ export const useWait = <T, D>(
 
   const reload = useCallback(() => {
     run()
-  }, [])
+  }, [run])
 
   return {
     promise: promiseRef.current,

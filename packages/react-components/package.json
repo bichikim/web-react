@@ -1,7 +1,7 @@
 {
   "name": "@winter-love/react-components",
   "version": "0.0.1",
-  "repository": "https://github.com/bluchip-nft/bluchip",
+  "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
   "exports": {
     ".": {
@@ -56,6 +56,5 @@
     "outDir": "dist",
     "sourcemap": true,
     "splitting": false
-  },
-  "gitHead": "789a3f185c83ee613e500614dad679fa8eb9b33f"
+  }
 }

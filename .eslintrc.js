@@ -524,5 +524,8 @@ module.exports = {
         project: ['tsconfig.json', 'packages/*/tsconfig.json'],
       },
     },
+    react: {
+      version: '18',
+    },
   },
 }

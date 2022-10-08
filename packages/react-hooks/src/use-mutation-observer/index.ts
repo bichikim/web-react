@@ -31,5 +31,5 @@ export const useMutationObserver = (
     return () => {
       observer.disconnect()
     }
-  }, [target, _options])
+  }, [target, _options, mutated])
 }

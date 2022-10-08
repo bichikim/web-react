@@ -21,5 +21,7 @@ export const useCustomLayoutEffect = <Deps extends DependencyList>(
     depsRef.current = deps
   }
 
+  // eslint cannot detect deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useLayoutEffect(effect, depsRef.current)
 }

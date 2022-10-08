@@ -11,5 +11,7 @@ export const useCustomMemo = <T, Deps extends DependencyList>(
     depsRef.current = deps
   }
 
+  // eslint cannot detect deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   return useMemo(factory, depsRef.current)
 }

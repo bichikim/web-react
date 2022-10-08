@@ -1,7 +1,7 @@
 {
   "name": "@winter-love/react-hooks",
   "version": "0.0.1",
-  "repository": "https://github.com/bluchip-nft/bluchip",
+  "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
   "exports": {
     ".": {
@@ -30,12 +30,9 @@
     "immer": "^9.0.15",
     "react": "^18.2",
     "react-fast-compare": "^3.2.0",
-    "@preact/signals-react": "^1.1.1",
-    "@preact/signals-core": "^1.2.1",
     "react-use": "^17.4.0"
   },
   "devDependencies": {
-    "@winter-love/signals-rebuild": "workspace:*",
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.14",
     "flush-promises": "^1.0.2",
@@ -61,6 +58,5 @@
     "outDir": "dist",
     "sourcemap": true,
     "splitting": false
-  },
-  "gitHead": "789a3f185c83ee613e500614dad679fa8eb9b33f"
+  }
 }

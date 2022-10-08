@@ -1,6 +1,6 @@
 import {renderHook} from '@testing-library/react-hooks'
-import {useWait} from '../use-wait'
 import flushPromises from 'flush-promises'
+import {useWait} from '../use-wait'
 
 describe('use-wait', () => {
   it('should return promise with autoStart', async () => {

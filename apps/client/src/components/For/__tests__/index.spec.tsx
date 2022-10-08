@@ -1,5 +1,6 @@
 import {render, screen} from '@testing-library/react'
 import {For} from '../'
+import React from 'react'
 
 describe('For', () => {
   it('should render any list', async () => {

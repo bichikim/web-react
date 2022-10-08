@@ -48,7 +48,8 @@ export const useIntervalWheel = (list: any[], options: UseIntervalWheelProps = {
     return () => {
       clearInterval(flag)
     }
-  }, [])
+    // todo deps error
+  }, [setState, listRef, duration, repeat, list, step, start])
 
   return state
 }

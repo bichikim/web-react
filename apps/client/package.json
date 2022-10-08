@@ -60,6 +60,8 @@
     "@winter-love/react-components": "workspace:*"
   },
   "devDependencies": {
+    "@testing-library/react-hooks": "^8.0.1",
+    "@testing-library/react": "^13.4.0",
     "flush-promises": "1.0.2",
     "@types/uuid": "8.3.4",
     "@capacitor/cli": "3.4.3",
