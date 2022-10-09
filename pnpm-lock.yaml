@@ -352,6 +352,7 @@ importers:
 
   packages/signals-core:
     specifiers:
+      '@preact/signals-react': ^1.1.1
       '@types/lodash': ^4.14.182
       '@types/react': ^18.0.14
       '@winter-love/signals-rebuild': workspace:*
@@ -364,6 +365,7 @@ importers:
       tsup: ^6.1.3
       typescript: ^4.6.2
     dependencies:
+      '@preact/signals-react': 1.1.1_react@18.2.0
       '@winter-love/signals-rebuild': link:../signals-rebuild
     devDependencies:
       '@types/lodash': 4.14.182
@@ -380,6 +382,7 @@ importers:
   packages/signals-rebuild:
     specifiers:
       '@preact/signals-core': ^1.2.1
+      '@preact/signals-react': ^1.1.1
       '@types/lodash': ^4.14.182
       '@types/react': ^18.0.14
       flush-promises: ^1.0.2
@@ -393,6 +396,7 @@ importers:
       react: 18.2.0
     devDependencies:
       '@preact/signals-core': 1.2.1
+      '@preact/signals-react': 1.1.1_react@18.2.0
       '@types/lodash': 4.14.182
       '@types/react': 18.0.17
       flush-promises: 1.0.2
@@ -5370,7 +5374,17 @@ packages:
 
   /@preact/signals-core/1.2.1:
     resolution: {integrity: sha512-aqzRMNFU1hoQyP4Kb1ldJrUTCnA9vqPDa7qHEQzHJ3upnBOcC2pjmvjAuTqGuY4AVTtUkCQV0FvOCuIQQ2hSdA==}
-    dev: true
+
+  /@preact/signals-react/1.1.1_react@18.2.0:
+    resolution: {integrity: sha512-U5HNWBt4q5pmsZjDOuVcz3OXLQtaBMMSErnTHFohOFQClBqHlVD/hmhayEEO38I9iU71kofhw2ngeWso/GsVMw==}
+    peerDependencies:
+      react: 17.x || 18.x
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      '@preact/signals-core': 1.2.1
+      react: 18.2.0
 
   /@rollup/plugin-babel/5.3.1_4aoyzp5jmnjre465pp7ghvzkve:
     resolution: {integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q==}

@@ -40,3 +40,5 @@ export interface Ref<T> {
 }
 
 export type UseRef = <T>(value: T) => Ref<T>
+
+export type SignalFn = <T>(value: T) => Signal<T>
