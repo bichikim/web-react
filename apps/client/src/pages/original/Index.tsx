@@ -1,6 +1,6 @@
-import {Original} from 'components/Original'
+import {Original} from './components/Original'
 
-export const OriginalPage: FPC = () => {
+export const OriginalPage = () => {
   return <Original />
 }
 

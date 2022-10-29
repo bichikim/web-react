@@ -4,7 +4,7 @@ export interface SyncMeProps {
   value?: string
 }
 
-export const SyncMe: FC<SyncMeProps> = (props) => {
+export const SyncMe = (props: SyncMeProps) => {
   const [value, setValue] = useSyncState(props.value)
 
   const onChange = () => {
@@ -19,7 +19,7 @@ export const SyncMe: FC<SyncMeProps> = (props) => {
   )
 }
 
-export const PropsSyncText: FC = () => {
+export const PropsSyncText = () => {
   const [value, setValue] = useState('foo')
   const onChange = () => {
     setValue(`${value}o`)

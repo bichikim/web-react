@@ -1,4 +1,4 @@
-import {HookState} from 'components/HookState'
+import {HookState} from './components/HookState'
 
 export const HookStatePage: FPC = () => {
   return <HookState />

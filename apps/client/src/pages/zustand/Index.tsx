@@ -1,6 +1,6 @@
-import {Zustand} from 'components/Zustand'
+import {Zustand} from './components/Zustand'
 
-export const ZustandPage: FPC = () => {
+export const ZustandPage = () => {
   return <Zustand />
 }
 
