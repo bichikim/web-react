@@ -15,6 +15,8 @@ module.exports = {
           'module-resolver',
           {
             alias: {
+              'react.tmp': 'react',
+              'signal.tmp': '@winter-love/signals-rebuild/react',
               src: './src',
             },
             cwd: 'packagejson',

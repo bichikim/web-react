@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",
-    "@winter-love/js-utils": "^0.0.1",
+    "@winter-love/utils": "^1.0.27-alpha.9",
     "react": "^18.2",
     "react-use": "^17.4.0"
   },

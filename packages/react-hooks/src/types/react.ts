@@ -13,3 +13,10 @@ export type FFC<Props = {}, ChildrenProps = {}> = import('react').FC<
   Props & {children?: (props: ChildrenProps) => import('react').ReactNode}
 >
 export type FPC<Props = {}> = import('react').FC<Props>
+
+export type MaybeRefObject<T> =
+  | T
+  | any
+  | {
+      readonly current?: T | null
+    }

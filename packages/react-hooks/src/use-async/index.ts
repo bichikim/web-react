@@ -1,21 +1,37 @@
-import {useEffect, useState} from 'react'
+import {toValue} from '@winter-love/js-utils'
+import {useEffect, useState, useRef} from 'react'
 import {useHandle} from 'src/use-handle'
 
-export const useAsync = <S>(initState: S | (() => S), logic: () => Promise<S> | S) => {
-  const [state, setState] = useState(initState)
+interface AsyncState<S, E = any> {
+  data: S
+  error?: E
+}
 
-  const run = useHandle(async (logic) => {
-    const result = await logic()
-    setState(result)
+export const useAsync = <S>(
+  initState: S | (() => S),
+  logic: () => Promise<S> | S,
+  immediate?: boolean,
+): AsyncState<S> & {run: () => Promise<S>} => {
+  const _immediate = useRef(immediate)
+  const [state, setState] = useState<AsyncState<S>>(() => {
+    return {
+      data: toValue(initState),
+    }
   })
 
-  const retry = useHandle(() => {
-    run(logic)
+  const run = useHandle(async () => {
+    const data = await logic()
+    setState({
+      data,
+    })
+    return data
   })
 
   useEffect(() => {
-    run(logic)
-  }, [run, logic])
+    if (_immediate.current) {
+      run()
+    }
+  }, [run])
 
-  return [state, retry]
+  return {...state, run}
 }

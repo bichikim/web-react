@@ -5,10 +5,12 @@
   "author": "bihci@live.co.kr",
   "exports": {
     ".": {
+      "types": "./src/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
     "./react": {
+      "types": "./src/react.d.ts",
       "import": "./dist/react.mjs",
       "require": "./dist/react.js"
     },
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@preact/signals-core": "^1.2.1",
     "@preact/signals-react": "^1.1.1",
+    "@preact/signals": "^1.1.1",
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.14",
     "flush-promises": "^1.0.2",
@@ -48,7 +51,8 @@
   "tsup": {
     "entry": [
       "src/index.ts",
-      "src/react.ts"
+      "src/react.ts",
+      "src/preact.ts"
     ],
     "clean": true,
     "format": [

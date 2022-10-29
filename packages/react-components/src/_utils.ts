@@ -1,1 +1,1 @@
-export * from '@winter-love/js-utils'
+export * from '@winter-love/utils'

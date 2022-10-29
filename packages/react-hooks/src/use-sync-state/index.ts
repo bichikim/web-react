@@ -1,7 +1,7 @@
-import {dispatchValue, FunctionValue, functionValue, NotFunction} from 'src/utils'
 import {Dispatch, SetStateAction, useRef} from 'react'
 import {useUpdate} from 'react-use'
 import {useHandle} from 'src/use-handle'
+import {MaybeFunction, toValue} from 'src/utils'
 
 const {is} = Object
 
@@ -10,12 +10,12 @@ const {is} = Object
  * @param value
  * @param isEqual
  */
-export const useSyncState = <S extends NotFunction>(
-  value: FunctionValue<S>,
+export const useSyncState = <S>(
+  value: MaybeFunction<S>,
   isEqual?: (a: S, b: S) => boolean,
 ): [S, Dispatch<SetStateAction<S>>] => {
   const _isEqual = isEqual ?? is
-  const _value = functionValue(value)
+  const _value = toValue(value)
   const update = useUpdate()
   const prevValue = useRef<S>(_value)
   const stateRef = useRef<S>(_value)
@@ -25,8 +25,8 @@ export const useSyncState = <S extends NotFunction>(
     stateRef.current = _value
   }
 
-  const set = useHandle((state: SetStateAction<S>) => {
-    const value = dispatchValue(stateRef.current, state)
+  const set = useHandle((state: MaybeFunction<S>) => {
+    const value = toValue(state, [stateRef.current])
     if (_isEqual(stateRef.current, value)) {
       return
     }

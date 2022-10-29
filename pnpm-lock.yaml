@@ -65,7 +65,6 @@ importers:
       eslint: 8.11.0
       eslint-config-prettier: ^8.5.0
       eslint-import-resolver-typescript: 2.7.0
-      eslint-plugin-htm: 0.4.0
       eslint-plugin-import: 2.25.4
       eslint-plugin-node: 11.1.0
       eslint-plugin-prettier: ^4.2.1
@@ -134,7 +133,6 @@ importers:
       eslint: 8.11.0
       eslint-config-prettier: 8.5.0_eslint@8.11.0
       eslint-import-resolver-typescript: 2.7.0_7yrnqyx753fo5bwjhiag2wpedy
-      eslint-plugin-htm: 0.4.0_eslint@8.11.0
       eslint-plugin-import: 2.25.4_ivwhc7qmrtksqtcnosfy6tyu5m
       eslint-plugin-node: 11.1.0_eslint@8.11.0
       eslint-plugin-prettier: 4.2.1_kvjrsu2pvedihm7dyj3mx5axey
@@ -186,6 +184,7 @@ importers:
       '@winter-love/lodash': ^1.0.25-alpha.14
       '@winter-love/react-components': workspace:*
       '@winter-love/react-hooks': workspace:*
+      '@winter-love/signals': workspace:*
       axios: ^1.0.0
       compression: 1.7.4
       cross-env: 7.0.3
@@ -236,6 +235,7 @@ importers:
       '@winter-love/lodash': 1.0.25-alpha.14
       '@winter-love/react-components': link:../../packages/react-components
       '@winter-love/react-hooks': link:../../packages/react-hooks
+      '@winter-love/signals': link:../../packages/signals
       compression: 1.7.4
       cross-env: 7.0.3
       express: 4.17.3
@@ -297,7 +297,7 @@ importers:
       '@stitches/react': ^1.2.8
       '@types/lodash': ^4.14.182
       '@types/react': ^18.0.14
-      '@winter-love/js-utils': ^0.0.1
+      '@winter-love/utils': ^1.0.27-alpha.9
       lodash: ^4.17.21
       react: ^18.2
       react-dom: ^18
@@ -307,7 +307,7 @@ importers:
       typescript: ^4.6.2
     dependencies:
       '@stitches/react': 1.2.8_react@18.2.0
-      '@winter-love/js-utils': link:../utils
+      '@winter-love/utils': 1.0.27-alpha.9
       react: 18.2.0
       react-use: 17.4.0_biqbaboplfbrettd7655fr4n2y
     devDependencies:
@@ -323,7 +323,7 @@ importers:
     specifiers:
       '@types/lodash': ^4.14.182
       '@types/react': ^18.0.14
-      '@winter-love/js-utils': ^0.0.1
+      '@winter-love/utils': ^1.0.27-alpha.9
       flush-promises: ^1.0.2
       immer: ^9.0.15
       lodash: ^4.17.21
@@ -335,7 +335,7 @@ importers:
       tsup: ^6.1.3
       typescript: ^4.6.2
     dependencies:
-      '@winter-love/js-utils': link:../utils
+      '@winter-love/utils': 1.0.27-alpha.9
       immer: 9.0.15
       react: 18.2.0
       react-fast-compare: 3.2.0
@@ -350,12 +350,14 @@ importers:
       tsup: 6.2.3_typescript@4.6.3
       typescript: 4.6.3
 
-  packages/signals-core:
+  packages/signals:
     specifiers:
       '@preact/signals-react': ^1.1.1
       '@types/lodash': ^4.14.182
       '@types/react': ^18.0.14
       '@winter-love/signals-rebuild': workspace:*
+      esbuild-plugin-alias: ^0.2.1
+      esbuild-plugin-replace: ^1.2.0
       flush-promises: ^1.0.2
       lodash: ^4.17.21
       preact: ^10.11.1
@@ -370,6 +372,8 @@ importers:
     devDependencies:
       '@types/lodash': 4.14.182
       '@types/react': 18.0.17
+      esbuild-plugin-alias: 0.2.1
+      esbuild-plugin-replace: 1.2.0
       flush-promises: 1.0.2
       lodash: 4.17.21
       preact: 10.11.1
@@ -381,44 +385,27 @@ importers:
 
   packages/signals-rebuild:
     specifiers:
+      '@preact/signals': ^1.1.1
       '@preact/signals-core': ^1.2.1
       '@preact/signals-react': ^1.1.1
       '@types/lodash': ^4.14.182
       '@types/react': ^18.0.14
       flush-promises: ^1.0.2
       lodash: ^4.17.21
-      react: ^18.2.0
       react-dom: ^18
       tslib: ^2.4.0
       tsup: ^6.1.3
       typescript: ^4.6.2
-    dependencies:
-      react: 18.2.0
     devDependencies:
+      '@preact/signals': 1.1.1_preact@10.11.1
       '@preact/signals-core': 1.2.1
-      '@preact/signals-react': 1.1.1_react@18.2.0
+      '@preact/signals-react': 1.1.1
       '@types/lodash': 4.14.182
       '@types/react': 18.0.17
       flush-promises: 1.0.2
       lodash: 4.17.21
-      react-dom: 18.2.0_react@18.2.0
+      react-dom: 18.2.0
       tslib: 2.4.0
-      tsup: 6.2.3_typescript@4.6.3
-      typescript: 4.6.3
-
-  packages/utils:
-    specifiers:
-      '@types/node': ^18.7.13
-      '@types/react': ^18.0.9
-      lodash: ^4.17.21
-      tsd: ^0.22.0
-      tsup: ^6.2.3
-      typescript: ^4.6.2
-    devDependencies:
-      '@types/node': 18.7.13
-      '@types/react': 18.0.17
-      lodash: 4.17.21
-      tsd: 0.22.0
       tsup: 6.2.3_typescript@4.6.3
       typescript: 4.6.3
 
@@ -4155,7 +4142,7 @@ packages:
       '@rollup/pluginutils': 4.2.1
       glob: 7.2.3
       glob-promise: 4.2.2_glob@7.2.3
-      magic-string: 0.26.1
+      magic-string: 0.26.2
       react-docgen-typescript: 2.2.2_typescript@4.6.2
       typescript: 4.6.2
       vite: 3.0.9
@@ -5375,6 +5362,17 @@ packages:
   /@preact/signals-core/1.2.1:
     resolution: {integrity: sha512-aqzRMNFU1hoQyP4Kb1ldJrUTCnA9vqPDa7qHEQzHJ3upnBOcC2pjmvjAuTqGuY4AVTtUkCQV0FvOCuIQQ2hSdA==}
 
+  /@preact/signals-react/1.1.1:
+    resolution: {integrity: sha512-U5HNWBt4q5pmsZjDOuVcz3OXLQtaBMMSErnTHFohOFQClBqHlVD/hmhayEEO38I9iU71kofhw2ngeWso/GsVMw==}
+    peerDependencies:
+      react: 17.x || 18.x
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      '@preact/signals-core': 1.2.1
+    dev: true
+
   /@preact/signals-react/1.1.1_react@18.2.0:
     resolution: {integrity: sha512-U5HNWBt4q5pmsZjDOuVcz3OXLQtaBMMSErnTHFohOFQClBqHlVD/hmhayEEO38I9iU71kofhw2ngeWso/GsVMw==}
     peerDependencies:
@@ -5385,6 +5383,16 @@ packages:
     dependencies:
       '@preact/signals-core': 1.2.1
       react: 18.2.0
+    dev: false
+
+  /@preact/signals/1.1.1_preact@10.11.1:
+    resolution: {integrity: sha512-I1DhYo2d1t9qDkEq1jYDVTQdBGmo4NlqatNEtulsS/87kVdwhZluP6TTDS4/5sc2h86TlBF6UA6LO+tDpIt/Gw==}
+    peerDependencies:
+      preact: 10.x
+    dependencies:
+      '@preact/signals-core': 1.2.1
+      preact: 10.11.1
+    dev: true
 
   /@rollup/plugin-babel/5.3.1_4aoyzp5jmnjre465pp7ghvzkve:
     resolution: {integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q==}
@@ -7074,11 +7082,6 @@ packages:
     hasBin: true
     dev: true
 
-  /@tsd/typescript/4.7.4:
-    resolution: {integrity: sha512-jbtC+RgKZ9Kk65zuRZbKLTACf+tvFW4Rfq0JEMXrlmV3P3yme+Hm+pnb5fJRyt61SjIitcrC810wj7+1tgsEmg==}
-    hasBin: true
-    dev: true
-
   /@types/aria-query/4.2.2:
     resolution: {integrity: sha512-HnYpAE1Y6kRyKM/XkEuiRQhTHvkzMBurTHnpFLYLBGPIylZNPs9jJcuOOYWxPLJCSEtmZT0Y8rHDokKN7rRTig==}
     dev: true
@@ -7867,6 +7870,19 @@ packages:
       '@types/lodash-es': 4.17.2
     dev: false
 
+  /@winter-love/lodash/1.0.27-alpha.5:
+    resolution: {integrity: sha512-szmDA69zyEfQWyq7uXx1eoNM91LsqzsBswYJTw03bq9yl2r3bctuSAwOPoJSUCIbFQ+T2dJ3urzgzEte3xqvDg==}
+    dependencies:
+      '@types/lodash-es': 4.17.2
+    dev: false
+
+  /@winter-love/utils/1.0.27-alpha.9:
+    resolution: {integrity: sha512-WS9Y56JH5lh3JsuUs2XHzOktBpeVmdiJ8qQElcpQq4VlIt+hy1IRecovADYTwWqOWApDcjA+AhbkXiQHYbZyDw==}
+    dependencies:
+      '@winter-love/lodash': 1.0.27-alpha.5
+      safe-stable-stringify: 2.4.1
+    dev: false
+
   /@xobotyi/scrollbar-width/1.9.5:
     resolution: {integrity: sha512-N8tkAACJx2ww8vFMneJmaAgmjAG1tnVBZJRLRcx061tmsLRZHSEZSLuGWnwPtunsSLvSqXQ2wfp7Mgqg1I+2dQ==}
     dev: false
@@ -8327,10 +8343,6 @@ packages:
 
   /async/0.9.2:
     resolution: {integrity: sha512-l6ToIJIotphWahxxHyzK9bnLR6kM4jJIIgLShZeqLY7iboHoGkdgFl7W2/Ivi4SkMJYGKqW8vSuk0uKUj6qsSw==}
-    dev: true
-
-  /async/3.2.3:
-    resolution: {integrity: sha512-spZRyzKL5l5BZQrr/6m/SqFdBN0q3OCI0f9rjfBzCMBIP4p75P620rR3gTmaksNOhmzgdxcaxdNfMy6anrbM0g==}
     dev: true
 
   /asynckit/0.4.0:
@@ -9469,11 +9481,6 @@ packages:
   /commander/8.3.0:
     resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
     engines: {node: '>= 12'}
-    dev: true
-
-  /commander/9.4.0:
-    resolution: {integrity: sha512-sRPT+umqkz90UA8M1yqYfnHlZA7fF6nSphDtxeywPZ49ysjxDQybzk13CL+mXekDRG92skbcqCLVovuCusNmFw==}
-    engines: {node: ^12.20.0 || >=14}
     dev: true
 
   /common-ancestor-path/1.0.1:
@@ -10899,6 +10906,16 @@ packages:
     dev: true
     optional: true
 
+  /esbuild-plugin-alias/0.2.1:
+    resolution: {integrity: sha512-jyfL/pwPqaFXyKnj8lP8iLk6Z0m099uXR45aSN8Av1XD4vhvQutxxPzgA2bTcAwQpa1zCXDcWOlhFgyP3GKqhQ==}
+    dev: true
+
+  /esbuild-plugin-replace/1.2.0:
+    resolution: {integrity: sha512-dYlDwjcKKgAi8fqsvLwDvO+03asnp1qyG4VU/qbvg061CIMfecF/qwkjr4QRetQP9Os2nJuNO95Y0rUUXhFAwg==}
+    dependencies:
+      magic-string: 0.25.9
+    dev: true
+
   /esbuild-plugin-text-replace/1.2.0:
     resolution: {integrity: sha512-04kdAMjxqGG+TEV/F+uGQVMFZlh65Eb11xo8b532io8FjOg5x2faoCXGicJo97BovXYARCPUhiZEECKZrFQq7Q==}
     engines: {node: '>=10.1.0'}
@@ -11224,20 +11241,6 @@ packages:
       regexpp: 3.2.0
     dev: true
 
-  /eslint-plugin-htm/0.4.0_eslint@8.11.0:
-    resolution: {integrity: sha512-CA5pZEMxGo/0s+BdlWkOHP0JGB7MXOtVg3jC9MsFwC4ZY9ZxRWq9ykR4Us9amPGgi7lUzq/AXkqxIBq+N00fdw==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      eslint: '>=5.0.0'
-    dependencies:
-      eslint: 8.11.0
-      eslint-plugin-utils: 0.2.0_eslint@8.11.0
-      htmlhint: 1.1.4
-      tslib: 2.4.0
-    transitivePeerDependencies:
-      - encoding
-    dev: true
-
   /eslint-plugin-import/2.25.4_ivwhc7qmrtksqtcnosfy6tyu5m:
     resolution: {integrity: sha512-/KJBASVFxpu0xg1kIBn9AUa8hQVnszpwgE7Ld0lKAlx7Ie87yzEzCgSkekt+le/YVhiaosO4Y14GDAOc41nfxA==}
     engines: {node: '>=4'}
@@ -11400,15 +11403,6 @@ packages:
       safe-regex: 2.1.1
       semver: 7.3.7
       strip-indent: 3.0.0
-    dev: true
-
-  /eslint-plugin-utils/0.2.0_eslint@8.11.0:
-    resolution: {integrity: sha512-3Pbr3afmJJm0zrAS6xc5x6AU8QjyztYqdTLaAhBhGI9nz1/uAR4eNmeIiHv6w+JQEfkYRXOE/SKint82Mh/aEw==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      eslint: '>=5.0.0'
-    dependencies:
-      eslint: 8.11.0
     dev: true
 
   /eslint-rule-docs/1.1.235:
@@ -12873,22 +12867,6 @@ packages:
       pretty-error: 4.0.0
       tapable: 2.2.1
       webpack: 5.74.0
-    dev: true
-
-  /htmlhint/1.1.4:
-    resolution: {integrity: sha512-tSKPefhIaaWDk/vKxAOQbN+QwZmDeJCq3bZZGbJMoMQAfTjepudC+MkuT9MOBbuQI3dLLzDWbmU7fLV3JASC7Q==}
-    hasBin: true
-    dependencies:
-      async: 3.2.3
-      chalk: 4.1.2
-      commander: 9.4.0
-      glob: 7.2.3
-      is-glob: 4.0.3
-      node-fetch: 2.6.7
-      strip-json-comments: 3.1.0
-      xml: 1.0.1
-    transitivePeerDependencies:
-      - encoding
     dev: true
 
   /htmlparser2-svelte/4.1.0:
@@ -17049,6 +17027,18 @@ packages:
       react: 18.2.0
       scheduler: 0.21.0
 
+  /react-dom/18.2.0:
+    resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
+    peerDependencies:
+      react: ^18.2.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      loose-envify: 1.4.0
+      scheduler: 0.23.0
+    dev: true
+
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -17780,6 +17770,11 @@ packages:
       regexp-tree: 0.1.24
     dev: true
 
+  /safe-stable-stringify/2.4.1:
+    resolution: {integrity: sha512-dVHE6bMtS/bnL2mwualjc6IxEv1F+OCUpA46pKUj6F8uDbUM0jCCulPqRNPSnWwGNKx5etqMjZYdXtrm5KJZGA==}
+    engines: {node: '>=10'}
+    dev: false
+
   /safer-buffer/2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
@@ -18461,11 +18456,6 @@ packages:
       min-indent: 1.0.1
     dev: true
 
-  /strip-json-comments/3.1.0:
-    resolution: {integrity: sha512-e6/d0eBu7gHtdCqFt0xJr642LdToM5/cN4Qb9DbHjVx1CP5RyeM+zH7pbecEmDv/lBqb0QH+6Uqq75rxFPkM0w==}
-    engines: {node: '>=8'}
-    dev: true
-
   /strip-json-comments/3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
@@ -19059,19 +19049,6 @@ packages:
     hasBin: true
     dependencies:
       '@tsd/typescript': 4.5.5
-      eslint-formatter-pretty: 4.1.0
-      globby: 11.1.0
-      meow: 9.0.0
-      path-exists: 4.0.0
-      read-pkg-up: 7.0.1
-    dev: true
-
-  /tsd/0.22.0:
-    resolution: {integrity: sha512-NH+tfEDQ0Ze8gH7TorB6IxYybD+M68EYawe45YNVrbQcydNBfdQHP9IiD0QbnqmwNXrv+l9GAiULT68mo4q/xA==}
-    engines: {node: '>=14.16'}
-    hasBin: true
-    dependencies:
-      '@tsd/typescript': 4.7.4
       eslint-formatter-pretty: 4.1.0
       globby: 11.1.0
       meow: 9.0.0
@@ -20453,10 +20430,6 @@ packages:
   /xml-name-validator/4.0.0:
     resolution: {integrity: sha512-ICP2e+jsHvAj2E2lIHxa5tjXRlKDJo4IdvPvCXbXQGdzSfmSpNVyIKMvoZHjDY9DP0zV17iI85o90vRFXNccRw==}
     engines: {node: '>=12'}
-    dev: true
-
-  /xml/1.0.1:
-    resolution: {integrity: sha1-eLpyAgApxbyHuKgaPPzXS0ovweU=}
     dev: true
 
   /xml2js/0.4.23:

@@ -55,9 +55,10 @@
     "urql": "2.2.0",
     "valtio": "^1.6.4",
     "validator": "13.7.0",
-    "@winter-love/lodash": "^1.0.25-alpha.14",
+    "@winter-love/lodash": "^1.0.27-alpha.5",
     "@winter-love/react-hooks": "workspace:*",
-    "@winter-love/react-components": "workspace:*"
+    "@winter-love/react-components": "workspace:*",
+    "@winter-love/signals": "workspace:*"
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^8.0.1",

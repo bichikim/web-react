@@ -1,8 +1,11 @@
-import {MutableRefObject, RefObject, useRef} from 'react'
+import {MutableRefObject, useRef} from 'react'
 import isEqual from 'react-fast-compare'
+import {isRef} from 'src/is-ref'
+import {MaybeRefObject} from 'src/types'
 import {useCustomEffect} from 'src/use-custom-effect'
 import {useCustomMemo} from 'src/use-custom-memo'
-import {isPassiveEventSupported} from 'src/utils'
+import {useHandle} from 'src/use-handle'
+import {isSupportPassive} from 'src/utils'
 
 export interface UseEventOptions {
   immediateStop?: boolean
@@ -36,31 +39,34 @@ export const wrapOnes = (handle: EventHandle, active: MutableRefObject<boolean>)
   }
 }
 
-const createHandle = (
-  handle: EventHandle,
-  active: MutableRefObject<boolean>,
-  options: UseEventOptions = {},
-) => {
-  const {ones = false, prevent = false, stop = false, immediateStop = false} = options
-  let _handle = handle
+const useEventHandle = (handle: EventHandle, options: UseEventOptions = {}) => {
+  const onesRef = useRef(false)
 
-  if (prevent) {
-    _handle = wrapPrevent(_handle)
-  }
+  return useCustomMemo(
+    () => {
+      let _handle = handle
+      const {ones = false, prevent = false, stop = false, immediateStop = false} = options
 
-  if (ones) {
-    _handle = wrapOnes(_handle, active)
-  }
+      if (prevent) {
+        _handle = wrapPrevent(_handle)
+      }
 
-  if (stop) {
-    _handle = wrapStop(_handle)
-  }
+      if (ones) {
+        _handle = wrapOnes(_handle, onesRef)
+      }
 
-  if (immediateStop) {
-    _handle = wrapImmediateStop(_handle)
-  }
+      if (stop) {
+        _handle = wrapStop(_handle)
+      }
 
-  return _handle
+      if (immediateStop) {
+        _handle = wrapImmediateStop(_handle)
+      }
+      return _handle
+    },
+    [handle, options],
+    isEqual,
+  )
 }
 
 export type EventHandle<Event = any> = (event: Event) => any
@@ -69,34 +75,30 @@ const getPassive = (value?: boolean) => {
   if (!value) {
     return
   }
-  return isPassiveEventSupported() ? {passive: true} : undefined
+  return isSupportPassive() ? {passive: true} : false
 }
 
 export const useEvent = (
-  target: RefObject<any>,
+  target: MaybeRefObject<HTMLElement | Window>,
   event: string,
   handle: EventHandle,
   options: UseEventOptions = {},
 ) => {
-  const onesRef = useRef(false)
+  const currentTarget = isRef(target) ? target.current : target
+  const _handle = useHandle((event) => {
+    return handle(event)
+  })
 
-  const eventHandle = useCustomMemo(
-    () => {
-      return createHandle(handle, onesRef, options)
-    },
-    [handle, options],
-    isEqual,
-  )
+  const eventHandle = useEventHandle(_handle, options)
 
   useCustomEffect(
     () => {
-      const currentTarget = target.current
       currentTarget?.addEventListener?.(event, eventHandle, getPassive(options.passive))
       return () => {
         currentTarget?.removeEventListener?.(event, eventHandle)
       }
     },
-    [eventHandle, event, options, target.current],
+    [eventHandle, event, options, currentTarget],
     isEqual,
   )
 }
