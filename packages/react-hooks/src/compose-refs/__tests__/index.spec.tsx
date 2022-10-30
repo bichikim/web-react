@@ -24,6 +24,9 @@ describe('composeRefs', () => {
     expect(refA).not.toBeNull()
     expect(refB).not.toBeNull()
   })
+})
+
+describe('useComposeRefs', () => {
   it('should pass refs', () => {
     let refA = null
     let refB = null
