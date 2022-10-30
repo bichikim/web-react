@@ -1,7 +1,8 @@
-import {ProgressBar} from 'src/components/ProgressBar'
+import {UProgressBar} from '../UProgressBar'
+import {useEffect, useState} from 'react'
 
 export default {
-  component: ProgressBar,
+  component: UProgressBar,
   title: 'Components/ProgressBar',
 }
 
@@ -26,7 +27,7 @@ export const Default = () => {
 
   return (
     <div style={{backgroundColor: 'black', height: '100px', width: '500px'}}>
-      <ProgressBar now={now} total={total} wait={wait} />
+      <UProgressBar now={now} total={total} wait={wait} />
     </div>
   )
 }

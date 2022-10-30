@@ -181,7 +181,7 @@ importers:
       '@vitejs/plugin-react': ^2.1.0
       '@vue/reactivity': 3.2.33
       '@vue/runtime-core': 3.2.33
-      '@winter-love/lodash': ^1.0.25-alpha.14
+      '@winter-love/lodash': ^1.0.27-alpha.5
       '@winter-love/react-components': workspace:*
       '@winter-love/react-hooks': workspace:*
       '@winter-love/signals': workspace:*
@@ -232,7 +232,7 @@ importers:
       '@tanstack/react-query': 4.10.1_biqbaboplfbrettd7655fr4n2y
       '@vue/reactivity': 3.2.33
       '@vue/runtime-core': 3.2.33
-      '@winter-love/lodash': 1.0.25-alpha.14
+      '@winter-love/lodash': 1.0.27-alpha.5
       '@winter-love/react-components': link:../../packages/react-components
       '@winter-love/react-hooks': link:../../packages/react-hooks
       '@winter-love/signals': link:../../packages/signals
@@ -297,6 +297,7 @@ importers:
       '@stitches/react': ^1.2.8
       '@types/lodash': ^4.14.182
       '@types/react': ^18.0.14
+      '@winter-love/react-hooks': workspace:*
       '@winter-love/utils': ^1.0.27-alpha.9
       lodash: ^4.17.21
       react: ^18.2
@@ -307,6 +308,7 @@ importers:
       typescript: ^4.6.2
     dependencies:
       '@stitches/react': 1.2.8_react@18.2.0
+      '@winter-love/react-hooks': link:../react-hooks
       '@winter-love/utils': 1.0.27-alpha.9
       react: 18.2.0
       react-use: 17.4.0_biqbaboplfbrettd7655fr4n2y
@@ -7862,13 +7864,6 @@ packages:
     transitivePeerDependencies:
       - encoding
     dev: true
-
-  /@winter-love/lodash/1.0.25-alpha.14:
-    resolution: {integrity: sha512-EZb0GnaHnyDUzXQCnsvWOj/3TBZZReQrEmjH3CY9CmMpY1rmSR86cAPN9Zvs8oWO93HbMKVN4g6Nwg0B+gvD3A==}
-    dependencies:
-      '@types/lodash': 4.14.182
-      '@types/lodash-es': 4.17.2
-    dev: false
 
   /@winter-love/lodash/1.0.27-alpha.5:
     resolution: {integrity: sha512-szmDA69zyEfQWyq7uXx1eoNM91LsqzsBswYJTw03bq9yl2r3bctuSAwOPoJSUCIbFQ+T2dJ3urzgzEte3xqvDg==}

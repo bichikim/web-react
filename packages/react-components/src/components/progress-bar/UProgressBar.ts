@@ -1,9 +1,10 @@
-import {styled} from '@stitches/react'
+import {styled} from 'src/style'
+import {ProgressBar} from './ProgressBar'
 
-export const ProgressBarStyled = styled('div', {
+export const UProgressBar = styled(ProgressBar, {
   $$color: 'white',
   $$transform: 'scaleX(0)',
-  $$transition: 'scaleX 2s',
+  $$transition: 'transform 2000ms',
   backgroundColor: '$$color',
   height: '100%',
   transform: '$$transform',
