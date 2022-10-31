@@ -31,7 +31,7 @@
   "dependencies": {
     "@winter-love/utils": "^1.0.27-alpha.9",
     "@preact/signals-react": "^1.1.1",
-    "@winter-love/signals-rebuild": "workspace:*"
+    "@winter-love/signals-rebuild": "^0.0.1"
   },
   "devDependencies": {
     "esbuild-plugin-replace": "^1.2.0",
