@@ -14,7 +14,7 @@ const mainLogic = () => {
   }
 }
 
-export const Main = () => {
+export const MainPage = () => {
   const {name, age, increase} = signals(mainLogic)
   return (
     <>

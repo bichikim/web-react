@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes as BrowserRoutes, Route} from 'react-router-dom'
 import {Root} from 'src/Root'
-import {Main} from 'src/pages/main/Index'
+import {MainPage} from 'src/pages/main/Index'
 import {OriginalPage} from 'src/pages/original'
 import {HookStatePage} from 'src/pages/hook-state'
 import {ZustandPage} from 'src/pages/zustand'
@@ -13,7 +13,7 @@ export const Routes: FC = () => {
       <BrowserRoutes>
         <Route path="/" element={<Root />}>
           <Route path="/" element={<MainLayout />}>
-            <Route index element={<Main />} />
+            <Route index element={<MainPage />} />
             <Route path="hook-state" element={<HookStatePage />} />
             <Route path="zustand" element={<ZustandPage />} />
             <Route path="original" element={<OriginalPage />} />
