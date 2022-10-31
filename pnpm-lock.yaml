@@ -299,7 +299,7 @@ importers:
       '@stitches/react': ^1.2.8
       '@types/lodash': ^4.14.182
       '@types/react': ^18.0.14
-      '@winter-love/react-hooks': workspace:*
+      '@winter-love/react-hooks': ^0.0.2-alpha.0
       '@winter-love/utils': ^1.0.27-alpha.9
       lodash: ^4.17.21
       react: ^18.2
@@ -359,7 +359,7 @@ importers:
       '@preact/signals-react': ^1.1.1
       '@types/lodash': ^4.14.182
       '@types/react': ^18.0.14
-      '@winter-love/signals-rebuild': workspace:*
+      '@winter-love/signals-rebuild': ^0.0.2-alpha.0
       '@winter-love/utils': ^1.0.27-alpha.9
       esbuild-plugin-alias: ^0.2.1
       esbuild-plugin-replace: ^1.2.0
