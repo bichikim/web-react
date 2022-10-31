@@ -1,14 +1,20 @@
 {
-  "packages": ["packages/*"],
+  "packages": [
+    "packages/*"
+  ],
   "npmClient": "pnpm",
   "useWorkspaces": true,
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "command": {
     "run": {
       "npmClient": "pnpm"
     },
     "publish": {
-      "ignoreChanges": ["lerna.json", "ignored-file", "*.md"]
+      "ignoreChanges": [
+        "lerna.json",
+        "ignored-file",
+        "*.md"
+      ]
     }
   }
 }

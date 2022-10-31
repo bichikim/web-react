@@ -1,6 +1,6 @@
 {
   "name": "@winter-love/signals-rebuild",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "private": true,
   "repository": "https://github.com/bluchip-nft/bluchip",
   "author": "bihci@live.co.kr",
@@ -33,9 +33,9 @@
     "publish": "npm publish"
   },
   "devDependencies": {
+    "@preact/signals": "^1.1.1",
     "@preact/signals-core": "^1.2.1",
     "@preact/signals-react": "^1.1.1",
-    "@preact/signals": "^1.1.1",
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.14",
     "flush-promises": "^1.0.2",
@@ -61,7 +61,10 @@
       "esm",
       "iife"
     ],
-    "external": ["react", "preact"],
+    "external": [
+      "react",
+      "preact"
+    ],
     "outDir": "dist",
     "sourcemap": true,
     "splitting": false

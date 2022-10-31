@@ -1,6 +1,6 @@
 {
   "name": "@winter-love/signals",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.0",
   "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
   "private": true,
@@ -29,19 +29,19 @@
     "publish": "npm publish"
   },
   "dependencies": {
-    "@winter-love/utils": "^1.0.27-alpha.9",
     "@preact/signals-react": "^1.1.1",
-    "@winter-love/signals-rebuild": "^0.0.1"
+    "@winter-love/signals-rebuild": "^0.0.2-alpha.0",
+    "@winter-love/utils": "^1.0.27-alpha.9"
   },
   "devDependencies": {
-    "esbuild-plugin-replace": "^1.2.0",
-    "esbuild-plugin-alias": "^0.2.1",
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.14",
+    "esbuild-plugin-alias": "^0.2.1",
+    "esbuild-plugin-replace": "^1.2.0",
     "flush-promises": "^1.0.2",
     "lodash": "^4.17.21",
-    "react": "^18.2.0",
     "preact": "^10.11.1",
+    "react": "^18.2.0",
     "react-dom": "^18",
     "tslib": "^2.4.0",
     "tsup": "^6.1.3",
