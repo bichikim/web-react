@@ -1,6 +1,6 @@
-import {RefObject, useEffect} from 'react'
-import {useCompareUpdate} from 'src/use-compare-update'
+import {RefObject, useEffect, useMemo} from 'react'
 import {useHandle} from 'src/use-handle'
+import {useDeepMemo} from 'src/use-deep-memo'
 
 /**
  * MutationObserver 기능의 hook 입니다
@@ -13,23 +13,21 @@ export const useMutationObserver = (
   options: MutationObserverInit,
   callback?: (record: MutationRecord[]) => any,
 ) => {
-  const _options = useCompareUpdate(options)
+  const _options = useDeepMemo(() => options, [options])
 
   const mutated = useHandle((mutations: MutationRecord[]) => {
     callback?.(mutations)
   })
 
+  const observer = useMemo(() => new MutationObserver(mutated), [mutated])
+
   useEffect(() => {
     const _target = target.current
-    const observer = new MutationObserver(mutated)
-    if (!_target) {
-      return () => {
-        // empty
-      }
+    if (_target) {
+      observer.observe(_target, _options)
     }
-    observer.observe(_target, _options)
     return () => {
       observer.disconnect()
     }
-  }, [target, _options, mutated])
+  }, [target, _options, observer])
 }

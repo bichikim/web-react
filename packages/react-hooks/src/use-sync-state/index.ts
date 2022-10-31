@@ -1,28 +1,22 @@
-import {Dispatch, SetStateAction, useRef} from 'react'
+import {Dispatch, SetStateAction, useCallback, useRef} from 'react'
 import {useUpdate} from 'react-use'
 import {useHandle} from 'src/use-handle'
 import {MaybeFunction, toValue} from 'src/utils'
 
 const {is} = Object
 
-/**
- * props 와 setState 중 하나의 변경 점을 반환 합니다
- * @param value
- * @param isEqual
- */
-export const useSyncState = <S>(
-  value: MaybeFunction<S>,
+export const useSync = <S>(
+  value: S,
   isEqual?: (a: S, b: S) => boolean,
-): [S, Dispatch<SetStateAction<S>>] => {
+  callback?: (value: S) => void,
+): [() => S, Dispatch<SetStateAction<S>>] => {
   const _isEqual = isEqual ?? is
-  const _value = toValue(value)
-  const update = useUpdate()
-  const prevValue = useRef<S>(_value)
-  const stateRef = useRef<S>(_value)
+  const prevValue = useRef<S>(value)
+  const stateRef = useRef<S>(value)
 
-  if (!_isEqual(prevValue.current, _value)) {
-    prevValue.current = _value
-    stateRef.current = _value
+  if (!_isEqual(prevValue.current, value)) {
+    prevValue.current = value
+    stateRef.current = value
   }
 
   const set = useHandle((state: MaybeFunction<S>) => {
@@ -31,8 +25,26 @@ export const useSyncState = <S>(
       return
     }
     stateRef.current = value
-    update()
+    callback?.(value)
   })
 
-  return [stateRef.current, set]
+  const get = useCallback(() => {
+    return stateRef.current
+  }, [])
+
+  return [get, set]
+}
+
+/**
+ * props 와 setState 중 하나의 변경 점을 반환 합니다
+ * @param value
+ * @param isEqual
+ */
+export const useSyncState = <S>(
+  value: S,
+  isEqual?: (a: S, b: S) => boolean,
+): [S, Dispatch<SetStateAction<S>>] => {
+  const update = useUpdate()
+  const [get, set] = useSync(value, isEqual, update)
+  return [get(), set]
 }

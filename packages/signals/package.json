@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
+  "private": true,
   "exports": {
     ".": {
       "import": "./dist/preact.mjs",
@@ -28,6 +29,7 @@
     "publish": "npm publish"
   },
   "dependencies": {
+    "@winter-love/utils": "^1.0.27-alpha.9",
     "@preact/signals-react": "^1.1.1",
     "@winter-love/signals-rebuild": "workspace:*"
   },
@@ -46,6 +48,6 @@
     "typescript": "^4.6.2"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "access": "public"
   }
 }

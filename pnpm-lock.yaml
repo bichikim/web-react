@@ -75,6 +75,7 @@ importers:
       eslint-plugin-sort-keys-fix: 1.1.2
       eslint-plugin-typescript-sort-keys: 2.1.0
       eslint-plugin-unicorn: 41.0.1
+      flush-promises: ^1.0.2
       jest: 29.0.1
       jest-environment-jsdom: ^29.0.1
       jest-extended: 3.0.2
@@ -143,6 +144,7 @@ importers:
       eslint-plugin-sort-keys-fix: 1.1.2
       eslint-plugin-typescript-sort-keys: 2.1.0_h7wskcyrkgkbjjgh2usgrxll6u
       eslint-plugin-unicorn: 41.0.1_eslint@8.11.0
+      flush-promises: 1.0.2
       jest: 29.0.1_4hf7bxudrsp7hfzxo3chlrtwsy
       jest-environment-jsdom: 29.0.1
       jest-extended: 3.0.2_jest@29.0.1
@@ -358,6 +360,7 @@ importers:
       '@types/lodash': ^4.14.182
       '@types/react': ^18.0.14
       '@winter-love/signals-rebuild': workspace:*
+      '@winter-love/utils': ^1.0.27-alpha.9
       esbuild-plugin-alias: ^0.2.1
       esbuild-plugin-replace: ^1.2.0
       flush-promises: ^1.0.2
@@ -371,6 +374,7 @@ importers:
     dependencies:
       '@preact/signals-react': 1.1.1_react@18.2.0
       '@winter-love/signals-rebuild': link:../signals-rebuild
+      '@winter-love/utils': 1.0.27-alpha.9
     devDependencies:
       '@types/lodash': 4.14.182
       '@types/react': 18.0.17

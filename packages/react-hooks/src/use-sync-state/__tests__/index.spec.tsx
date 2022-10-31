@@ -76,7 +76,7 @@ describe('signal', () => {
       const [value, setValue] = useSyncState<string>('foo')
       const onChange = useCallback(() => {
         setValue((value) => `${value}o`)
-      }, [])
+      }, [setValue])
       rendered()
       return (
         <div>

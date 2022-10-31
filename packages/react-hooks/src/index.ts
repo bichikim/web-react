@@ -1,6 +1,5 @@
 export * from './compose-refs'
 export * from './types'
-export * from './use-compare-update'
 export * from './use-custom-effect'
 export * from './use-custom-layout-effect'
 export * from './use-custom-memo'
