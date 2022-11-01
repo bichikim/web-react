@@ -21,7 +21,6 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "../../apps/client/auto-imports.d.ts"
   ],
   "exclude": [
     "node_modules"
