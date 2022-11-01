@@ -58,5 +58,6 @@
     "outDir": "dist",
     "sourcemap": true,
     "splitting": false
-  }
+  },
+  "gitHead": "58268866b25b307a8a97953bdcd964056d5b670d"
 }
