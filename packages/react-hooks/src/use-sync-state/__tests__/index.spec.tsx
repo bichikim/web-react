@@ -23,7 +23,7 @@ describe('signal', () => {
       return (
         <div>
           <button onClick={onChange}>change</button>
-          <div data-testid="value">{value}</div>
+          <div data-testid="value">{value.current}</div>
         </div>
       )
     }
@@ -81,7 +81,7 @@ describe('signal', () => {
       return (
         <div>
           <button onClick={onChange}>change</button>
-          <div data-testid="value">{value}</div>
+          <div data-testid="value">{value.current}</div>
         </div>
       )
     }
@@ -119,8 +119,8 @@ describe('signal', () => {
       return (
         <div>
           <button onClick={onChange}>change</button>
-          <div data-testid="foo">{state.foo}</div>
-          <div data-testid="bar">{state.bar}</div>
+          <div data-testid="foo">{state.current.foo}</div>
+          <div data-testid="bar">{state.current.bar}</div>
         </div>
       )
     }

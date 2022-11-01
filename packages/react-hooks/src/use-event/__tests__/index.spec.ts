@@ -53,22 +53,10 @@ describe('useEvent', () => {
         },
       },
     )
-    // Component = (props) => {
-    //   const [state, setState] = useState(0)
-    //   const onClick = () => {
-    //     setState((value) => value + 1)
-    //   }
-    //   const clickRef = useRef()
-    //   useEvent(clickRef, 'click', onClick, props.options)
-    //   return (
-    //     <div>
-    //       <div data-testid="state">{state}</div>
-    //       <button ref={clickRef} type="button">
-    //         click
-    //       </button>
-    //     </div>
-    //   )
-    // }
+  })
+
+  afterEach(() => {
+    jest.clearAllMocks()
   })
 
   it('should call the handle', async () => {
@@ -253,7 +241,7 @@ describe('useEvent', () => {
         ones: true,
       },
     })
-    expect(fakeElement.addEventListener).toBeCalledTimes(3)
-    expect(fakeElement.removeEventListener).toBeCalledTimes(2)
+    expect(fakeElement.addEventListener).toBeCalledTimes(2)
+    expect(fakeElement.removeEventListener).toBeCalledTimes(1)
   })
 })

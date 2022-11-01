@@ -1,10 +1,9 @@
-import {MaybeFunction} from 'src/utils'
 import {useSyncState} from '../use-sync-state'
-import {useCallback} from 'react'
+import {RefObject, useCallback} from 'react'
 
-export type UseToggleReturn = [boolean, () => unknown]
-export const useToggle = (value: MaybeFunction<boolean>): UseToggleReturn => {
-  const [toggle, setToggle] = useSyncState(value)
+export type UseToggleReturn = [RefObject<boolean>, () => void]
+export const useToggle = (value: boolean): UseToggleReturn => {
+  const [toggle, setToggle] = useSyncState<boolean>(value)
   const onToggle = useCallback(() => {
     setToggle((toggle) => !toggle)
   }, [setToggle])
