@@ -5,9 +5,11 @@ describe('use-connection', () => {
   beforeEach(() => {
     jest.spyOn(window, 'addEventListener').mockClear()
   })
+
   afterEach(() => {
     jest.spyOn(window, 'addEventListener').mockClear()
   })
+
   it('should change connection state', () => {
     const spy = jest.spyOn(window, 'addEventListener')
 
