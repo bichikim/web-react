@@ -1,6 +1,6 @@
 {
   "name": "@winter-love/react-components",
-  "version": "0.0.2-alpha.0",
+  "version": "0.0.2-alpha.1",
   "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
   "exports": {
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",
-    "@winter-love/react-hooks": "^0.0.2-alpha.0",
+    "@winter-love/react-hooks": "^0.0.2-alpha.1",
     "@winter-love/utils": "^1.0.27-alpha.9",
     "react": "^18.2",
     "react-use": "^17.4.0"
