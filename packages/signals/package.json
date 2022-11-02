@@ -1,6 +1,6 @@
 {
   "name": "@winter-love/signals",
-  "version": "0.0.2-alpha.4",
+  "version": "0.0.2-y.0",
   "private": true,
   "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@preact/signals-react": "^1.1.1",
-    "@winter-love/signals-rebuild": "^0.0.2-alpha.0",
+    "@winter-love/signals-rebuild": "^0.0.2-y.0",
     "@winter-love/utils": "^1.0.27-alpha.9"
   },
   "devDependencies": {
