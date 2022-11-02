@@ -1,7 +1,7 @@
 import {Outlet} from 'react-router-dom'
 import {QueryProvider} from 'src/queries'
 
-export const Root: FPC = () => {
+export const Root = () => {
   return (
     <>
       <QueryProvider>

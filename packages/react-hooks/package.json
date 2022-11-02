@@ -45,6 +45,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "gitHead": "e2fbe22a872cbfc43122ee7ff4747f6587f6fffa",
   "tsup": {
     "entry": [
       "src/index.ts"
@@ -58,6 +59,5 @@
     "outDir": "dist",
     "sourcemap": true,
     "splitting": false
-  },
-  "gitHead": "e2fbe22a872cbfc43122ee7ff4747f6587f6fffa"
+  }
 }

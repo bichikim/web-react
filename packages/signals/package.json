@@ -1,9 +1,9 @@
 {
   "name": "@winter-love/signals",
   "version": "0.0.2-alpha.0",
+  "private": true,
   "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
-  "private": true,
   "exports": {
     ".": {
       "import": "./dist/preact.mjs",
