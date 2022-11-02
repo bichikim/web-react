@@ -12,8 +12,8 @@ export interface ImageState {
   loadError: boolean
 }
 
-export const Image = (props: ImageProps) => {
-  const {alt, src, fallbackSrc, width} = props
+export const Image = (props: ImageProps & JSX.IntrinsicElements['img']) => {
+  const {alt, src, fallbackSrc, width, ...rest} = props
   const [state, setState] = useImmer({
     loadError: false,
   })
@@ -31,5 +31,5 @@ export const Image = (props: ImageProps) => {
     })
   })
 
-  return <img src={_src} alt={alt} onError={handleError} width={width} />
+  return <img src={_src} alt={alt} onError={handleError} width={width} {...rest} />
 }
