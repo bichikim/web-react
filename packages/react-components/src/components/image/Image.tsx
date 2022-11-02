@@ -1,5 +1,4 @@
-import * as process from 'process'
-import {useEffect, useMemo} from 'react'
+import {useMemo} from 'react'
 import {useHandle, useImmer} from '@winter-love/react-hooks'
 
 export interface ImageProps {
@@ -32,11 +31,5 @@ export const Image = (props: ImageProps) => {
     })
   })
 
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'production' && typeof width === 'undefined') {
-      console.warn('Please make sure set the width prop')
-    }
-  }, [width])
-
-  return <img src={_src} alt={alt} onError={handleError} />
+  return <img src={_src} alt={alt} onError={handleError} width={width} />
 }
