@@ -299,7 +299,7 @@ importers:
       '@stitches/react': ^1.2.8
       '@types/lodash': ^4.14.182
       '@types/react': ^18.0.14
-      '@winter-love/react-hooks': ^0.0.2-alpha.4
+      '@winter-love/react-hooks': ^0.0.2-alpha.5
       '@winter-love/utils': ^1.0.27-alpha.9
       lodash: ^4.17.21
       react: ^18.2

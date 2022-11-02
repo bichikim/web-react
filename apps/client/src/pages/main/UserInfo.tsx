@@ -1,11 +1,12 @@
 import {computed, deps, signals} from '@winter-love/signals/react'
+import {styled} from '@winter-love/react-components'
 
 export interface UserInfoProps {
   age: string
   name: string
 }
 
-export const UserInfo = (props) => {
+export const HUserInfo = (props) => {
   const {name, age} = deps(props, {write: true})
 
   const {fullInfo, increase} = signals(() => {
@@ -26,3 +27,7 @@ export const UserInfo = (props) => {
     </div>
   )
 }
+
+export const UserInfo = styled(HUserInfo, {
+  // empty
+})

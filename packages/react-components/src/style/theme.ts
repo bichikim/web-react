@@ -1,5 +1,14 @@
 import {createStitches} from '@stitches/react'
 import {baseColors, colors, darkColors} from './colors'
+export type {ConfigType, DefaultThemeMap, CreateStitches} from '@stitches/react/types/config'
+export type {
+  CSS,
+  CSSProperties,
+  $$PropertyValue,
+  $$ScaleValue,
+  $$ThemeValue,
+  Native,
+} from '@stitches/react/types/css-util'
 import {radii} from './radii'
 
 const stitches = createStitches({
