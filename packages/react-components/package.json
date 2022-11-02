@@ -23,8 +23,7 @@
   "scripts": {
     "build": "tsup --dts --minify",
     "dev": "tsup --watch",
-    "prepare": "tsup --dts",
-    "publish": "npm publish"
+    "prepare": "tsup --dts"
   },
   "dependencies": {
     "@stitches/react": "^1.2.8",

@@ -22,8 +22,7 @@
   "scripts": {
     "build": "tsup --dts --minify",
     "dev": "tsup --watch",
-    "prepare": "tsup --dts",
-    "publish": "npm publish"
+    "prepare": "tsup --dts"
   },
   "dependencies": {
     "@winter-love/utils": "^1.0.27-alpha.9",

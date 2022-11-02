@@ -29,8 +29,7 @@
   "scripts": {
     "build": "tsup --dts --minify",
     "dev": "tsup --watch",
-    "prepare": "tsup --dts",
-    "publish": "npm publish"
+    "prepare": "tsup --dts"
   },
   "devDependencies": {
     "@preact/signals": "^1.1.1",
