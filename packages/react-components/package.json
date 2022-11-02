@@ -3,6 +3,7 @@
   "version": "0.0.2-alpha.5",
   "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
+  "private": true,
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
