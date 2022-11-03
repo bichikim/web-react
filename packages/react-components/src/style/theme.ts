@@ -9,6 +9,19 @@ export type {
   $$ThemeValue,
   Native,
 } from '@stitches/react/types/css-util'
+export type {
+  $$StyledComponentProps,
+  CssComponent,
+  $$StyledComponentType,
+  $$StyledComponentMedia,
+  IntrinsicElement,
+  IntrinsicElementsKeys,
+  StyledComponent,
+  StyledComponentProps,
+  StyledComponentType,
+  TransformProps,
+  ForwardRefExoticComponent,
+} from '@stitches/react/types/styled-component'
 import {radii} from './radii'
 
 const stitches = createStitches({
