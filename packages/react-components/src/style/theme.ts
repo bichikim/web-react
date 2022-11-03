@@ -22,6 +22,7 @@ export type {
   TransformProps,
   ForwardRefExoticComponent,
 } from '@stitches/react/types/styled-component'
+export type {RemoveIndex} from '@stitches/react/types/stitches'
 import {radii} from './radii'
 
 const stitches = createStitches({
