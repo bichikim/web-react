@@ -23,6 +23,16 @@ export type {
   ForwardRefExoticComponent,
 } from '@stitches/react/types/styled-component'
 export type {RemoveIndex} from '@stitches/react/types/stitches'
+export type {Token, ScaleValue} from '@stitches/react/types/theme'
+export type {
+  Assign,
+  Index,
+  String,
+  Widen,
+  Function,
+  WideObject,
+  Prefixed,
+} from '@stitches/react/types/util'
 import {radii} from './radii'
 
 const stitches = createStitches({
