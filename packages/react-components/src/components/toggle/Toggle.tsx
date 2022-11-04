@@ -6,9 +6,9 @@ export interface ToggleProps {
   when?: boolean | undefined | null
 }
 
-export const Toggle = (props: ToggleProps): Children => {
+export const Toggle = (props: ToggleProps) => {
   if (props.when) {
-    return props.children
+    return <>{props.children}</>
   }
-  return props.fallback ?? null
+  return <>{props.fallback ?? null}</>
 }
