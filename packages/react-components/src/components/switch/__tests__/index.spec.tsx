@@ -1,4 +1,4 @@
-import {Condition, Switch} from '../'
+import {Condition, DefaultCondition, Switch} from '../'
 import {fireEvent, render} from '@testing-library/react'
 import {useState} from 'react'
 
@@ -13,9 +13,13 @@ describe('Switch', () => {
             <Switch value={value}>
               <Condition when={'foo'}>hi foo</Condition>
               <Condition when={'bar'}>hi bar</Condition>
+              <DefaultCondition>hi default</DefaultCondition>
             </Switch>
           </div>
-          <button role="button" onClick={() => setValue('bar')}>
+          <button role="button-bar" onClick={() => setValue('bar')}>
+            click
+          </button>
+          <button role="button-john" onClick={() => setValue('john')}>
             click
           </button>
         </>
@@ -25,8 +29,12 @@ describe('Switch', () => {
 
     expect(wrapper.getByTestId('value').textContent).toBe('hi foo')
 
-    fireEvent.click(wrapper.getByRole('button'))
+    fireEvent.click(wrapper.getByRole('button-bar'))
 
     expect(wrapper.getByTestId('value').textContent).toBe('hi bar')
+
+    fireEvent.click(wrapper.getByRole('button-john'))
+
+    expect(wrapper.getByTestId('value').textContent).toBe('hi default')
   })
 })
