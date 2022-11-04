@@ -1,12 +1,12 @@
-import {ReactElement} from 'react'
+import {Children} from 'src/types'
 
 export interface ToggleProps {
-  children?: ReactElement
-  fallback?: ReactElement
+  children?: Children
+  fallback?: Children
   when?: boolean | undefined | null
 }
 
-export const Toggle = (props: ToggleProps): ReactElement => {
+export const Toggle = (props: ToggleProps): Children => {
   if (props.when) {
     return props.children
   }
