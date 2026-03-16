@@ -1,4 +1,4 @@
-import {getWindow} from '@winter-love/utils'
+import {getWindow} from 'src/utils'
 import {RefObject, useRef} from 'react'
 import {useEvent} from 'src/use-event'
 

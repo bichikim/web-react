@@ -1,7 +1,7 @@
 import {Dispatch, MutableRefObject, RefObject, SetStateAction, useRef} from 'react'
 import {useUpdate} from 'react-use'
 import {useHandle} from 'src/use-handle'
-import {MaybeFunction, toValue} from 'src/utils'
+import {toValue} from 'src/utils'
 
 const {is} = Object
 
@@ -31,7 +31,7 @@ export const useSyncSet = <S>(
 ): [RefObject<S>, Dispatch<SetStateAction<S>>] => {
   const _isEqual = isEqual ?? is
   const stateRef = useSync(value, _isEqual, updatedValueCallback)
-  const set = useHandle((state: MaybeFunction<S>) => {
+  const set = useHandle((state: S) => {
     const value = toValue(state, [stateRef.current])
     if (_isEqual(stateRef.current, value)) {
       return

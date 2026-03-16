@@ -5,6 +5,7 @@ import {OriginalPage} from 'src/pages/original'
 import {HookStatePage} from 'src/pages/hook-state'
 import {ZustandPage} from 'src/pages/zustand'
 import {MainLayout} from 'src/layouts/main-layout/Index'
+import {VuePage} from 'src/pages/vue'
 import ValtioPage from 'src/pages/valtio/Index'
 
 export const Routes: FC = () => {
@@ -18,6 +19,7 @@ export const Routes: FC = () => {
             <Route path="zustand" element={<ZustandPage />} />
             <Route path="original" element={<OriginalPage />} />
             <Route path="valitio" element={<ValtioPage />} />
+            <Route path="vue" element={<VuePage />} />
           </Route>
         </Route>
       </BrowserRoutes>

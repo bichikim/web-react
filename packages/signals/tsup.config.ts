@@ -3,14 +3,8 @@ import {replace} from 'esbuild-plugin-replace'
 
 export default defineConfig({
   clean: true,
-  entry: ['./src/react.ts'],
-  esbuildPlugins: [
-    replace({
-      'react.tmp': 'react',
-      'signal.tmp': '@winter-love/signals-rebuild/react',
-    }),
-  ],
-  external: ['react', 'preact'],
+  entry: ['./src/index.ts'],
+  external: ['react'],
   format: [
     'cjs',
     'esm',

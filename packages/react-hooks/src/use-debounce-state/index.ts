@@ -1,9 +1,8 @@
-import {MaybeFunction, NotFunction} from 'src/utils'
 import {Dispatch, useState} from 'react'
 import {useTimeout} from '../use-timeout'
 
-export const useDebounceState = <S extends NotFunction>(
-  initialState: MaybeFunction<S>,
+export const useDebounceState = <S>(
+  initialState: S,
   wait?: number,
 ): [S, Dispatch<S>, () => void] => {
   const [state, setState] = useState(initialState)

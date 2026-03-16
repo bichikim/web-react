@@ -1,4 +1,4 @@
-import {getStorageItem, setStorageItem, StorageKind} from '@winter-love/utils'
+import {getStorageItem, setStorageItem, StorageKind} from 'src/utils'
 import {useEffect} from 'react'
 import {useCount} from 'src/use-count'
 

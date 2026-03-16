@@ -1,5 +1,5 @@
 {
-  "name": "@winter-love/react-hooks",
+  "name": "@web-react/react-hooks",
   "version": "0.0.2-alpha.14",
   "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
@@ -25,11 +25,12 @@
     "prepare": "tsup --dts"
   },
   "dependencies": {
-    "@winter-love/utils": "^1.0.27-alpha.9",
+    "es-toolkit": "^1.45.1",
     "immer": "^9.0.15",
     "react": "^18.2",
     "react-fast-compare": "^3.2.0",
-    "react-use": "^17.4.0"
+    "react-use": "^17.4.0",
+    "esm-env": "^1.2.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
