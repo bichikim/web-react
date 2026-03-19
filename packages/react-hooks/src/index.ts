@@ -1,7 +1,6 @@
 export * from './compose-refs'
 export * from './is-ref'
 export * from './types'
-export * from './use-async'
 export * from './use-blur'
 export * from './use-connection'
 export * from './use-count'

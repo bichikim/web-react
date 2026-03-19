@@ -1,8 +1,8 @@
-import {isSupportPassive} from 'src/utils'
+import {supportPassive} from '@web-react/utils'
 
 export const getPassive = (value?: boolean) => {
   if (!value) {
     return
   }
-  return isSupportPassive() ? {passive: true} : false
+  return supportPassive() ? {passive: true} : false
 }

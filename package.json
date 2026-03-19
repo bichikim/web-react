@@ -124,10 +124,15 @@
   },
   "engines": {
     "node": ">= 16",
-    "pnpm": ">= 6.17"
+    "pnpm": "10"
   },
+  "packageManager": "pnpm@10.32.1",
   "pnpm": {
     "overrides": {
+      "@web-react/utils": "workspace:*",
+      "@web-react/lib-config": "workspace:*",
+      "@web-react/react-hooks": "workspace:*",
+      "@web-react/signals": "workspace:*",
       "globby@<11.1.0": "11.1.0",
       "fork-ts-checker-webpack-plugin@<7.2.13": "7.2.13",
       "@types/react-dom@<18": "^18",
@@ -153,5 +158,5 @@
       ]
     }
   },
-  "productName": "Coong"
+  "productName": "Web React"
 }

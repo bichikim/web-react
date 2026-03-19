@@ -1,6 +1,6 @@
 import {useHandle} from 'src/use-handle'
 import {RefObject, useEffect, useRef} from 'react'
-import {Size} from 'src/utils'
+import {Size} from '@web-react/utils'
 
 export const useElementResize = (
   ref: RefObject<HTMLElement>,

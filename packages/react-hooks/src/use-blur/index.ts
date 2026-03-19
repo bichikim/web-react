@@ -1,4 +1,4 @@
-import {getDocument, getHtmlElement} from '@winter-love/utils'
+import {getDocument, getHtmlElement} from '@web-react/utils'
 import {useCallback} from 'react'
 
 /**

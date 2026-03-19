@@ -1,4 +1,4 @@
-import {getWindow} from 'src/utils'
+import {getWindow} from '@web-react/utils'
 import {RefObject, useRef} from 'react'
 import {useEvent} from 'src/use-event'
 

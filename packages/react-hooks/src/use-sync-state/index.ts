@@ -1,7 +1,7 @@
 import {Dispatch, MutableRefObject, RefObject, SetStateAction, useRef} from 'react'
 import {useUpdate} from 'react-use'
 import {useHandle} from 'src/use-handle'
-import {toValue} from 'src/utils'
+import {executeWithAny} from '@web-react/utils'
 
 const {is} = Object
 
@@ -32,7 +32,7 @@ export const useSyncSet = <S>(
   const _isEqual = isEqual ?? is
   const stateRef = useSync(value, _isEqual, updatedValueCallback)
   const set = useHandle((state: S) => {
-    const value = toValue(state, [stateRef.current])
+    const value = executeWithAny(state, [stateRef.current])
     if (_isEqual(stateRef.current, value)) {
       return
     }

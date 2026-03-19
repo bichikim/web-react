@@ -1,5 +1,5 @@
 import {forwardRef, useEffect, useMemo, useRef} from 'react'
-import {composeRefs} from '@winter-love/react-hooks'
+import {composeRefs} from '@web-react/react-hooks'
 
 export interface ProgressBarProps {
   now?: number

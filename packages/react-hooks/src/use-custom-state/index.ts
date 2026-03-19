@@ -1,4 +1,4 @@
-import {toValue} from 'src/utils'
+import {executeWithAny} from '@web-react/utils'
 import {SetStateAction, useState} from 'react'
 import {useHandle} from 'src/use-handle'
 
@@ -12,7 +12,7 @@ export type Dispatch<A> = (value: A, set?: boolean) => void
  * @param isEqual
  */
 export const useCustomState = <S>(
-  initialState: S,
+  initialState: S | (() => S),
   isEqual?: (a, b) => boolean,
 ): [S, Dispatch<SetStateAction<S>>] => {
   const [state, setState] = useState(initialState)
@@ -21,8 +21,8 @@ export const useCustomState = <S>(
   /**
    * 비교 연산후 true 면 setState 를 실행 합니다
    */
-  const updateRef = useHandle((patch: S) => {
-    const value = toValue(patch, [state])
+  const updateRef = useHandle((patch: S | ((prevState: S | undefined) => S)) => {
+    const value = executeWithAny(patch, [state])
     if (_isEqual(state, value)) {
       return
     }

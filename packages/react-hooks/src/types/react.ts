@@ -1,18 +1,18 @@
-/* eslint-disable @typescript-eslint/ban-types */
-import type {PureObject} from 'src/utils'
-
-export type ReactComponent<Props extends PureObject> =
+export type ReactComponent<Props extends Record<string, any>> =
   | import('react').ComponentType<Props>
   | import('react').ForwardRefExoticComponent<Props>
 
-export type FC<Props = {}> = import('react').FC<import('react').PropsWithChildren<Props>>
-export type FCC<Props = {}> = import('react').FC<
+export type FC<Props = Record<string, any>> = import('react').FC<
+  import('react').PropsWithChildren<Props>
+>
+export type FCC<Props = Record<string, any>> = import('react').FC<
   import('react').PropsWithChildren<Props & {className?: string}>
 >
-export type FFC<Props = {}, ChildrenProps = {}> = import('react').FC<
-  Props & {children?: (props: ChildrenProps) => import('react').ReactNode}
->
-export type FPC<Props = {}> = import('react').FC<Props>
+export type FFC<
+  Props = Record<string, any>,
+  ChildrenProps = Record<string, any>,
+> = import('react').FC<Props & {children?: (props: ChildrenProps) => import('react').ReactNode}>
+export type FPC<Props = Record<string, any>> = import('react').FC<Props>
 
 export type MaybeRefObject<T> =
   | T

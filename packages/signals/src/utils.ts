@@ -1,4 +1,4 @@
-import {setActiveSub, endBatch, startBatch} from 'alien-signals'
+import {endBatch, setActiveSub, startBatch} from 'alien-signals'
 
 export interface Signal<T> {
   (): T

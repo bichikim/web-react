@@ -1,0 +1,25 @@
+{
+  "name": "@web-react/lib-config",
+  "version": "0.0.1",
+  "private": true,
+  "repository": "git@github.com:bichikim/web-react.git",
+  "author": "bihci@live.co.kr",
+  "exports": {
+    "./create-vite-config": "./create-vite-config.mts",
+    "./require": "./require.mts"
+  },
+  "main": "create-vite-config.mts",
+  "scripts": {},
+  "dependencies": {
+    "esm-env": "^1.2.2",
+    "es-toolkit": "^1.45.1",
+    "vite-plugin-dts": "^4.5.4",
+    "vite": "^8.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
