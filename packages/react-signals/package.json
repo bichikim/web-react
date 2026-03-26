@@ -1,6 +1,6 @@
 {
-  "name": "@web-react/signals",
-  "version": "0.0.2-y.0",
+  "name": "@web-react/react-signals",
+  "version": "0.1.0",
   "private": true,
   "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
