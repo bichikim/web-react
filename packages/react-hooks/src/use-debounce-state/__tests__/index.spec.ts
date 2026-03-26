@@ -1,20 +1,21 @@
 import {useDebounceState} from '../'
 import * as useTimeoutModule from 'src/use-timeout'
 import {act, renderHook} from '@testing-library/react-hooks'
+import {vi} from 'vitest'
 
-// jest.mock('src/use-timeout', () => {
+// vi.mock('src/use-timeout', () => {
 //   return {
-//     useTimeout: jest.fn(),
+//     useTimeout: vi.fn(),
 //   }
 // })
 
 describe('useDebounceState', () => {
   it('should change call after wait', () => {
-    const setState = jest.fn()
-    const clear = jest.fn()
+    const setState = vi.fn()
+    const clear = vi.fn()
     let updateState: (...args) => any
     const wait = 200
-    jest.spyOn(useTimeoutModule, 'useTimeout').mockImplementation((_updateState, _wait) => {
+    vi.spyOn(useTimeoutModule, 'useTimeout').mockImplementation((_updateState, _wait) => {
       updateState = _updateState
       expect(typeof _updateState).toBe('function')
       expect(_wait).toBe(wait)

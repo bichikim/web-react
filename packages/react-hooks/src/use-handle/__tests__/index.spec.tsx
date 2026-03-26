@@ -1,10 +1,11 @@
 /**
- * @jest-environment jsdom
+ * @vitest-environment jsdom
  */
 
 import {fireEvent, render, screen} from '@testing-library/react'
 import React, {FC, useEffect, useRef, useState} from 'react'
 import {useHandle} from '../'
+import {Mock, vi} from 'vitest'
 
 describe('use-handle', () => {
   interface ComponentProps {
@@ -12,12 +13,12 @@ describe('use-handle', () => {
     onChange?: () => void
   }
 
-  let rendered: jest.Mock
+  let rendered: Mock
   let Component: FC<ComponentProps>
   let Root: FC
 
   beforeEach(() => {
-    rendered = jest.fn((...args) => args)
+    rendered = vi.fn((...args) => args)
     Component = (props) => {
       const [state, setState] = useState(0)
       const onChange = useHandle(props.onChange)

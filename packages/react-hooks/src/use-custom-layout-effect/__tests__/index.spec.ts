@@ -1,10 +1,11 @@
 import {renderHook} from '@testing-library/react-hooks'
 import isEqual from 'react-fast-compare'
 import {useCustomLayoutEffect} from 'src/use-custom-layout-effect'
+import {vi} from 'vitest'
 
 describe('useCustomLayoutEffect', () => {
   it('should effect with custom compare', () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     const wrapper = renderHook(
       (props) => {
         useCustomLayoutEffect(

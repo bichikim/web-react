@@ -2,10 +2,11 @@ import * as useCustomMemoModule from 'src/use-custom-memo'
 import {useDeepMemo} from '../'
 import {renderHook} from '@testing-library/react-hooks'
 import isEqual from 'react-fast-compare'
+import {vi} from 'vitest'
 
 describe('useDeepMemo', () => {
   it('should ', () => {
-    jest.spyOn(useCustomMemoModule, 'useCustomMemo').mockImplementationOnce(() => {
+    vi.spyOn(useCustomMemoModule, 'useCustomMemo').mockImplementationOnce(() => {
       return 'return'
     })
     let factory

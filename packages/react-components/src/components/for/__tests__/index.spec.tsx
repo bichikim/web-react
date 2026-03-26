@@ -1,5 +1,5 @@
 /**
- * @jest-environment jsdom
+ * @vitest-environment jsdom
  */
 import {For} from '../'
 import {render, screen} from '@testing-library/react'

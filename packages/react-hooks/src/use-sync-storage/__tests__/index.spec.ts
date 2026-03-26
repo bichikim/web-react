@@ -1,3 +1,6 @@
+/**
+ * @vitest-environment jsdom
+ */
 import {renderHook} from '@testing-library/react-hooks'
 import {useSyncStorage} from '../'
 
@@ -6,7 +9,7 @@ describe('use-sync-storage', () => {
     const key = '__key__ '
     const wrapper = renderHook(
       (props) => {
-        return useSyncStorage(key, props.name, 'local')
+        return useSyncStorage(key, props.name, 'localStorage')
       },
       {
         initialProps: {name: 'foo'},
@@ -15,20 +18,20 @@ describe('use-sync-storage', () => {
 
     expect(wrapper.result.current).toBe('foo')
 
-    expect(localStorage.getItem(key)).toBe('"foo"')
+    expect(localStorage.getItem(key)).toBe('foo')
 
     wrapper.rerender({name: 'bar'})
 
-    expect(localStorage.getItem(key)).toBe('"bar"')
+    expect(localStorage.getItem(key)).toBe('bar')
 
     expect(wrapper.result.current).toBe('bar')
   })
   it('should use sync (default)', () => {
     const key = '__key__ '
-    localStorage.setItem(key, '"john"')
+    localStorage.setItem(key, 'john')
     const wrapper = renderHook(
       (props) => {
-        return useSyncStorage(key, props.name, 'local')
+        return useSyncStorage(key, props.name, 'localStorage')
       },
       {
         initialProps: {name: 'foo'},
@@ -37,11 +40,11 @@ describe('use-sync-storage', () => {
 
     expect(wrapper.result.current).toBe('john')
 
-    expect(localStorage.getItem(key)).toBe('"john"')
+    expect(localStorage.getItem(key)).toBe('john')
 
     wrapper.rerender({name: 'bar'})
 
-    expect(localStorage.getItem(key)).toBe('"bar"')
+    expect(localStorage.getItem(key)).toBe('bar')
 
     expect(wrapper.result.current).toBe('bar')
   })

@@ -1,6 +1,4 @@
-export * from './box'
 export * from './for'
-export * from './image'
 export * from './progress-bar'
 export * from './show'
 export * from './slot'

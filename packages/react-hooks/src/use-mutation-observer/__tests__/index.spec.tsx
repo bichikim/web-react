@@ -1,14 +1,15 @@
 /**
- * @jest-environment jsdom
+ * @vitest-environment jsdom
  */
 
 import {render, waitFor} from '@testing-library/react'
 import {FC, useRef} from 'react'
 import {useMutationObserver} from '../'
+import {vi} from 'vitest'
 
 describe('useMutationObserver', () => {
   it('should call callback with mutation observer', async () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
 
     const Component: FC<{color: string; onCallback: (...args) => any}> = (props) => {
       const ref = useRef()

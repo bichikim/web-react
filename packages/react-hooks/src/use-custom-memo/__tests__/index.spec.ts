@@ -1,14 +1,12 @@
-/* eslint-disable import/no-named-as-default-member */
-import React from 'react'
 import {useCustomMemo} from '../'
 import {renderHook} from '@testing-library/react-hooks'
 import isEqual from 'react-fast-compare'
+import {vi} from 'vitest'
 
 describe('useCustomMemo', () => {
   it('should return value with a custom compare logic', () => {
-    jest.spyOn(React, 'useMemo').mockReturnValue('foo')
-    const mockIsEqual = jest.fn(isEqual)
-    const callback = jest.fn()
+    const mockIsEqual = vi.fn(isEqual)
+    const callback = vi.fn(() => ({value: 'foo'}))
     const deps = ['myDeps']
     const deps2 = ['myDeps2']
     const wrapper = renderHook(({deps}) => useCustomMemo(callback, deps, mockIsEqual), {
@@ -16,8 +14,8 @@ describe('useCustomMemo', () => {
     })
 
     expect(mockIsEqual).not.toHaveBeenCalled()
-    expect(React.useMemo).toHaveBeenCalledWith(callback, deps)
-    jest.spyOn(React, 'useMemo').mockClear()
+    expect(callback).toBeCalledTimes(1)
+    const first = wrapper.result.current
 
     wrapper.rerender({
       deps: deps2,
@@ -25,16 +23,15 @@ describe('useCustomMemo', () => {
 
     expect(mockIsEqual).toHaveBeenCalled()
     expect(mockIsEqual).toHaveBeenCalledWith(deps2, deps)
-    expect(React.useMemo).toHaveBeenCalledWith(callback, deps2)
-    jest.spyOn(React, 'useMemo').mockClear()
+    expect(callback).toBeCalledTimes(2)
+    const second = wrapper.result.current
+    expect(Object.is(second, first)).toBe(false)
 
     wrapper.rerender({
       deps: [...deps2],
     })
-    expect(React.useMemo).toHaveBeenCalledWith(callback, deps2)
-    // check same object address
-    expect(Object.is((React.useMemo as jest.Mock).mock.calls[0][1], deps2)).toBe(true)
-
-    jest.spyOn(React, 'useMemo').mockRestore()
+    expect(callback).toBeCalledTimes(2)
+    const third = wrapper.result.current
+    expect(Object.is(third, second)).toBe(true)
   })
 })

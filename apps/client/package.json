@@ -1,5 +1,5 @@
 {
-  "name": "@coong/client-react-18",
+  "name": "@app/client",
   "version": "1.0.23",
   "private": true,
   "scripts": {
@@ -31,7 +31,7 @@
     "@vue/runtime-dom": "3.3.4",
     "@web-react/react-components": "workspace:*",
     "@web-react/react-hooks": "workspace:*",
-    "@web-react/signals": "workspace:*",
+    "@web-react/react-signals": "workspace:*",
     "compression": "1.7.4",
     "cross-env": "7.0.3",
     "express": "4.17.3",

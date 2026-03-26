@@ -1,4 +1,44 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`For > should render fallback 1`] = `
+[
+  <div
+    data-testid="loading"
+  >
+    Loading...
+  </div>,
+]
+`;
+
+exports[`For > should render list all 1`] = `
+[
+  <div
+    data-testid="item"
+  >
+    1
+  </div>,
+  <div
+    data-testid="item"
+  >
+    2
+  </div>,
+  <div
+    data-testid="item"
+  >
+    3
+  </div>,
+  <div
+    data-testid="item"
+  >
+    4
+  </div>,
+  <div
+    data-testid="item"
+  >
+    5
+  </div>,
+]
+`;
 
 exports[`For should render fallback 1`] = `
 [

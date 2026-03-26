@@ -5,6 +5,10 @@
   "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./*": "./*"
   },
   "main": "dist/index.js",

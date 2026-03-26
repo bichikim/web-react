@@ -1,9 +1,10 @@
 import {render} from '@testing-library/react'
 import {Toggle} from '../'
+import {vi} from 'vitest'
 
 describe('toggle', () => {
   it('should toggle', () => {
-    const ran = jest.fn(() => 'bar')
+    const ran = vi.fn(() => 'bar')
 
     const wrapper = render(
       <Toggle>

@@ -12,7 +12,7 @@ export type UpdateState<S> = (recipe: Recipe<S>) => void
  * @param initialState
  */
 export const useImmer = <S>(initialState: S): [S, UpdateState<S>] => {
-  const [state, setState] = useCustomState(() => freeze(executeWithAny(initialState)))
+  const [state, setState] = useCustomState(() => freeze(executeWithAny(initialState, [])))
 
   const updateState = useCallback(
     (recipe: Recipe<S>) => {

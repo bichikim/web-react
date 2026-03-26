@@ -22,7 +22,7 @@
   },
   "include": [
     "**/*.ts",
-    "jest.setup.ts"
+    "vitest.setup.ts"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,10 +1,11 @@
 import {useCustomEffect} from '../'
 import {renderHook} from '@testing-library/react-hooks'
 import isEqual from 'react-fast-compare'
+import {vi} from 'vitest'
 
 describe('useCustomEffect', () => {
   it('should effect with custom compare', () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     const wrapper = renderHook(
       (props) => {
         useCustomEffect(

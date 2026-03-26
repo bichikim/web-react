@@ -2,14 +2,15 @@ import {useCustomEffect} from 'src/use-custom-effect'
 import {useDeepEffect} from '../'
 import {renderHook} from '@testing-library/react-hooks'
 import isEqual from 'react-fast-compare'
+import {vi} from 'vitest'
 
-jest.mock('src/use-custom-effect', () => ({
-  useCustomEffect: jest.fn(),
+vi.mock('src/use-custom-effect', () => ({
+  useCustomEffect: vi.fn(),
 }))
 
 describe('useDeepEffect', () => {
   it('should call useCustomCompareEffect', () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
     renderHook(() => useDeepEffect(callback, []))
     expect(useCustomEffect).toHaveBeenCalledWith(callback, [], isEqual)
   })

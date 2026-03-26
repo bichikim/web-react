@@ -2,6 +2,7 @@ import {useWait} from '../use-wait'
 import {Wait} from '../'
 import {fireEvent, render, screen} from '@testing-library/react'
 import flushPromises from 'flush-promises'
+import {vi} from 'vitest'
 
 describe('wait with use wait', () => {
   it.skip('should wait Promise', async () => {
@@ -35,7 +36,7 @@ describe('wait with use wait', () => {
     expect(screen.getByTestId('result').textContent).toBe('bar')
   })
   it.skip('should wait Promise', async () => {
-    const rendered = jest.fn()
+    const rendered = vi.fn()
     const Root = () => {
       const {promise, reload, run} = useWait((data) => Promise.resolve(data ?? 'foo'))
       const {promise: promise2} = useWait((data) => Promise.resolve(data ?? 'foo'), {

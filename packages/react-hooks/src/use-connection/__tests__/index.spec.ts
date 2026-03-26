@@ -1,17 +1,18 @@
 import {act, renderHook} from '@testing-library/react-hooks'
 import {useConnection} from '../'
+import {vi} from 'vitest'
 
 describe('use-connection', () => {
   beforeEach(() => {
-    jest.spyOn(window, 'addEventListener').mockClear()
+    vi.spyOn(window, 'addEventListener').mockClear()
   })
 
   afterEach(() => {
-    jest.spyOn(window, 'addEventListener').mockClear()
+    vi.spyOn(window, 'addEventListener').mockClear()
   })
 
   it('should change connection state', () => {
-    const spy = jest.spyOn(window, 'addEventListener')
+    const spy = vi.spyOn(window, 'addEventListener')
 
     const wrapper = renderHook(() => {
       return useConnection(true)

@@ -1,10 +1,11 @@
 import {fireEvent, render, screen} from '@testing-library/react'
 import React, {useCallback} from 'react'
 import {useSafeState} from '../'
+import {vi} from 'vitest'
 
 describe('use-safe-state', () => {
   it('should toggle value', async () => {
-    const rendered = jest.fn()
+    const rendered = vi.fn()
     const Component = () => {
       const [state, setState] = useSafeState(0)
       const onChange = useCallback(() => {

@@ -1,15 +1,16 @@
 /**
- * @jest-environment jsdom
+ * @vitest-environment jsdom
  */
 import {useElementIntersection} from '../'
 import {renderHook} from '@testing-library/react-hooks'
+import {vi} from 'vitest'
 
 describe('useElementIntersection', () => {
   it('should ', () => {
     const threshold = 0.5
-    const observe = jest.fn()
-    const disconnect = jest.fn()
-    const observer = jest.fn(() => ({
+    const observe = vi.fn()
+    const disconnect = vi.fn()
+    const observer = vi.fn(() => ({
       disconnect,
       observe,
     }))
@@ -17,7 +18,7 @@ describe('useElementIntersection', () => {
     window.IntersectionObserver = observer as any
 
     const element = document.createElement('div')
-    const callback = jest.fn()
+    const callback = vi.fn()
 
     const wrapper = renderHook(() => {
       return useElementIntersection(element, callback, {threshold})

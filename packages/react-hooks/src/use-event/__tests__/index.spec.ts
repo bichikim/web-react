@@ -1,11 +1,12 @@
 /**
- * @jest-environment jsdom
+ * @vitest-environment jsdom
  */
 import {act} from '@testing-library/react'
 import {renderHook} from '@testing-library/react-hooks'
 import {RenderHookResult} from '@testing-library/react-hooks/src/types'
 import {useRef} from 'react'
 import {useEvent, UseEventOptions} from '../'
+import {vi} from 'vitest'
 
 describe('useEvent', () => {
   interface ComponentProps {
@@ -19,14 +20,14 @@ describe('useEvent', () => {
   class FakeElement {
     handler: ((event: any) => void) | null
     fakeEvent = {
-      preventDefault: jest.fn(),
-      stopImmediatePropagation: jest.fn(),
-      stopPropagation: jest.fn(),
+      preventDefault: vi.fn(),
+      stopImmediatePropagation: vi.fn(),
+      stopPropagation: vi.fn(),
     }
-    addEventListener = jest.fn((eventName: string, handler: () => void): void => {
+    addEventListener = vi.fn((eventName: string, handler: () => void): void => {
       this.handler = handler
     })
-    removeEventListener = jest.fn((): void => {
+    removeEventListener = vi.fn((): void => {
       this.handler = null
     })
 
@@ -40,7 +41,7 @@ describe('useEvent', () => {
 
   beforeEach(() => {
     fakeElement = new FakeElement()
-    handle = jest.fn()
+    handle = vi.fn()
     wrapper = renderHook<ComponentProps, void>(
       ({options, handle}) => {
         const ref = useRef(fakeElement as any)
@@ -56,7 +57,7 @@ describe('useEvent', () => {
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   it('should call the handle', async () => {
@@ -157,14 +158,14 @@ describe('useEvent', () => {
   })
   it('should call removeEventListener before deleting a component or changing a ref', async () => {
     const fakeElement: any = {
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     }
     const fakeElement2: any = {
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     }
-    const handle = jest.fn()
+    const handle = vi.fn()
 
     const {rerender, unmount} = renderHook(
       ({fakeElement}) => {
@@ -180,7 +181,9 @@ describe('useEvent', () => {
     )
     expect(fakeElement.addEventListener).toBeCalledTimes(1)
     expect(fakeElement.removeEventListener).toBeCalledTimes(0)
-    rerender()
+    rerender({
+      fakeElement,
+    })
     expect(fakeElement.addEventListener).toBeCalledTimes(1)
     expect(fakeElement.removeEventListener).toBeCalledTimes(0)
     rerender({
@@ -195,11 +198,11 @@ describe('useEvent', () => {
   })
   it('should call addEventListener and removeEventListener after changing options or handle', () => {
     const fakeElement = {
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
     }
-    const handle = jest.fn()
-    const handle2 = jest.fn()
+    const handle = vi.fn()
+    const handle2 = vi.fn()
     const options = {
       ones: false,
     }

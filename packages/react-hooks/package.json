@@ -23,15 +23,19 @@
     "@web-react/utils": "^0.0.1",
     "es-toolkit": "^1.45.1",
     "immer": "^9.0.15",
-    "react": "^19.2.4",
-    "react-dom": "19.2.4",
     "react-fast-compare": "^3.2.0",
     "react-use": "^17.6.0",
     "esm-env": "^1.2.2"
   },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
   "devDependencies": {
     "@web-react/lib-config": "0.0.1",
-    "@types/react": "^18.0.14",
+    "@types/react": "^19.2.2",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "typescript": "^5.9.3"
   },
   "publishConfig": {

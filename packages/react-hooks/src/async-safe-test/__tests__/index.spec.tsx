@@ -1,12 +1,13 @@
 import {render} from '@testing-library/react'
 import {useEffect, useState} from 'react'
 import flushPromises from 'flush-promises'
+import {vi} from 'vitest'
 
 describe('async safe test', () => {
   it('should work', async () => {
     let _resolve: any
 
-    const rendered = jest.fn()
+    const rendered = vi.fn()
     const fetch = () => {
       return new Promise<string>((resolve) => {
         _resolve = resolve

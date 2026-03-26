@@ -1,9 +1,10 @@
 import {useRef} from '../index'
 import {renderHook} from '@testing-library/react-hooks'
+import {vi} from 'vitest'
 
 describe('use-ref', () => {
   it('should return ', () => {
-    const initState = jest.fn(() => 'foo')
+    const initState = vi.fn(() => 'foo')
     const wrapper = renderHook(() => {
       return useRef(initState)
     })

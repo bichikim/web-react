@@ -1,10 +1,11 @@
 import {useCustomState} from '../'
 import {act, renderHook} from '@testing-library/react-hooks'
 import isEqual from 'react-fast-compare'
+import {vi} from 'vitest'
 
 describe('useCustomState', () => {
   it('should update state with a isEqual', () => {
-    const rendered = jest.fn()
+    const rendered = vi.fn()
     const wrapper = renderHook(() => {
       rendered()
       return useCustomState({foo: 'foo'}, isEqual)

@@ -1,9 +1,10 @@
 import {renderHook} from '@testing-library/react-hooks'
 import {useHandle} from '../'
+import {vi} from 'vitest'
 
 describe('useHandle', () => {
   it('should create handle only once', () => {
-    const callback = jest.fn()
+    const callback = vi.fn()
 
     interface Props {
       callback?: (name: string) => void

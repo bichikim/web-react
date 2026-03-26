@@ -1,9 +1,10 @@
 import {useImmer} from '../'
 import {act, renderHook} from '@testing-library/react-hooks'
+import {vi} from 'vitest'
 
 describe('use-immer', () => {
   it('should update and render with only changed state', () => {
-    const rendered = jest.fn()
+    const rendered = vi.fn()
     const wrapper = renderHook(() => {
       rendered()
       return useImmer(() => ({foo: 'foo'}))

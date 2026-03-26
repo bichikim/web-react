@@ -1,11 +1,12 @@
 import {useTimeout} from '../'
 import {useFakeTimers} from 'sinon'
 import {renderHook} from '@testing-library/react-hooks'
+import {vi} from 'vitest'
 
 describe('useTimeout', () => {
   it('should timeout', async () => {
     const clock = useFakeTimers()
-    const callback = jest.fn()
+    const callback = vi.fn()
     const wrapper = renderHook(() => useTimeout(callback, 1000))
     clock.tick(1000)
     expect(callback).not.toHaveBeenCalled()
