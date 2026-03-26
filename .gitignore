@@ -7,6 +7,7 @@ node_modules
 .parcel-cache
 /storybook-static
 /.keystone
+vite.config.mts.timestamp-*
 
 # Quasar core related directories
 .quasar
