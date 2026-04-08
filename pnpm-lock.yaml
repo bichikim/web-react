@@ -449,6 +449,9 @@ importers:
       immer:
         specifier: ^9.0.15
         version: 9.0.21
+      react:
+        specifier: ^19.0.0
+        version: 19.2.4
       react-fast-compare:
         specifier: ^3.2.0
         version: 3.2.0
@@ -462,9 +465,6 @@ importers:
       '@web-react/lib-config':
         specifier: workspace:*
         version: link:../lib-config
-      react:
-        specifier: ^19.2.4
-        version: 19.2.4
       react-dom:
         specifier: ^19.2.4
         version: 19.2.4(react@19.2.4)
@@ -474,6 +474,9 @@ importers:
 
   packages/react-signals:
     dependencies:
+      '@web-react/react-hooks':
+        specifier: workspace:*
+        version: link:../react-hooks
       '@web-react/utils':
         specifier: workspace:*
         version: link:../utils
