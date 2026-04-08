@@ -3,7 +3,7 @@
  */
 
 import {fireEvent, render, screen} from '@testing-library/react'
-import React, {FC, useEffect, useRef, useState} from 'react'
+import {FC, useEffect, useRef, useState} from 'react'
 import {useHandle} from '../'
 import {Mock, vi} from 'vitest'
 
