@@ -57,3 +57,6 @@ coverage
 .history
 
 
+# pnpm
+
+.pnpm-store/
