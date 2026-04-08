@@ -23,6 +23,7 @@
 
 - Use `renderHook` from the project's preferred testing library.
 - Use `waitFor` only for async updates.
+- Use '@testing-library/react' instead of '@testing-library/react-hooks'.
 - Cover at least:
   - normal path
   - one edge case
