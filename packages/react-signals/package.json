@@ -5,7 +5,12 @@
   "repository": "git@github.com:bichikim/web-react.git",
   "author": "bihci@live.co.kr",
   "exports": {
-    "./*": "./*"
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "import": "./dist/*.js",
+      "require": "./dist/*.cjs"
+    },
+    "./package.json": "./package.json"
   },
   "main": "dist/index.cjs",
   "jsdelivr": "dist/index.iife.js",
@@ -21,12 +26,20 @@
     "dev": "vite dev"
   },
   "dependencies": {
-    "@web-react/utils": "0.0.1",
+    "@web-react/react-hooks": "^0.0.1",
+    "@web-react/utils": "^0.0.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "alien-signals": "^3.1.2",
     "immer": "^11.1.4",
     "es-toolkit": "^1.45.1"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*.d.ts"
+      ]
+    }
   },
   "devDependencies": {
     "@web-react/lib-config": "0.0.1",

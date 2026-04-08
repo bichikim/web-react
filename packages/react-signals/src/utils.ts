@@ -29,3 +29,7 @@ export const batch = <T>(callback: () => T): T => {
   endBatch()
   return result
 }
+
+export const getUndefined = (): undefined => {
+  return undefined
+}
