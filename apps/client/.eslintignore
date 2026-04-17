@@ -7,3 +7,4 @@ node_modules
 **/*.d.ts
 /src-ssr
 /lib
+vite.config.ts

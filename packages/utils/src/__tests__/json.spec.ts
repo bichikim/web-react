@@ -1,9 +1,4 @@
-import {
-  parseJson,
-  parseJsonWithDefault,
-  stringifyJson,
-  stringifyJsonWithDefault,
-} from '../json'
+import {parseJson, parseJsonWithDefault, stringifyJson, stringifyJsonWithDefault} from '../json'
 
 describe('json', () => {
   it('should parse valid JSON strings into objects', () => {

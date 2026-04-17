@@ -5,7 +5,7 @@ import isEqual from 'react-fast-compare'
 import {vi} from 'vitest'
 
 describe('useDeepMemo', () => {
-  it('should ', () => {
+  it('should', () => {
     vi.spyOn(useCustomMemoModule, 'useCustomMemo').mockImplementationOnce(() => {
       return 'return'
     })

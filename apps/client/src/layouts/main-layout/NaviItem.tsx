@@ -1,4 +1,4 @@
-import {kebabCase} from '@winter-love/lodash'
+import {kebabCase} from 'es-toolkit/compat'
 import {NavLink} from 'react-router-dom'
 
 export interface NaviItemProps {

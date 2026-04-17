@@ -48,7 +48,7 @@ describe('use-wait', () => {
     await flushPromises()
     expect(callback).toHaveBeenCalled()
   })
-  it('should rerun promise ', async () => {
+  it('should rerun promise', async () => {
     const callback = vi.fn()
     let _resolve
     const {result} = renderHook(() => {

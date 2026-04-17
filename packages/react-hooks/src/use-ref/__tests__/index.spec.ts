@@ -3,7 +3,7 @@ import {renderHook} from '@testing-library/react-hooks'
 import {vi} from 'vitest'
 
 describe('use-ref', () => {
-  it('should return ', () => {
+  it('should return', () => {
     const initState = vi.fn(() => 'foo')
     const wrapper = renderHook(() => {
       return useRef(initState)

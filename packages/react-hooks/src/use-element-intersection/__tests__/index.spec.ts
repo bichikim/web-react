@@ -6,7 +6,7 @@ import {renderHook} from '@testing-library/react-hooks'
 import {vi} from 'vitest'
 
 describe('useElementIntersection', () => {
-  it('should ', () => {
+  it('should', () => {
     const threshold = 0.5
     const observe = vi.fn()
     const disconnect = vi.fn()

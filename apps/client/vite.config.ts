@@ -1,7 +1,6 @@
 import * as path from 'path'
 import {defineConfig} from 'vite'
 import icons from 'unplugin-icons/vite'
-import markdown from 'vite-plugin-md'
 import {VitePWA as vitePWA} from 'vite-plugin-pwa'
 import Prism from 'markdown-it-prism'
 import LinkAttributes from 'markdown-it-link-attributes'
@@ -14,8 +13,34 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 // eslint-disable-next-line import/no-named-as-default-member
 dotenv.config()
 
+const createMarkdownPlugin = async () => {
+  try {
+    const {default: markdown} = await import('vite-plugin-md')
+    return markdown({
+      headEnabled: true,
+      markdownItSetup(md) {
+        // https://prismjs.com/
+        md.use(Prism)
+        md.use(LinkAttributes, {
+          attrs: {
+            rel: 'noopener',
+            target: '_blank',
+          },
+          pattern: /^https?:\/\//u,
+        })
+      },
+      wrapperClasses: 'q-page q-mx-auto padding',
+    })
+  } catch (error) {
+    console.warn('[vite] skip vite-plugin-md:', error)
+    return null
+  }
+}
+
 // eslint-disable-next-line max-lines-per-function
-export default defineConfig(() => {
+export default defineConfig(async () => {
+  const markdownPlugin = await createMarkdownPlugin()
+
   return {
     build: {
       chunkSizeWarningLimit: 600,
@@ -40,22 +65,7 @@ export default defineConfig(() => {
         ],
       }),
       vitePluginImp(),
-      // https://github.com/antfu/vite-plugin-md
-      markdown({
-        headEnabled: true,
-        markdownItSetup(md) {
-          // https://prismjs.com/
-          md.use(Prism)
-          md.use(LinkAttributes, {
-            attrs: {
-              rel: 'noopener',
-              target: '_blank',
-            },
-            pattern: /^https?:\/\//u,
-          })
-        },
-        wrapperClasses: 'q-page q-mx-auto padding',
-      }),
+      ...(markdownPlugin ? [markdownPlugin] : []),
 
       icons(),
       // https://github.com/antfu/vite-plugin-pwa
@@ -81,8 +91,10 @@ export default defineConfig(() => {
             },
           ],
           name: 'Coong',
+          // oxlint-disable-next-line camelcase
           // eslint-disable-next-line camelcase
           short_name: 'Coong',
+          // oxlint-disable-next-line camelcase
           // eslint-disable-next-line camelcase
           theme_color: '#ffffff',
         },

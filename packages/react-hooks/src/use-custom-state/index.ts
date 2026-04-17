@@ -13,7 +13,7 @@ export type Dispatch<A> = (value: A, set?: boolean) => void
  */
 export const useCustomState = <S>(
   initialState: S | (() => S),
-  isEqual?: (a, b) => boolean,
+  isEqual?: (first: S, second: S) => boolean,
 ): [S, Dispatch<SetStateAction<S>>] => {
   const [state, setState] = useState(initialState)
   const _isEqual = isEqual ?? is

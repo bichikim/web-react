@@ -1,27 +1,17 @@
-import {signal, signals} from '@winter-love/signals/react'
+import {useState} from 'react'
 import {UserInfo} from './UserInfo'
 
-const mainLogic = () => {
-  const name = signal('foo')
-  const age = signal(0)
-
-  const increase = () => (age.value += 1)
-
-  return {
-    age,
-    increase,
-    name,
-  }
-}
-
 export const MainPage = () => {
-  const {name, age, increase} = signals(mainLogic)
+  const [name] = useState('foo')
+  const [age, setAge] = useState(0)
+  const increase = () => setAge((oldAge) => oldAge + 1)
+
   return (
     <>
-      <span>{name.value}</span>
-      <span>{age.value}</span>
+      <span>{name}</span>
+      <span>{age}</span>
       <button onClick={increase}>increase</button>
-      <UserInfo name={name.value} age={age.value} />
+      <UserInfo name={name} age={age} />
     </>
   )
 }

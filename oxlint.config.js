@@ -116,6 +116,7 @@ const CONDITIONAL_JS_PLUGIN_RULES = {
   ],
   'react-js/prop-types': 'off',
   'sort-export-all/sort-export-all': 'warn',
+  'sort-keys-fix/sort-keys-fix': ['warn', 'asc', {natural: true}],
   'ts-js/indent': 'off',
   'ts-js/member-delimiter-style': [
     'error',
@@ -170,6 +171,10 @@ module.exports = {
     },
     'eslint-plugin-prettier',
     'eslint-plugin-sort-export-all',
+    {
+      name: 'sort-keys-fix',
+      specifier: '@web-react/oxlint-plugins',
+    },
   ],
   overrides: [
     {
@@ -231,6 +236,17 @@ module.exports = {
       files: ['.eslintrc.js'],
       rules: {
         'no-magic-numbers': 'off',
+      },
+    },
+    {
+      files: ['packages/oxlint-plugins/**/*.js'],
+      rules: {
+        'eslint-js/max-len': 'off',
+        'id-length': 'off',
+        'max-params': 'off',
+        'prefer-destructuring': 'off',
+        'prettier/prettier': 'off',
+        'sort-keys-fix/sort-keys-fix': 'off',
       },
     },
   ],

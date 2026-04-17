@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-filename-extension */
 import {renderHook, waitFor} from '@testing-library/react'
 import {useToggle} from '../'
 

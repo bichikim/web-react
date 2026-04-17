@@ -5,11 +5,13 @@ describe('support-passive', () => {
   })
 
   it('should return true when the passive option getter is accessed', async () => {
-    const addEventListenerMock = vi
-      .spyOn(window, 'addEventListener')
-      .mockImplementation(((_type: any, _listener: any, options?: any) => {
-        void options?.passive
-      }) as any)
+    const addEventListenerMock = vi.spyOn(window, 'addEventListener').mockImplementation(((
+      _type: any,
+      _listener: any,
+      options?: any,
+    ) => {
+      void options?.passive
+    }) as any)
     vi.spyOn(window, 'removeEventListener').mockImplementation((() => undefined) as any)
 
     const {supportPassive} = await import('../support-passive')

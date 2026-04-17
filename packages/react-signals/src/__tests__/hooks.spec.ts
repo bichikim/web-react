@@ -1,6 +1,7 @@
 import {renderHook, waitFor} from '@testing-library/react'
 import {useSignal, useSignalValue} from '../hooks'
 import {signal} from 'alien-signals'
+import {describe, expect, it} from 'vitest'
 
 describe('useSignal', () => {
   it('should return the initial value', () => {
