@@ -104,6 +104,38 @@ const ESLINT_JS_CORE_RULES = {
   'eslint-js/yield-star-spacing': ['error', 'before'],
 }
 
+const CONDITIONAL_JS_PLUGIN_RULES = {
+  'import-js/no-unresolved': 'off',
+  'prettier/prettier': 'error',
+  'react-js/function-component-definition': [
+    'error',
+    {
+      namedComponents: 'arrow-function',
+      unnamedComponents: 'arrow-function',
+    },
+  ],
+  'react-js/prop-types': 'off',
+  'sort-export-all/sort-export-all': 'warn',
+  'ts-js/indent': 'off',
+  'ts-js/member-delimiter-style': [
+    'error',
+    {
+      multiline: {
+        delimiter: 'none',
+        requireLast: true,
+      },
+      singleline: {
+        delimiter: 'semi',
+        requireLast: false,
+      },
+    },
+  ],
+  'unicorn-js/import-style': 'off',
+  'unicorn-js/no-unsafe-regex': 'error',
+  'unicorn-js/prefer-export-from': 'off',
+  'unicorn-js/prevent-abbreviations': 'off',
+}
+
 module.exports = {
   $schema: './node_modules/oxlint/configuration_schema.json',
   env: {
@@ -118,7 +150,27 @@ module.exports = {
     ga: true,
     process: true,
   },
-  jsPlugins: ['oxlint-plugin-eslint'],
+  jsPlugins: [
+    'oxlint-plugin-eslint',
+    {
+      name: 'import-js',
+      specifier: 'eslint-plugin-import',
+    },
+    {
+      name: 'react-js',
+      specifier: 'eslint-plugin-react',
+    },
+    {
+      name: 'ts-js',
+      specifier: '@typescript-eslint/eslint-plugin',
+    },
+    {
+      name: 'unicorn-js',
+      specifier: 'eslint-plugin-unicorn',
+    },
+    'eslint-plugin-prettier',
+    'eslint-plugin-sort-export-all',
+  ],
   overrides: [
     {
       env: {
@@ -154,13 +206,13 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-var-requires': 'off',
+        'eslint-js/no-invalid-this': 'off',
         'id-length': 'off',
         'max-lines-per-function': 'off',
         'max-nested-callbacks': 'off',
         'max-statements': 'off',
         'no-empty-function': 'off',
         'no-magic-numbers': 'off',
-        'eslint-js/no-invalid-this': 'off',
         'no-void': 'off',
         'prefer-destructuring': 'off',
         'react/jsx-filename-extension': 'off',
@@ -326,6 +378,7 @@ module.exports = {
     'unicorn/prefer-module': 'off',
     'unicorn/prefer-node-protocol': 'off',
     'unicorn/prefer-ternary': 'off',
+    ...CONDITIONAL_JS_PLUGIN_RULES,
     ...ESLINT_JS_CORE_RULES,
     yoda: 'error',
   },
