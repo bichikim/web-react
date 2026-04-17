@@ -37,6 +37,7 @@ yarn-error.log*
 .env
 
 # Editor directories and files
+.trunk
 .idea
 *.suo
 *.ntvs*

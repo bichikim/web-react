@@ -26,10 +26,12 @@ export const createViteConfig = (options: Options) => {
             {
               entryFileNames: '[name].iife.js',
               format: 'iife' as const,
+              name: camelCase(name),
             },
             {
               entryFileNames: '[name].js',
               format: 'es' as const,
+              name: camelCase(name),
               preserveModules: true,
               preserveModulesRoot: 'src',
             },

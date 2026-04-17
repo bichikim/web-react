@@ -1,8 +1,7 @@
 import {Dispatch, useEffect, useRef, useSyncExternalStore} from 'react'
 import {getUndefined, Signal, untrack} from './utils'
 import {effect, signal} from 'alien-signals'
-import {useHandle} from '@web-react/react-hooks/use-handle'
-import {useOnce} from '@web-react/react-hooks/use-once'
+import {useHandle, useOnce} from '@web-react/react-hooks'
 
 /**
  * 이전 값을 가져오고 리렌더링되면 리렌더링 이전 값을 유지 합니다
