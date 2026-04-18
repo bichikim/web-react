@@ -2,69 +2,38 @@
  * @vitest-environment jsdom
  */
 
-import {fireEvent, render, screen} from '@testing-library/react'
-import {FC, useEffect, useRef, useState} from 'react'
+import {renderHook} from '@testing-library/react'
 import {useHandle} from '../'
-import {Mock, vi} from 'vitest'
+import {StrictMode} from 'react'
+import {describe, expect, it, vi} from 'vitest'
 
 describe('use-handle', () => {
-  interface ComponentProps {
-    age?: number
-    onChange?: () => void
-  }
-
-  let rendered: Mock
-  let Component: FC<ComponentProps>
-  let Root: FC
-
-  beforeEach(() => {
-    rendered = vi.fn((...args) => args)
-    Component = (props) => {
-      const [state, setState] = useState(0)
-      const onChange = useHandle(props.onChange)
-      const prev = useRef(onChange)
-      const onIncrease = () => {
-        setState((value) => value + 1)
-      }
-      rendered(prev.current === onChange)
-      useEffect(() => {
-        prev.current = onChange
-      })
-      return (
-        <div>
-          <button onClick={onIncrease}>increase</button>
-          <button onClick={onChange}>change</button>
-          <div data-testid="state">{String(state)}</div>
-          <div data-testid="age">{String(props.age)}</div>
-        </div>
-      )
-    }
-    Root = () => {
-      const [state, setState] = useState(0)
-      const onChange = () => {
-        setState((value) => value + 1)
-      }
-      return <Component onChange={onChange} age={state} />
-    }
+  it('should return the same function instance after re-rendering', () => {
+    const callback = vi.fn()
+    const {result, rerender} = renderHook(() => useHandle(callback), {
+      wrapper: StrictMode,
+    })
+    const handle = result.current
+    rerender()
+    expect(handle).toBe(result.current)
   })
 
-  it('should not return new function whenever state changes', async () => {
-    await render(<Root />)
+  it('should call the new callback when it changes and still return the same function after re-rendering', () => {
+    const callbackA = vi.fn()
+    const callbackB = vi.fn()
+    const {result, rerender} = renderHook(({cb}: {cb: () => void}) => useHandle(cb), {
+      initialProps: {cb: callbackA},
+      wrapper: StrictMode,
+    })
+    const handle = result.current
+    handle()
+    expect(callbackA).toHaveBeenCalledTimes(1)
+    expect(callbackB).not.toHaveBeenCalled()
 
-    expect(rendered).toBeCalledTimes(1)
-    expect(rendered.mock.calls[0]).toEqual([true])
-    expect(screen.getByTestId('age').textContent).toBe('0')
-
-    fireEvent.click(screen.getByText('change'))
-    expect(rendered).toBeCalledTimes(2)
-    expect(rendered.mock.calls[1]).toEqual([true])
-    expect(screen.getByTestId('state').textContent).toBe('0')
-    expect(screen.getByTestId('age').textContent).toBe('1')
-
-    fireEvent.click(screen.getByText('increase'))
-    expect(rendered).toBeCalledTimes(3)
-    expect(rendered.mock.calls[2]).toEqual([true])
-    expect(screen.getByTestId('state').textContent).toBe('1')
-    expect(screen.getByTestId('age').textContent).toBe('1')
+    rerender({cb: callbackB})
+    expect(handle).toBe(result.current)
+    handle()
+    expect(callbackB).toHaveBeenCalledTimes(1)
+    expect(callbackA).toHaveBeenCalledTimes(1)
   })
 })

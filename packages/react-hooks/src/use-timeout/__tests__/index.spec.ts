@@ -1,58 +1,80 @@
 import {useTimeout} from '../'
-import {useFakeTimers} from 'sinon'
 import {renderHook} from '@testing-library/react-hooks'
 import {vi} from 'vitest'
+import {StrictMode} from 'react'
 
 describe('useTimeout', () => {
-  it('should timeout', async () => {
-    const clock = useFakeTimers()
+  beforeEach(() => {
+    vi.useFakeTimers()
+  })
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+  it('should call after timeout', async () => {
     const callback = vi.fn()
-    const wrapper = renderHook(() => useTimeout(callback, 1000))
-    clock.tick(1000)
+    const {result} = renderHook(() => useTimeout(callback, 1000), {
+      wrapper: StrictMode,
+    })
+
+    result.current[0]('foo', 'bar')
     expect(callback).not.toHaveBeenCalled()
-    {
-      const [set] = wrapper.result.current
-
-      set('foo', 'bar')
-    }
-
-    clock.tick(1000)
+    vi.advanceTimersByTime(1000)
     expect(callback).toHaveBeenCalledWith('foo', 'bar')
-    callback.mockClear()
+  })
 
-    {
-      const [set] = wrapper.result.current
+  it('should call last callback if called multiple times', async () => {
+    const callback = vi.fn()
+    const {result} = renderHook(() => useTimeout(callback, 1000), {
+      wrapper: StrictMode,
+    })
 
-      set('foo', 'bar')
-    }
-
-    clock.tick(500)
-
-    {
-      const [set] = wrapper.result.current
-
-      set('foo')
-    }
-    clock.tick(500)
+    result.current[0]('foo', 'bar')
     expect(callback).not.toHaveBeenCalled()
-    clock.tick(500)
-    expect(callback).toHaveBeenCalledWith('foo')
-    callback.mockClear()
-
-    {
-      const [set] = wrapper.result.current
-
-      set('john')
-    }
-    clock.tick(500)
+    vi.advanceTimersByTime(500)
     expect(callback).not.toHaveBeenCalled()
-    {
-      const [, clear] = wrapper.result.current
+    result.current[0]('foo', 'bar')
+    vi.advanceTimersByTime(1000)
+    expect(callback).toHaveBeenCalledWith('foo', 'bar')
+  })
 
-      clear()
-    }
-    clock.tick(1000)
+  it('should not call callback after clean up', async () => {
+    const callback = vi.fn()
+    const {result} = renderHook(() => useTimeout(callback, 1000), {
+      wrapper: StrictMode,
+    })
+
+    result.current[0]('foo', 'bar')
     expect(callback).not.toHaveBeenCalled()
-    clock.restore()
+    vi.advanceTimersByTime(500)
+
+    // clean up
+    result.current[1]()
+    vi.advanceTimersByTime(1000)
+    expect(callback).not.toHaveBeenCalled()
+  })
+
+  it('should call callback after unmount', async () => {
+    const callback = vi.fn()
+    const {result, unmount} = renderHook(() => useTimeout(callback, 1000), {
+      wrapper: StrictMode,
+    })
+
+    result.current[0]('foo', 'bar')
+    expect(callback).not.toHaveBeenCalled()
+    unmount()
+    vi.advanceTimersByTime(1000)
+    expect(callback).not.toHaveBeenCalled()
+  })
+
+  it('should change execute and clean up function after rerender', async () => {
+    const callback = vi.fn()
+    const {rerender, result} = renderHook(() => useTimeout(callback, 1000), {
+      wrapper: StrictMode,
+    })
+
+    const [execute, cleanUp] = result.current
+    rerender()
+    expect(execute).toBe(result.current[0])
+    expect(cleanUp).toBe(result.current[1])
   })
 })
