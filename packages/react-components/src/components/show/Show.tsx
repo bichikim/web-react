@@ -1,4 +1,4 @@
-import {Children, cloneElement, isValidElement, ReactElement, ReactNode} from 'react'
+import {Fragment, type ReactElement, type ReactNode} from 'react'
 
 export interface ShowProps {
   children?: ReactNode
@@ -8,14 +8,9 @@ export interface ShowProps {
 export const Show = (props: ShowProps): ReactElement => {
   const {when, children} = props
 
-  return (
-    <>
-      {Children.toArray(children).map((child) => {
-        if (isValidElement(child)) {
-          return cloneElement(child, {style: when ? undefined : {display: 'none'}})
-        }
-        return child
-      })}
-    </>
-  )
+  if (!when) {
+    return <Fragment />
+  }
+
+  return <>{children}</>
 }

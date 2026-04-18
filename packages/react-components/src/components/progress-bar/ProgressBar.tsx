@@ -1,4 +1,11 @@
-import {forwardRef, useEffect, useMemo, useRef} from 'react'
+import {
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  type ComponentPropsWithoutRef,
+  type CSSProperties,
+} from 'react'
 import {composeRefs} from '@web-react/react-hooks'
 
 export interface ProgressBarProps {
@@ -13,8 +20,8 @@ const DEFAULT_TOTAL = 5
 const getTransform = (now, total) => `scaleX(${now / (total + 1)})`
 
 export const ProgressBar = forwardRef(
-  (props: ProgressBarProps & JSX.IntrinsicElements['div'], ref) => {
-    const {wait = DEFAULT_WAIT, total = DEFAULT_TOTAL, now = 0, ...rest} = props
+  (props: ProgressBarProps & ComponentPropsWithoutRef<'div'>, ref) => {
+    const {wait = DEFAULT_WAIT, total = DEFAULT_TOTAL, now = 0, style: styleProp, ...rest} = props
     const element = useRef<HTMLDivElement>(null)
 
     const transition = useMemo(() => {
@@ -30,9 +37,10 @@ export const ProgressBar = forwardRef(
       }
     }, [now, total])
 
-    const style: any = {
-      '---transform': transform,
-      '---transition': transition,
+    const style: CSSProperties = {
+      ...styleProp,
+      transform,
+      transition,
     }
 
     return <div key={now} style={style} ref={composeRefs(element, ref)} {...rest}></div>
