@@ -14,6 +14,7 @@ Create or update custom hooks with minimal API, predictable behavior, and matchi
 - Folder name: `use-<kebab-name>` (example: `use-previous`)
 - Hook symbol: `use<PascalName>` (example: `usePrevious`)
 - Keep one primary hook export per folder.
+- **`init` parameter prefix**: Use `init*` (for example `initCleanUp`, `initState`) for parameters that **are not refreshed on rerender**—only the first value applies unless the hook exposes a separate way to update it. Say so in JSDoc.
 
 ## Required Output
 
