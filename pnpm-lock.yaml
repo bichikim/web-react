@@ -194,9 +194,6 @@ importers:
 
   apps/client:
     dependencies:
-      '@stitches/react':
-        specifier: 1.2.8
-        version: 1.2.8(react@19.2.4)
       '@tanstack/query-core':
         specifier: ^4.10.1
         version: 4.43.0
@@ -396,9 +393,6 @@ importers:
 
   packages/react-components:
     dependencies:
-      '@stitches/react':
-        specifier: ^1.2.8
-        version: 1.2.8(react@19.2.4)
       '@web-react/react-hooks':
         specifier: workspace:*
         version: link:../react-hooks
@@ -2761,11 +2755,6 @@ packages:
     deprecated: |-
       Deprecated: no longer maintained and no longer used by Sinon packages. See
         https://github.com/sinonjs/nise/issues/243 for replacement details.
-
-  '@stitches/react@1.2.8':
-    resolution: {integrity: sha512-9g9dWI4gsSVe8bNLlb+lMkBYsnIKCZTmvqvDG+Avnn69XfmHZKiaMrx7cgTaddq7aTPPmXiTsbFcUy0xgI4+wA==}
-    peerDependencies:
-      react: '>= 16.3.0'
 
   '@storybook/addon-links@10.3.5':
     resolution: {integrity: sha512-Xe2wCGZ+hpZ0cDqAIBHk+kPc8nODNbu585ghd5bLrlYJMDVXoNM/fIlkrLgjIDVbfpgeJLUEg7vldJrn+FyOLw==}
@@ -11856,10 +11845,6 @@ snapshots:
       type-detect: 4.1.0
 
   '@sinonjs/text-encoding@0.7.3': {}
-
-  '@stitches/react@1.2.8(react@19.2.4)':
-    dependencies:
-      react: 19.2.4
 
   '@storybook/addon-links@10.3.5(react@19.2.4)(storybook@10.3.5(@testing-library/dom@8.19.0)(prettier@2.8.8)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))':
     dependencies:
