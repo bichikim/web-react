@@ -5,9 +5,6 @@ export const Navigation: FPC = () => {
     <nav>
       <ul>
         <NaviItem to="/" name="main" />
-        <NaviItem to="hook-state" />
-        <NaviItem to="original" />
-        <NaviItem to="zustand" />
         <NaviItem to="valitio" />
         <NaviItem to="vue" />
       </ul>

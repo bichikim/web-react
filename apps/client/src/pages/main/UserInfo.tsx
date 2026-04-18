@@ -1,5 +1,4 @@
 import {useEffect, useMemo, useState} from 'react'
-import {styled} from '@web-react/react-components/style/theme'
 
 export interface UserInfoProps {
   age: number
@@ -23,6 +22,4 @@ export const HUserInfo = ({age, name}: UserInfoProps) => {
   )
 }
 
-export const UserInfo = styled(HUserInfo, {
-  // empty
-})
+export const UserInfo = HUserInfo
