@@ -51,7 +51,7 @@ export default defineConfig(async () => {
       'process.env.NODE_ENV': JSON.stringify('import.meta.env.MODE'),
     },
     optimizeDeps: {
-      exclude: ['vite', 'react-router-dom'],
+      exclude: ['vite'],
       include: [],
     },
 

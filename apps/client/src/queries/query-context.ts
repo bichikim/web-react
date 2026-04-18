@@ -1,5 +1,5 @@
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
-import {useOnce} from '@winter-love/react-hooks'
+import {useOnce} from '@web-react/react-hooks'
 import Axios, {AxiosInstance} from 'axios'
 import {
   createContext,
