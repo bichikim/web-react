@@ -1,6 +1,6 @@
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {useOnce} from '@web-react/react-hooks'
-import Axios, {AxiosInstance} from 'axios'
+import Axios, {AxiosHeaders, AxiosInstance} from 'axios'
 import {
   createContext,
   createElement,
@@ -40,10 +40,8 @@ export const QueryProvider = (props: QueryProviderProps) => {
       baseURL: 'https://dapi.kakao.com',
     })
     axios.interceptors.request.use((config) => {
-      if (!config.headers) {
-        config.headers = {}
-      }
-      config.headers.Authorization = authorization.current
+      config.headers = AxiosHeaders.from(config.headers)
+      config.headers.set('Authorization', authorization.current)
       return config
     })
     return axios
