@@ -13,8 +13,7 @@ const config: StorybookConfig = {
     '../packages/*/src/**/*.stories.@(js|jsx|ts|tsx|mdx)',
     '../apps/*/src/**/*.stories.@(js|jsx|ts|tsx|mdx)',
   ],
-  // In this repo, Babel presets are mostly scoped to test env,
-  // so react-docgen's Babel parser can fail on TSX stories.
+  // react-docgen + TSX can be brittle; keep off unless needed.
   typescript: {
     reactDocgen: false,
   },
