@@ -29,7 +29,7 @@
   "devDependencies": {
     "@types/react": "^19.2.14",
     "@web-react/lib-config": "workspace:*",
-    "typescript": "^4.9.5"
+    "typescript": "5.9.3"
   },
   "publishConfig": {
     "access": "public"

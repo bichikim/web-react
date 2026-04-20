@@ -38,9 +38,9 @@ export const useGetSearchBook = (payload: GetSearchBookPayLoad) => {
   const {page, size, search} = payload
   const axios = useAxios()
 
-  const query = useQuery(
-    ['get-search-book'],
-    async (): Promise<GetSearchBookResponse> => {
+  const query = useQuery({
+    enabled: false,
+    queryFn: async (): Promise<GetSearchBookResponse> => {
       if (!search) {
         return {}
       }
@@ -54,14 +54,12 @@ export const useGetSearchBook = (payload: GetSearchBookPayLoad) => {
 
       return data
     },
-    {
-      enabled: false,
-    },
-  )
+    queryKey: ['get-search-book', page, size, search],
+  })
 
   useEffect(() => {
-    query.refetch()
-  }, [query])
+    void query.refetch()
+  }, [page, query.refetch, search, size])
 
   return query
 }

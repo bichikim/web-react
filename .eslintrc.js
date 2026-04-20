@@ -86,19 +86,7 @@ module.exports = {
 
     '@typescript-eslint/indent': 'off',
 
-    '@typescript-eslint/member-delimiter-style': [
-      'error',
-      {
-        multiline: {
-          delimiter: 'none',
-          requireLast: true,
-        },
-        singleline: {
-          delimiter: 'semi',
-          requireLast: false,
-        },
-      },
-    ],
+    // Removed in typescript-eslint v8; formatting is handled by Prettier.
     // Owing to using prettier, It does not need to this config anymore
     // '@typescript-eslint/indent': [
     //   'error',

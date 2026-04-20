@@ -117,20 +117,6 @@ const CONDITIONAL_JS_PLUGIN_RULES = {
   'react-js/prop-types': 'off',
   'sort-export-all/sort-export-all': 'warn',
   'sort-keys-fix/sort-keys-fix': ['warn', 'asc', {natural: true}],
-  'ts-js/indent': 'off',
-  'ts-js/member-delimiter-style': [
-    'error',
-    {
-      multiline: {
-        delimiter: 'none',
-        requireLast: true,
-      },
-      singleline: {
-        delimiter: 'semi',
-        requireLast: false,
-      },
-    },
-  ],
   'unicorn-js/import-style': 'off',
   'unicorn-js/no-unsafe-regex': 'error',
   'unicorn-js/prefer-export-from': 'off',
