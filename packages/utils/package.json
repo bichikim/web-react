@@ -23,11 +23,11 @@
     "dev": "vite dev"
   },
   "dependencies": {
-    "esm-env": "^1.2.2",
-    "es-toolkit": "^1.45.1"
+    "es-toolkit": "^1.45.1",
+    "esm-env": "^1.2.2"
   },
   "devDependencies": {
-    "@web-react/lib-config": "0.0.1",
+    "@web-react/lib-config": "workspace:*",
     "typescript": "^5.9.3"
   },
   "publishConfig": {

@@ -11,10 +11,10 @@
   "main": "create-vite-config.mts",
   "scripts": {},
   "dependencies": {
-    "esm-env": "^1.2.2",
     "es-toolkit": "^1.45.1",
-    "vite-plugin-dts": "^4.5.4",
-    "vite": "^8.0.1"
+    "esm-env": "^1.2.2",
+    "vite": "^8.0.8",
+    "vite-plugin-dts": "^4.5.4"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
