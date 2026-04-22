@@ -1,0 +1,39 @@
+{
+  "name": "@web-react/iconify-icons",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "repository": "git@github.com:bichikim/web-react.git",
+  "author": "bihci@live.co.kr",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "source": "src/index.ts",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/*",
+    "src/svg/*"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite dev"
+  },
+  "dependencies": {
+    "unplugin-icons": "23.0.1"
+  },
+  "devDependencies": {
+    "@web-react/lib-config": "workspace:*",
+    "typescript": "5.9.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
