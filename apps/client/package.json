@@ -66,6 +66,7 @@
     "@graphql-codegen/typescript-apollo-client-helpers": "2.2.3",
     "@graphql-codegen/typescript-operations": "2.5.3",
     "@iconify/json": "2.2.463",
+    "@web-react/iconify-icons": "workspace:*",
     "@testing-library/react": "^16.3.2",
     "@testing-library/react-hooks": "^8.0.1",
     "@types/node": "^22.12.0",

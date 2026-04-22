@@ -1,6 +1,7 @@
 import * as path from 'path'
 import {defineConfig} from 'vite'
 import icons from 'unplugin-icons/vite'
+import {createIconifyCollection} from '@web-react/iconify-icons'
 import {VitePWA as vitePWA} from 'vite-plugin-pwa'
 import Prism from 'markdown-it-prism'
 import LinkAttributes from 'markdown-it-link-attributes'
@@ -67,7 +68,14 @@ export default defineConfig(async () => {
       vitePluginImp(),
       ...(markdownPlugin ? [markdownPlugin] : []),
 
-      icons(),
+      icons({
+        autoInstall: true,
+        compiler: 'jsx',
+        customCollections: {
+          app: createIconifyCollection(),
+        },
+        jsx: 'react',
+      }),
       // https://github.com/antfu/vite-plugin-pwa
       vitePWA({
         includeAssets: ['favicon.svg', 'robots.txt', 'safari-pinned-tab.svg'],
