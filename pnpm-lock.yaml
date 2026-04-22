@@ -309,6 +309,9 @@ importers:
       '@web-react/iconify-icons':
         specifier: workspace:*
         version: link:../../packages/iconify-icons
+      '@web-react/vite-markdown-plugin':
+        specifier: workspace:*
+        version: link:../../packages/vite-markdown-plugin
       axios:
         specifier: ^1.15.0
         version: 1.15.0
@@ -318,12 +321,6 @@ importers:
       dotenv:
         specifier: 17.4.2
         version: 17.4.2
-      markdown-it-link-attributes:
-        specifier: 4.0.1
-        version: 4.0.1
-      markdown-it-prism:
-        specifier: 2.2.3
-        version: 2.2.3
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -336,9 +333,6 @@ importers:
       vite-plugin-imp:
         specifier: ^2.4.0
         version: 2.4.0(vite@8.0.8(@types/node@22.19.17)(esbuild@0.27.7)(terser@5.46.1))
-      vite-plugin-md:
-        specifier: ^0.21.5
-        version: 0.21.5(@vitejs/plugin-vue@6.0.5(vite@8.0.8(@types/node@22.19.17)(esbuild@0.27.7)(terser@5.46.1))(vue@3.5.32(typescript@5.9.3)))(encoding@0.1.13)(happy-dom@8.9.0(encoding@0.1.13))(jsdom@20.0.0)(lightningcss@1.32.0)(terser@5.46.1)(vite@8.0.8(@types/node@22.19.17)(esbuild@0.27.7)(terser@5.46.1))
       vite-plugin-pwa:
         specifier: ^1.2.0
         version: 1.2.0(vite@8.0.8(@types/node@22.19.17)(esbuild@0.27.7)(terser@5.46.1))(workbox-build@6.6.0(@types/babel__core@7.20.5))(workbox-window@6.6.0)
@@ -494,6 +488,28 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
+
+  packages/vite-markdown-plugin:
+    dependencies:
+      markdown-it-link-attributes:
+        specifier: 4.0.1
+        version: 4.0.1
+      markdown-it-prism:
+        specifier: 2.2.3
+        version: 2.2.3
+      vite-plugin-md:
+        specifier: ^0.21.5
+        version: 0.21.5(@vitejs/plugin-vue@6.0.5(vite@8.0.8(@types/node@22.19.17)(esbuild@0.27.7)(terser@5.46.1))(vue@3.5.32(typescript@5.9.3)))(encoding@0.1.13)(happy-dom@8.9.0(encoding@0.1.13))(jsdom@20.0.0)(lightningcss@1.32.0)(terser@5.46.1)(vite@8.0.8(@types/node@22.19.17)(esbuild@0.27.7)(terser@5.46.1))
+    devDependencies:
+      '@web-react/lib-config':
+        specifier: workspace:*
+        version: link:../lib-config
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vite:
+        specifier: ^8.0.8
+        version: 8.0.8(@types/node@22.19.17)(esbuild@0.27.7)(terser@5.46.1)
 
 packages:
 
