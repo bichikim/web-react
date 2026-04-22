@@ -6,6 +6,7 @@
   "author": "bihci@live.co.kr",
   "exports": {
     "./create-vite-config": "./create-vite-config.mts",
+    "./create-vite-config.mts": "./create-vite-config.mts",
     "./require": "./require.mts"
   },
   "main": "create-vite-config.mts",

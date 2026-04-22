@@ -7,8 +7,9 @@ const packageJsonPath = path.join(runtimeRoot, 'package.json')
 // eslint-disable-next-line unicorn/prefer-json-parse-buffer
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'))
 
-export const require = createViteConfig({
+const configFactory = createViteConfig({
   ...packageJson,
   root: runtimeRoot,
 })
+export const require = configFactory()
 export default require
